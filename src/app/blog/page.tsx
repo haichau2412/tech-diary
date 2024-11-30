@@ -1,4 +1,4 @@
-import SlideNav from "../../components/slideNav.tsx";
+import SlideNav from "@/components/slideNav.tsx";
 const DUMMY_DATA = [
   {
     id: "9e6da701-1c9b-4d46-a63e-ec7353f73a35",

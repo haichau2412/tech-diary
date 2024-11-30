@@ -1,6 +1,6 @@
 import { Cinzel } from "next/font/google";
 import Image from "next/image";
-import criminalPic from "../assets/human.png";
+import criminalPic from "@/assets/human.png";
 
 const anton = Cinzel({
   subsets: ["latin"],
@@ -21,7 +21,7 @@ export default function WantedBanner() {
           className="mx-auto"
           src={criminalPic}
           width={150}
-          height={"auto"}
+
           alt="Developer's potrait"
         />
         <div className="text-center text-2xl font-bold uppercase">

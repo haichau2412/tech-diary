@@ -9,7 +9,7 @@ const SlideNav = ({
     title: string;
   }[];
 }) => {
-  const currentRef = useRef<HTMLElement>(null);
+  const currentRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="relative">

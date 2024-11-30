@@ -3,7 +3,7 @@
 import { format } from "date-fns";
 import { memo, useState, useEffect } from "react";
 
-const TimeInfo = memo(() => {
+const TimeInfo = memo(function TimeInfo() {
   const [{ greeting, dateStr }, setData] = useState({
     greeting: "",
     dateStr: "",
