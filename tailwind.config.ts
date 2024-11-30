@@ -12,6 +12,13 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      gridTemplateColumns: {
+        main: "300px 1fr",
+        mainSm: "200px 1fr",
+      },
+      gridTemplateRows: {
+        main: "fit-content(50px) fit-content(50px) minmax(auto,1fr)",
+      },
     },
   },
   plugins: [],
