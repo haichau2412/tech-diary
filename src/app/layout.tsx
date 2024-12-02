@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import Nav from "@/components/nav.tsx";
-import TimeInfo from "@/components/timeInfo.tsx";
+import Header from "@/components/header.tsx";
 import WantedBanner from "@/components/wantedBanner.tsx";
 
 import { Tinos } from "next/font/google";
@@ -30,15 +30,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${tinos.className}`}>
-        <div className="grid-cols-mainSm grid h-screen w-screen cursor-default grid-rows-main pb-1 lg:grid-cols-main">
-          <div className="col-span-2 flex items-center justify-between px-3 py-2">
-            <TimeInfo />
-            <h1 className="text-4xl font-bold uppercase">{`Chau's news`}</h1>
-            <div className="flex-grow basis-0 text-right">Weather</div>
-          </div>
+        <div className="flex h-screen w-screen cursor-default flex-col px-5 py-3">
+          <Header />
           <Nav />
-          <WantedBanner />
-          <div className="max-w-full overflow-hidden">{children}</div>
+          {/* <WantedBanner /> */}
+          <div className="flex max-w-full flex-grow flex-col items-center justify-center overflow-hidden">
+            {children}
+          </div>
         </div>
       </body>
     </html>

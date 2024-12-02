@@ -5,6 +5,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --themeGreen: #3b8c6e;
+  --themeGreenDark: #27592f;
+  --themeBrownLight: #f2a25c;
+  --themeBrown: #a6653f;
+  --themeRed: #a63232;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -25,11 +30,24 @@ body {
 
 @layer components {
   .activeLink {
-    @apply underline decoration-red-700 decoration-2 underline-offset-4;
+    @apply underline decoration-2 underline-offset-4;
+
+    &.red {
+      text-decoration-color: var(--themeRed);
+    }
+
+    &.green {
+      text-decoration-color: var(--themeGreenDark);
+    }
+
+    &.brown {
+      text-decoration-color: var(--themeBrown);
+    }
   }
 
   a.socialLink {
     @apply h-fit cursor-pointer;
+
     &::after {
       content: " |";
     }
@@ -38,7 +56,7 @@ body {
       content: "";
     }
     &:hover {
-      @apply font-medium underline;
+      @apply underline;
     }
   }
 
@@ -47,9 +65,32 @@ body {
 
     &::after {
       content: "";
-      mask-image: url("../assets//svg/star.svg");
+      mask-image: url("../assets/svg/star.svg");
       mask-size: contain;
-      @apply absolute block h-5 w-5 bg-yellow-500 top-[-2px] right-[-25px];
+      @apply absolute right-[-25px] top-[-2px] block h-5 w-5 bg-yellow-500;
+    }
+  }
+
+  .themeGradientText {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      to right,
+      var(--themeGreenDark),
+      var(--themeGreenDark),
+      var(--themeRed),
+      var(--themeRed)
+    );
+  }
+
+  .wantedContainer {
+    background-image: url("../assets/paper.avif");
+    background-repeat: no-repeat;
+    background-position: center;
+    max-width: fit-content;
+    color: #4b311a;
+
+    img {
+      filter: grayscale(30%) sepia(60%);
     }
   }
 }

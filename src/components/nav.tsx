@@ -8,17 +8,23 @@ export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <div className="col-span-2 mx-2 my-1 flex items-center justify-center gap-2 border-b border-t border-solid border-black py-[2px]">
+    <div className="mx-2 my-1 flex items-center justify-center gap-2 border-b border-t border-solid border-black py-[2px] sm:text-lg">
       <Link
-        className={`px-4 ${
-          ["/experiment", "/"].includes(pathname) ? "activeLink" : ""
+        className={`green px-4 ${
+          ["/aboutme", "/"].includes(pathname) ? "activeLink" : ""
         }`}
+        href="/aboutme"
+      >
+        About me
+      </Link>
+      <Link
+        className={`brown px-4 ${pathname === "/experiment" ? "activeLink" : ""}`}
         href="/experiment"
       >
         Experiment UI
       </Link>
       <Link
-        className={`px-4 ${pathname === "/blog" ? "activeLink" : ""}`}
+        className={`red px-4 ${pathname === "/blog" ? "activeLink" : ""}`}
         href="/blog"
       >
         Blogs

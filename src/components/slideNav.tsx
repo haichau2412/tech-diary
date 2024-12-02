@@ -22,30 +22,29 @@ const SlideNav = ({
           return (
             <div
               key={i.id}
-              className="aspect-[3/2] w-[150px] flex-shrink-0 truncate bg-red-300 snap-start"
+              className="grid aspect-[3/2] w-[150px] flex-shrink-0 snap-start place-content-center truncate text-wrap rounded-md bg-red-300"
             >
               {i.title}
             </div>
           );
         })}
-
-        <div
-          className="absolute top-2/4 flex h-6 w-6 items-center justify-center rounded-full bg-white"
-          onClick={() => {
-            if (currentRef.current) {
-              currentRef.current.scrollLeft -= 400;
-            }
-          }}
-        >{`<`}</div>
-        <div
-          onClick={() => {
-            if (currentRef.current) {
-              currentRef.current.scrollLeft += 400;
-            }
-          }}
-          className="absolute right-0 top-2/4 flex h-6 w-6 items-center justify-center rounded-full bg-white"
-        >{`>`}</div>
       </div>
+      <div
+        className="absolute top-full flex h-6 w-6 items-center justify-center rounded-full bg-pink-200"
+        onClick={() => {
+          if (currentRef.current) {
+            currentRef.current.scrollLeft -= 400;
+          }
+        }}
+      >{`<`}</div>
+      <div
+        onClick={() => {
+          if (currentRef.current) {
+            currentRef.current.scrollLeft += 400;
+          }
+        }}
+        className="absolute right-0 top-full flex h-6 w-6 items-center justify-center rounded-full bg-pink-200"
+      >{`>`}</div>
     </div>
   );
 };
