@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 import Nav from "@/components/nav.tsx";
 import Header from "@/components/header.tsx";
-import WantedBanner from "@/components/wantedBanner.tsx";
 
 import { Tinos } from "next/font/google";
 
