@@ -21,7 +21,7 @@ export default function Nav() {
         className={`brown px-4 ${pathname === "/experiment" ? "activeLink" : ""}`}
         href="/experiment"
       >
-        Experiment UI
+        Experimental UI
       </Link>
       <Link
         className={`red px-4 ${pathname === "/blog" ? "activeLink" : ""}`}

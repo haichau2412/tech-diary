@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import { format } from "date-fns";
 import { useState, useEffect } from "react";
 
@@ -53,7 +53,9 @@ const Header = () => {
         <div className="text-sm sm:text-2xl">{greeting}</div>
       </div>
       <div className="flex flex-col items-center">
-        <h1 className="themeGradientText text-3xl font-bold uppercase sm:text-4xl">{`Chau's news`}</h1>
+        <Link href="/">
+          <h1 className="themeGradientText text-3xl font-bold uppercase sm:text-4xl">{`Chau's news`}</h1>
+        </Link>
         <div className="text-xs">{dateStr}</div>
       </div>
       <div className="text-bold flex-grow basis-0 text-right text-sm sm:text-2xl">
