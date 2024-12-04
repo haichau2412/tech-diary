@@ -1,5 +1,6 @@
 "use client";
 import { useRef } from "react";
+import Link from "next/link";
 
 const SlideNav = ({
   items,
@@ -12,7 +13,7 @@ const SlideNav = ({
   const currentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative">
+    <div className="relative max-w-full">
       <div
         ref={currentRef}
         className="flex snap-x snap-mandatory gap-2 overflow-x-scroll scroll-smooth"
@@ -20,12 +21,14 @@ const SlideNav = ({
       >
         {items.map((i) => {
           return (
-            <div
-              key={i.id}
-              className="grid aspect-[3/2] w-[150px] flex-shrink-0 snap-start place-content-center truncate text-wrap rounded-md bg-red-300"
-            >
-              {i.title}
-            </div>
+            <Link key={i.id} href={"/blog/dummy1"}>
+              <div
+                key={i.id}
+                className="grid aspect-[3/2] w-[150px] flex-shrink-0 snap-start place-content-center truncate text-wrap rounded-md bg-red-300"
+              >
+                {i.title}
+              </div>
+            </Link>
           );
         })}
       </div>

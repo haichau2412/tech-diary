@@ -10,6 +10,7 @@
   --themeBrownLight: #f2a25c;
   --themeBrown: #a6653f;
   --themeRed: #a63232;
+  --bannerDominantColor: #401700;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -61,13 +62,14 @@ body {
   }
 
   .starAfter {
-    @apply relative w-fit;
+    @apply flex w-fit flex-col items-center;
 
     &::after {
       content: "";
+      display: block;
       mask-image: url("../assets/svg/star.svg");
-      mask-size: contain;
-      @apply absolute right-[-25px] top-[-2px] block h-5 w-5 bg-yellow-500;
+      mask-repeat: repeat;
+      @apply block h-[20px] w-[150px] translate-y-[-8px] bg-yellow-500 sm:translate-y-[-15px];
     }
   }
 
@@ -83,14 +85,18 @@ body {
   }
 
   .wantedContainer {
+    @apply p-1 outline;
     background-image: url("../assets/paper.avif");
     background-repeat: no-repeat;
-    background-position: center;
+    background-size: cover;
     max-width: fit-content;
-    color: #4b311a;
-
+    color: var(--bannerDominantColor);
+    outline-color: var(--bannerDominantColor);
+    outline-offset: 4px;
     img {
-      filter: grayscale(30%) sepia(60%);
+      @apply border-4 p-1;
+      border-color: var(--bannerDominantColor);
+      filter: grayscale(10%) sepia(50%);
     }
   }
 }

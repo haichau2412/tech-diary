@@ -59,7 +59,7 @@ const Header = () => {
         <div className="text-xs">{dateStr}</div>
       </div>
       <div className="text-bold flex-grow basis-0 text-right text-sm sm:text-2xl">
-        Weather
+        Chau is online
       </div>
     </div>
   );
