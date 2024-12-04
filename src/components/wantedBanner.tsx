@@ -9,7 +9,6 @@ const anton = Cinzel({
   weight: ["400", "500", "900", "700"],
 });
 
-const dummy = new Array(5).fill("s");
 
 export default function WantedBanner() {
   return (
