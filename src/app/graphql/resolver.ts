@@ -6,15 +6,15 @@ const books = [
 const resolvers = {
     Query: {
         books: () => books,
-        book: (parent, { id }) => books.find((book) => book.id === id),
+        book: (_ = {}, { id }: { id: string }) => books.find((book) => book.id === id),
     },
     Mutation: {
-        createBook: (parent, { title, author }) => {
+        createBook: (_ = {}, { title, author }: { title: string, author: string }) => {
             const newBook = { id: String(books.length + 1), title, author };
             books.push(newBook);
             return newBook;
         },
-        updateBook: (parent, { id, title, author }) => {
+        updateBook: (_ = {}, { id, title, author }: { title: string, id: string, author: string }) => {
             const book = books.find((book) => book.id === id);
             if (!book) {
                 throw new Error("Book not found");
@@ -23,7 +23,7 @@ const resolvers = {
             book.author = author || book.author;
             return book;
         },
-        deleteBook: (parent, { id }) => {
+        deleteBook: (_ = {}, { id }: { id: string }) => {
             const bookIndex = books.findIndex((book) => book.id === id);
             if (bookIndex === -1) {
                 throw new Error("Book not found");
