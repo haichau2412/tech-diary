@@ -24,7 +24,7 @@ const SlideNav = ({
             <Link key={i.id} href={"/blog/dummy1"}>
               <div
                 key={i.id}
-                className="grid aspect-[3/2] w-[150px] flex-shrink-0 snap-start place-content-center truncate text-wrap rounded-md bg-red-300"
+                className="grid aspect-[3/2] w-[150px] flex-shrink-0 snap-start place-content-center truncate text-wrap bg-red-300"
               >
                 {i.title}
               </div>

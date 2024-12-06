@@ -27,7 +27,7 @@ export default function Nav() {
         className={`red px-4 ${pathname === "/blog" ? "activeLink" : ""}`}
         href="/blog"
       >
-        Blogs
+        My notes
       </Link>
     </div>
   );

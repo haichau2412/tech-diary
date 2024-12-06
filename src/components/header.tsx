@@ -58,8 +58,11 @@ const Header = () => {
         </Link>
         <div className="text-xs">{dateStr}</div>
       </div>
-      <div className="text-bold flex-grow basis-0 text-right text-sm sm:text-2xl">
-        Chau is online
+      <div className="flex flex-grow basis-0 flex-col items-end">
+        <div className="text-bold text-right text-sm sm:text-2xl">
+          Are you the creator?
+        </div>
+        <div className="">Google login</div>
       </div>
     </div>
   );
