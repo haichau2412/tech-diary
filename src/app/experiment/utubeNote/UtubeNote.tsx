@@ -96,7 +96,6 @@ const NoteItem = ({
 
 const NoteContainer = ({
   noteTime,
-  skipNote,
   playAt,
   timelapsed,
 }: {
@@ -192,7 +191,7 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
   };
 
   useEffect(() => {
-    let timeInterval: any;
+    let timeInterval: ReturnType<typeof setInterval>;
     if (videoState === "playing") {
       timeInterval = setInterval(() => {
         setTimelapsed(Math.floor(playerRef.current.getCurrentTime()));

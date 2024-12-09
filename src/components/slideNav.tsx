@@ -20,7 +20,7 @@ const SlideNav = ({
         className="flex snap-x snap-mandatory gap-2 overflow-x-scroll scroll-smooth"
         style={{ scrollbarWidth: "none" }}
       >
-        {items.map((i, index) => {
+        {items.map((i) => {
           return (
             <Link key={i.id} href={`/blog/${i.id}`}>
               <div
