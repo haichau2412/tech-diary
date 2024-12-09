@@ -15,9 +15,11 @@ export default {
       gridTemplateColumns: {
         main: "300px 1fr",
         mainSm: "200px 1fr",
+        utubeNote: "minmax(50%, 55%) 1fr"
       },
       gridTemplateRows: {
         main: "fit-content(50px) fit-content(50px) minmax(auto,1fr)",
+        utubeNote: "calc(100% - 200px) 200px"
       },
     },
   },

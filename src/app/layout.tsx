@@ -32,7 +32,7 @@ export default function RootLayout({
         <div className="flex h-screen w-screen cursor-default flex-col px-5 py-3">
           <Header />
           <Nav />
-          <div className="max-w-full flex-grow overflow-hidden">{children}</div>
+          <div className="max-w-full flex-grow overflow-hidden h-min">{children}</div>
         </div>
       </body>
     </html>

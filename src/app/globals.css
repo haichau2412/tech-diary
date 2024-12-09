@@ -109,4 +109,14 @@ body {
       background-color: var(--themeGreen);
     }
   }
+
+  .customScrollBarUtube {
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb  {
+      @apply bg-red-900;
+    }
+  }
 }
