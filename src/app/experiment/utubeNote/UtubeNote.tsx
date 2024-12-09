@@ -105,7 +105,7 @@ const NoteContainer = ({
   playAt: (timeStamp: number) => void;
 }) => {
   let currentNoteIndex = -1;
-  const nextNoteIndex = DUMMY_NOTE.findIndex(({ from }) => from >= timelapsed);
+  const nextNoteIndex = DUMMY_NOTE.findIndex(({ from }) => from > timelapsed);
 
   if (nextNoteIndex > 0) {
     currentNoteIndex = nextNoteIndex - 1;
@@ -186,8 +186,8 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
   };
 
   const playAt = (timeStamp: number) => {
-    playerRef.current.seekTo(timeStamp);
     setTimelapsed(timeStamp);
+    playerRef.current.seekTo(timeStamp);
     playerRef.current.playVideo();
   };
 
