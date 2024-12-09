@@ -1,4 +1,5 @@
 "use client";
+
 import { useRef } from "react";
 import Link from "next/link";
 
@@ -19,9 +20,9 @@ const SlideNav = ({
         className="flex snap-x snap-mandatory gap-2 overflow-x-scroll scroll-smooth"
         style={{ scrollbarWidth: "none" }}
       >
-        {items.map((i) => {
+        {items.map((i, index) => {
           return (
-            <Link key={i.id} href={"/blog/dummy1"}>
+            <Link key={i.id} href={`/blog/${i.id}`}>
               <div
                 key={i.id}
                 className="grid aspect-[3/2] w-[150px] flex-shrink-0 snap-start place-content-center truncate text-wrap bg-red-300"

@@ -99,4 +99,14 @@ body {
       filter: grayscale(10%) sepia(50%);
     }
   }
+
+  button.loggin {
+    @apply px-1;
+    color: #fff;
+    background-color: var(--themeGreenDark);
+
+    &:hover {
+      background-color: var(--themeGreen);
+    }
+  }
 }
