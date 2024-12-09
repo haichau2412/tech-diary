@@ -187,6 +187,7 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
 
   const playAt = (timeStamp: number) => {
     playerRef.current.seekTo(timeStamp);
+    setTimelapsed(timeStamp);
     playerRef.current.playVideo();
   };
 
