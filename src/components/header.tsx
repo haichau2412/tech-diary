@@ -54,14 +54,14 @@ const Header = () => {
       </div>
       <div className="flex flex-col items-center">
         <Link href="/">
-          <h1 className="themeGradientText text-3xl font-bold uppercase sm:text-4xl">{`Chau the human`}</h1>
+          <h1 className="themeGradientText text-3xl font-bold uppercase sm:text-4xl">
+            Chau Tech Shelf
+          </h1>
         </Link>
         <div className="text-xs">{dateStr}</div>
       </div>
-      <div className="flex flex-grow basis-0 flex-col items-end">
-        <div className="text-bold text-right text-sm sm:text-2xl">
-          Are you Chau?
-        </div>
+      <div className="flex flex-grow basis-0 flex-col items-end text-sm sm:text-2xl">
+        <div className="text-bold text-right">Are you Chau?</div>
         <button className="loggin">Google login</button>
       </div>
     </div>
