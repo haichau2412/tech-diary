@@ -1,13 +1,16 @@
 "use client";
 import Link from "next/link";
 import { format } from "date-fns";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "@/components/authContext";
 
 const Header = () => {
   const [{ greeting, dateStr }, setData] = useState({
     greeting: "",
     dateStr: "",
   });
+
+  const data = useContext(AuthContext);
 
   useEffect(() => {
     const generateData = () => {
@@ -39,30 +42,43 @@ const Header = () => {
         dateStr: `${date}, ${month} ${day}, ${year}`,
       });
     };
+    generateData();
 
-    const time = setInterval(generateData, 60);
+    const time = setInterval(generateData, 60 * 1000);
 
     return () => {
       clearInterval(time);
     };
   }, []);
 
+  const handleLogin = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_BE_ORIGIN}/auth/google`;
+  };
+
   return (
-    <div className="flex items-center justify-between px-3 py-2">
+    <div className="flex items-center justify-between px-1 py-2 sm:px-3">
       <div className="flex flex-grow basis-0 flex-col">
         <div className="text-sm sm:text-2xl">{greeting}</div>
       </div>
       <div className="flex flex-col items-center">
         <Link href="/">
-          <h1 className="themeGradientText text-3xl font-bold uppercase sm:text-4xl">
-            Chau Tech Shelf
+          <h1 className="themeGradientText text-2xl font-bold uppercase sm:text-4xl">
+            Chau&apos;s Tech
           </h1>
         </Link>
         <div className="text-xs">{dateStr}</div>
       </div>
       <div className="flex flex-grow basis-0 flex-col items-end text-sm sm:text-2xl">
-        <div className="text-bold text-right">Are you Chau?</div>
-        <button className="loggin">Google login</button>
+        {data.isAuthorized ? (
+          <div className="text-bold text-right">Hello Chau</div>
+        ) : (
+          <>
+            <div className="text-bold text-right">Are you Chau?</div>
+            <button onClick={handleLogin} className="loggin">
+              Gmail signin
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 import Nav from "@/components/nav.tsx";
 import Header from "@/components/header.tsx";
+import AuthProvider from "@/components/authContext";
 
 import { Tinos } from "next/font/google";
 
@@ -29,10 +30,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${tinos.className}`}>
-        <div className="flex h-screen w-screen cursor-default flex-col px-5 py-3">
-          <Header />
-          <Nav />
-          <div className="max-w-full flex-grow overflow-hidden h-min">{children}</div>
+        <div className="flex h-screen w-screen cursor-default flex-col sm:px-5 sm:py-3">
+          <AuthProvider>
+            <Header />
+            <Nav />
+            <div className="h-min max-w-full flex-grow overflow-x-hidden">
+              {children}
+            </div>
+          </AuthProvider>
         </div>
       </body>
     </html>

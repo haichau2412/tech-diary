@@ -2,16 +2,17 @@ import { Cinzel } from "next/font/google";
 import Image from "next/image";
 import criminalPic from "@/assets/human.png";
 
-const anton = Cinzel({
+const cinzel = Cinzel({
   subsets: ["latin"],
   weight: ["400", "500", "900", "700"],
+  display: "swap",
 });
 
 export default function WantedBanner() {
   return (
     <div className="grid h-full place-items-center">
       <div
-        className={`${anton.className} wantedContainer mx-2 flex flex-col items-center justify-center px-5 py-3`}
+        className={`${cinzel.className} wantedContainer mx-2 flex flex-col items-center justify-center px-1 py-3 sm:px-5`}
       >
         <div className="starAfter text-center text-6xl font-black uppercase leading-none sm:text-8xl">
           Wanted
@@ -57,8 +58,22 @@ export default function WantedBanner() {
         <div className="flex flex-col items-center sm:flex-row">
           <p>Conviction for his criminal: </p>
           <div className="ml-1 flex justify-center gap-1 font-bold sm:text-xl">
-            <a className="github socialLink">Github</a>
-            <a className="linkedIn socialLink">Linkedin</a>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://www.linkedin.com/in/chau-luu-0a3378179/"
+              className="github socialLink"
+            >
+              Github
+            </a>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://https://github.com/haichau2412"
+              className="linkedIn socialLink"
+            >
+              Linkedin
+            </a>
           </div>
         </div>
       </div>

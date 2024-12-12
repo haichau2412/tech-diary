@@ -69,7 +69,7 @@ body {
       display: block;
       mask-image: url("../assets/svg/star.svg");
       mask-repeat: repeat;
-      @apply block h-[20px] w-[150px] translate-y-[-8px] bg-yellow-500 sm:translate-y-[-15px];
+      @apply block h-[20px] w-[150px] translate-y-[-5px] bg-yellow-500 sm:translate-y-[-15px];
     }
   }
 
@@ -100,7 +100,7 @@ body {
     }
   }
 
-  button.loggin {
+  .loggin {
     @apply px-1;
     color: #fff;
     background-color: var(--themeGreenDark);
@@ -115,7 +115,7 @@ body {
       width: 4px;
     }
 
-    &::-webkit-scrollbar-thumb  {
+    &::-webkit-scrollbar-thumb {
       @apply bg-red-900;
     }
   }
