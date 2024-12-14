@@ -86,7 +86,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative col-span-2 flex max-w-full items-center gap-3 border-2 border-t-0 border-solid border-red-900 px-2 py-3">
+    <div className="relative col-span-2 flex max-w-full items-center gap-3 border-2 border-solid border-red-900 px-2 py-3">
       {isLoading ? (
         renderLoading()
       ) : (
@@ -102,10 +102,17 @@ const Carousel = () => {
                   key={i.youtubeId}
                   className="flex h-fit w-[200px] flex-shrink-0 snap-start flex-col place-content-center truncate text-wrap"
                 >
-                  <Image
-                    src={`https://img.youtube.com/vi/${i.youtubeId}/0.jpg`}
-                    alt=""
-                  />
+                  <div className="relative w-[200px] h-[150px]">
+                    <Image
+                      role="presentation"
+                      priority={false}
+                      fill
+                      style={{ objectFit: "contain" }}
+                      sizes="200px"
+                      src={`https://img.youtube.com/vi/${i.youtubeId}/0.jpg`}
+                      alt=""
+                    />
+                  </div>
 
                   <Link
                     className="max-w-full truncate text-ellipsis text-center"
