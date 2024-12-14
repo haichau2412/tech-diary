@@ -119,4 +119,26 @@ body {
       @apply bg-red-900;
     }
   }
+
+  .addUtubeForm {
+    @apply flex flex-shrink-0 flex-grow-0 basis-[200px] flex-col items-center self-stretch border-2 border-green-900 px-1 pt-3 bg-green-50;
+
+    label {
+      @apply font-bold uppercase text-green-900;
+    }
+
+    input {
+      @apply border border-green-900 bg-transparent px-1 text-sm text-slate-700 shadow-sm placeholder:text-slate-400 hover:border-green-700 focus:border-green-500 focus:shadow focus:outline-none;
+
+      &[type="submit"] {
+        @apply mt-3 w-fit bg-green-900 px-2 py-1 uppercase text-white hover:bg-green-600 active:bg-green-800;
+      }
+    }
+  }
+
+  .customScrollBarUtube {
+    &::-webkit-scrollbar {
+      height: 2px;
+    }
+  }
 }

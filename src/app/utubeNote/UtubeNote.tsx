@@ -3,6 +3,8 @@
 import YouTube, { YouTubePlayer } from "react-youtube";
 import { YouTubeNote, Note as NoteType, VideoState } from "./youtubeData";
 import { useState, useRef, useEffect } from "react";
+import { postWithCredential, getWithCredential } from "@/utils/fetcher";
+import useSWR from "swr";
 
 const formatTime = (time: number) => {
   const sec = time % 60;
@@ -20,115 +22,14 @@ const formatTime = (time: number) => {
   return result.join(":").replace(/\b(\d)\b/g, "0$1");
 };
 
-const DUMMY_NOTE = [
-  {
-    from: 1,
-    note: "anbvlksdd sdkjjd  kjdsk ",
-  },
-  {
-    from: 2,
-    note: "dffds tyer 0789 gjg ",
-  },
-  {
-    from: 3,
-    note: "anbvlksdd sdkjjd  kjdsk ",
-  },
-  {
-    from: 4,
-    note: "sdfsdf sdgfs cvxcv  ",
-  },
-  {
-    from: 5,
-    note: "sdf  sdfs vcbb mnmnm  ",
-  },
-  {
-    from: 6,
-    note: "212 r6ert i867ij dsfrs ",
-  },
-  {
-    from: 7,
-    note: "anbvlksdd sdkjjd  kjdsk ",
-  },
-  {
-    from: 8,
-    note: "dffds tyer 0789 gjg ",
-  },
-  {
-    from: 9,
-    note: "anbvlksdd sdkjjd  kjdsk ",
-  },
-  {
-    from: 120,
-    note: "sdfsdf sdgfs cvxcv  ",
-  },
-  {
-    from: 300,
-    note: "sdf  sdfs vcbb mnmnm  ",
-  },
-  {
-    from: 310,
-    note: "212 r6ert i867ij dsfrs ",
-  },
-  {
-    from: 311,
-    note: "anbvlksdd sdkjjd  kjdsk ",
-  },
-  {
-    from: 312,
-    note: "dffds tyer 0789 gjg ",
-  },
-  {
-    from: 313,
-    note: "anbvlksdd sdkjjd  kjdsk ",
-  },
-  {
-    from: 314,
-    note: "sdfsdf sdgfs cvxcv  ",
-  },
-  {
-    from: 315,
-    note: "sdf  sdfs vcbb mnmnm  ",
-  },
-  {
-    from: 316,
-    note: "212 r6ert i867ij dsfrs ",
-  },
-  {
-    from: 317,
-    note: "anbvlksdd sdkjjd  kjdsk ",
-  },
-  {
-    from: 318,
-    note: "dffds tyer 0789 gjg ",
-  },
-  {
-    from: 319,
-    note: "anbvlksdd sdkjjd  kjdsk ",
-  },
-  {
-    from: 320,
-    note: "sdfsdf sdgfs cvxcv  ",
-  },
-  {
-    from: 340,
-    note: "dffds tyer 0789 gjg ",
-  },
-  {
-    from: 341,
-    note: "anbvlksdd sdkjjd  kjdsk ",
-  },
-  {
-    from: 342,
-    note: "sdfsdf sdgfs cvxcv  ",
-  },
-];
-
 const AddNote = ({
   skipNote,
   noteTime,
+  addNote,
 }: {
   skipNote: () => void;
   noteTime: number;
+  addNote: (from: number, text: string) => void;
 }) => {
   const [note, setNote] = useState("");
 
@@ -149,8 +50,7 @@ const AddNote = ({
             className="col-span-1 -translate-y-2 bg-red-900 px-1 text-white hover:bg-red-700 active:bg-red-700"
             type="submit"
             onClick={() => {
-              console.log("send note to server");
-
+              addNote(noteTime, note);
               skipNote();
             }}
           >
@@ -169,7 +69,7 @@ const AddNote = ({
 
 const NoteItem = ({
   from,
-  note,
+  text,
   playAt,
   highlighted,
 }: NoteType & {
@@ -190,7 +90,7 @@ const NoteItem = ({
         >
           {timeAsString}
         </span>
-        : {note}
+        : {text}
       </p>
     </div>
   );
@@ -198,26 +98,74 @@ const NoteItem = ({
 
 const NoteContainer = ({
   noteTime,
+  videoId,
   playAt,
   timelapsed,
   skipNote,
 }: {
+  videoId: string;
   noteTime: number | null;
   timelapsed: number;
   skipNote: () => void;
   playAt: (timeStamp: number) => void;
 }) => {
+  const { data } = useSWR(
+    `${process.env.NEXT_PUBLIC_BE_ORIGIN}/api/notes/${videoId}`,
+    getWithCredential,
+  );
+
+  const [notes, setNotes] = useState<{ from: number; text: string }[]>([]);
+
+  useEffect(() => {
+    if (data) {
+      const _data = data as unknown as {
+        data: { from: number; text: string }[];
+      };
+      const notes = _data.data;
+
+      setNotes(notes.sort((a, b) => a.from - b.from));
+    }
+  }, [data]);
+
+  const addNote = async (from: number, text: string) => {
+    const _notes = structuredClone(notes);
+    _notes.push({
+      from,
+      text,
+    });
+    setNotes(_notes.sort((a, b) => a.from - b.from));
+
+    const data = await postWithCredential(
+      `${process.env.NEXT_PUBLIC_BE_ORIGIN}/api/notes/${videoId}`,
+      {
+        from,
+        text,
+      },
+    );
+
+    setNotes(data.data.sort((a, b) => a.from - b.from));
+  };
+
   let currentNoteIndex = -1;
-  const nextNoteIndex = DUMMY_NOTE.findIndex(({ from }) => from > timelapsed);
+  const nextNoteIndex = notes.findIndex(({ from }) => from > timelapsed);
 
   if (nextNoteIndex > 0) {
     currentNoteIndex = nextNoteIndex - 1;
+  } else {
+    if (notes[notes.length - 1]?.from < timelapsed)
+      currentNoteIndex = notes.length - 1;
   }
 
   return (
     <div className="relative col-span-1 row-span-1 border-2 border-l-0 border-solid border-red-900 p-2">
+      
       <div className="customScrollBarUtube flex max-h-full min-h-0 flex-grow flex-col overflow-y-scroll">
-        {DUMMY_NOTE.map((d, index) => {
+        {notes.length === 0 && (
+          <>
+            <div className=""> No note for this clip</div>
+          </>
+        )}
+        {notes.map((d, index) => {
           return (
             <NoteItem
               key={d.from}
@@ -229,7 +177,7 @@ const NoteContainer = ({
         })}
       </div>
       {typeof noteTime === "number" ? (
-        <AddNote skipNote={skipNote} noteTime={noteTime} />
+        <AddNote skipNote={skipNote} addNote={addNote} noteTime={noteTime} />
       ) : null}
     </div>
   );
@@ -332,6 +280,7 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
         }}
       />
       <NoteContainer
+        videoId={videoId}
         noteTime={noteTime}
         skipNote={skipNote}
         playAt={playAt}

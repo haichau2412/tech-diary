@@ -1,6 +1,6 @@
 export type Note = {
     from: number,
-    note: string
+    text: string
 }
 
 export type YouTubeNote = {
@@ -14,7 +14,7 @@ export type Player = {
     playerInfo: {
         duration: number
     }
-    
+
 }
 
 export type VideoState = "paused" | "playing"

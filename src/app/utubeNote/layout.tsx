@@ -10,7 +10,7 @@ const YouTubeNote = ({
   return (
     <div className="grid h-full max-h-full grid-cols-utubeNote grid-rows-utubeNote overflow-hidden text-sm sm:text-base">
       <>{children}</>
-      <UtubeCarousel items={[]} />
+      <UtubeCarousel />
     </div>
   );
 };
