@@ -143,7 +143,11 @@ const NoteContainer = ({
       },
     );
 
-    setNotes(data.data.sort((a, b) => a.from - b.from));
+    const _data = data as unknown as {
+      data?: { from: number; text: string }[];
+    };
+
+    setNotes((_data.data || []).sort((a, b) => a.from - b.from));
   };
 
   let currentNoteIndex = -1;
@@ -158,7 +162,6 @@ const NoteContainer = ({
 
   return (
     <div className="relative col-span-1 row-span-1 border-2 border-l-0 border-solid border-red-900 p-2">
-      
       <div className="customScrollBarUtube flex max-h-full min-h-0 flex-grow flex-col overflow-y-scroll">
         {notes.length === 0 && (
           <>

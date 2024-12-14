@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useContext } from "react";
-import { AuthContext } from "@/components/authContext";
+import { useRef } from "react";
+// import { AuthContext } from "@/components/authContext";
 import useSWR from "swr";
 import { getWithCredential, postWithCredential } from "@/utils/fetcher";
 import Link from "next/link";
@@ -65,20 +65,19 @@ const ImportYoutube = () => {
 };
 
 const Carousel = () => {
-  const { isAuthorized } = useContext(AuthContext);
+  // const { isAuthorized } = useContext(AuthContext);
 
-  const { data, error, isLoading } = useSWR(
+  const { data, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_BE_ORIGIN}/api/videos`,
     getWithCredential,
   );
 
-  console.log(
-    "{ data, error, isLoading } ",
-    isAuthorized,
-    data,
-    error,
-    isLoading,
-  );
+  const _data = data as unknown as {
+    data?: {
+      youtubeId: string;
+      customName: string;
+    }[];
+  };
 
   const currentRef = useRef<HTMLDivElement>(null);
 
@@ -97,7 +96,7 @@ const Carousel = () => {
             ref={currentRef}
             className="customScrollBarUtube flex snap-x snap-mandatory gap-2 overflow-x-scroll scroll-smooth"
           >
-            {data?.data?.map((i) => {
+            {(_data?.data || []).map((i) => {
               return (
                 <div
                   key={i.youtubeId}
