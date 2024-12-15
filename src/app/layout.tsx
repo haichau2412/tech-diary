@@ -30,11 +30,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${tinos.className}`}>
-        <div className="flex h-screen w-screen cursor-default flex-col sm:px-5 sm:py-3">
+        <div className="flex h-screen max-h-screen w-screen cursor-default flex-col sm:px-5 sm:py-3">
           <AuthProvider>
             <Header />
             <Nav />
-            <div className="h-min max-w-full flex-grow overflow-x-hidden">
+            <div className="flex-shrink flex-grow overflow-hidden">
               {children}
             </div>
           </AuthProvider>

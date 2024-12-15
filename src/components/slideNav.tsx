@@ -14,10 +14,10 @@ const SlideNav = ({
   const currentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative max-w-full">
+    <div className="relative h-full overflow-hidden">
       <div
         ref={currentRef}
-        className="flex snap-x snap-mandatory gap-2 overflow-x-scroll scroll-smooth"
+        className="flex max-h-full snap-both snap-mandatory flex-col gap-2 overflow-y-scroll scroll-smooth"
         style={{ scrollbarWidth: "none" }}
       >
         {items.map((i) => {
@@ -34,20 +34,22 @@ const SlideNav = ({
         })}
       </div>
       <div
-        className="absolute top-full flex h-6 w-6 items-center justify-center rounded-full bg-pink-200"
+        className="absolute top-0 flex h-6 w-6 items-center justify-center rounded-full bg-pink-200"
         onClick={() => {
           if (currentRef.current) {
-            currentRef.current.scrollLeft -= 400;
+            currentRef.current.scrollTop += 300;
+            console.log("click", currentRef.current.scrollTop);
           }
         }}
       >{`<`}</div>
       <div
         onClick={() => {
           if (currentRef.current) {
-            currentRef.current.scrollLeft += 400;
+            currentRef.current.scrollTop = 300;
+            console.log("click", currentRef.current.scrollTop);
           }
         }}
-        className="absolute right-0 top-full flex h-6 w-6 items-center justify-center rounded-full bg-pink-200"
+        className="absolute right-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-pink-200"
       >{`>`}</div>
     </div>
   );
