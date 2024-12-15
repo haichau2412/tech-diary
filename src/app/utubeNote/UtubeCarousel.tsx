@@ -96,76 +96,85 @@ const Carousel = () => {
             ref={currentRef}
             className="customScrollBarUtube flex snap-x snap-mandatory gap-2 overflow-x-scroll scroll-smooth"
           >
-            {(_data?.data || []).map((i) => {
-              return (
-                <Link key={i.youtubeId} href={`/utubeNote/${i.youtubeId}`} className="cursor-pointer">
-                  <div className="flex h-fit w-[150px] flex-shrink-0 snap-start flex-col place-content-center truncate text-wrap sm:w-[200px]">
-                    <div className="relative aspect-[3/2]">
-                      <Image
-                        role="presentation"
-                        priority={false}
-                        fill
-                        style={{ objectFit: "contain" }}
-                        sizes="(max-width: 768px) 200px, 100px"
-                        src={`https://img.youtube.com/vi/${i.youtubeId}/0.jpg`}
-                        alt=""
-                      />
-                    </div>
+            {_data?.data &&
+              _data?.data.map((i) => {
+                return (
+                  <Link
+                    key={i.youtubeId}
+                    href={`/utubeNote/${i.youtubeId}`}
+                    className="cursor-pointer"
+                  >
+                    <div className="flex h-fit w-[150px] flex-shrink-0 snap-start flex-col place-content-center truncate text-wrap sm:w-[200px]">
+                      <div className="relative aspect-[3/2]">
+                        <Image
+                          role="presentation"
+                          priority={false}
+                          fill
+                          style={{ objectFit: "contain" }}
+                          sizes="(max-width: 768px) 200px, 100px"
+                          src={`https://img.youtube.com/vi/${i.youtubeId}/0.jpg`}
+                          alt=""
+                        />
+                      </div>
 
-                    <p className="max-w-full truncate text-ellipsis text-center">
-                      {i.customName || "no name"}
-                    </p>
-                  </div>
-                </Link>
-              );
-            })}
+                      <p className="max-w-full truncate text-ellipsis text-center">
+                        {i.customName || "no name"}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
           </div>
-          <div
-            className="navBtn absolute left-[170px] sm:left-[220px]"
-            onClick={() => {
-              if (currentRef.current) {
-                currentRef.current.scrollLeft -= 400;
-              }
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-              />
-            </svg>
-          </div>
-          <div
-            onClick={() => {
-              if (currentRef.current) {
-                currentRef.current.scrollLeft += 400;
-              }
-            }}
-            className="navBtn absolute right-0"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-              />
-            </svg>
-          </div>
+          {_data?.data && (
+            <>
+              <div
+                className="navBtn absolute left-[170px] sm:left-[220px]"
+                onClick={() => {
+                  if (currentRef.current) {
+                    currentRef.current.scrollLeft -= 400;
+                  }
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+                  />
+                </svg>
+              </div>
+              <div
+                onClick={() => {
+                  if (currentRef.current) {
+                    currentRef.current.scrollLeft += 400;
+                  }
+                }}
+                className="navBtn absolute right-0"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                  />
+                </svg>
+              </div>
+            </>
+          )}
         </>
       )}
     </div>

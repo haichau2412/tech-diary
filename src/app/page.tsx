@@ -45,18 +45,10 @@ const Home = () => {
           Even though I used to work dedicatedly on my last project,which is now
           used by a large number of people.
         </p>
-        <p>
-          I was lucky have an interview at a company and interviewed by their
-          leader.
-        </p>
-        <p>
-          He pointed out what was wrong with me. That moment turned out to be an
-          awakening for me.
-        </p>
         <p>I know my work ethic, I know I can get things done.</p>
         <p>But how can I make people trust ME ?</p>
         <p>
-          I can&apos;t blame people on not trusting me. They need to see{" "}
+          They can&apos;t blindlessly trust me. They need to see{" "}
           <a className="underline" href="http://chautechdiary.tech/">
             PROOF
           </a>

@@ -6,10 +6,12 @@ import axios from "axios";
 type AuthContext = {
   isAuthorized: boolean;
   onLogout: () => void;
+  name: string;
 };
 
 export const AuthContext = createContext<AuthContext>({
   isAuthorized: false,
+  name: "",
   onLogout: () => {},
 });
 
@@ -25,6 +27,7 @@ export default function AuthProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [name, setName] = useState("");
   const [isAuthorized, setIsAuthorized] = useState<boolean>(
     JSON.parse(
       typeof window !== "undefined"
@@ -36,32 +39,32 @@ export default function AuthProvider({
   useEffect(() => {
     let timeOut: ReturnType<typeof setTimeout>;
     const validateToken = async () => {
-      const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_BE_ORIGIN}/token/validate`,
-        {
+      try {
+        const result = await axios.get<{
+          message: string;
+          name: string;
+          expiredAt: number;
+        }>(`${process.env.NEXT_PUBLIC_BE_ORIGIN}/token/validate`, {
           withCredentials: true,
-        },
-      );
+        });
 
-      console.log("result", result);
+        if (result.status === 200) {
+          const expiredAt = (result as unknown as responseData).data.expiredAt;
 
-      if (result.status === 200) {
-        const expiredAt = (result as unknown as responseData).data.expiredAt;
+          setIsAuthorized(true);
+          setName(result.data.name || "");
+          window.sessionStorage.setItem("isAuthorized", "true");
 
-        setIsAuthorized(true);
-
-        console.log(
-          "expiredAt * 1000 - Date.now()",
-          expiredAt * 1000 - Date.now(),
-        );
-
-        timeOut = setTimeout(
-          () => {
-            console.log("revalidate");
-            validateToken();
-          },
-          expiredAt * 1000 - Date.now(),
-        );
+          timeOut = setTimeout(
+            () => {
+              validateToken();
+            },
+            expiredAt * 1000 - Date.now(),
+          );
+        }
+      } catch (err: unknown) {
+        console.log("err", err);
+        window.sessionStorage.setItem("isAuthorized", "false");
       }
     };
 
@@ -78,6 +81,7 @@ export default function AuthProvider({
     <AuthContext.Provider
       value={{
         isAuthorized,
+        name,
         onLogout: () => {
           setIsAuthorized(false);
         },

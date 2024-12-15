@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "@/components/authContext";
 import { postWithCredential } from "@/utils/fetcher";
+import { mutate } from "swr";
 
 const Header = () => {
   const [{ greeting, dateStr }, setData] = useState({
@@ -58,13 +59,18 @@ const Header = () => {
 
   const handleLogout = async () => {
     await postWithCredential(`${process.env.NEXT_PUBLIC_BE_ORIGIN}/logout`);
+    mutate(() => true, undefined, { revalidate: false });
     data.onLogout();
   };
 
   return (
     <div className="flex items-center justify-between px-1 py-2 sm:px-3">
       <div className="flex flex-grow basis-0 flex-col">
-        <div className="text-sm sm:text-2xl">{`${greeting}, ${data.isAuthorized ? "Chau" : "stranger"} !`}</div>
+        <div className="text-sm sm:text-2xl">
+          {greeting
+            ? `${greeting}${data.isAuthorized ? `${data.name ? `, ${data.name}` : ""}` : ", stranger"}!`
+            : null}
+        </div>
       </div>
       <div className="flex flex-col items-center">
         <Link href="/">
