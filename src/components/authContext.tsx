@@ -10,7 +10,11 @@ type AuthContext = {
 };
 
 export const AuthContext = createContext<AuthContext>({
-  isAuthorized: false,
+  isAuthorized: JSON.parse(
+    typeof window !== "undefined"
+      ? window.sessionStorage.getItem("isAuthorized") || "false"
+      : "false",
+  ),
   name: "",
   onLogout: () => {},
 });

@@ -2,9 +2,10 @@
 
 import YouTube, { YouTubePlayer } from "react-youtube";
 import { YouTubeNote, Note as NoteType, VideoState } from "./youtubeData";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { postWithCredential, getWithCredential } from "@/utils/fetcher";
 import useSWR from "swr";
+import { AuthContext } from "@/components/authContext";
 
 const formatTime = (time: number) => {
   const sec = time % 60;
@@ -230,6 +231,7 @@ const VideoBox = ({
 };
 
 const UtubeNote = ({ videoId }: { videoId: string }) => {
+  const { isAuthorized } = useContext(AuthContext);
   const [videoState, setVideoState] = useState<VideoState>("paused");
   const [noteTime, setNoteTime] = useState<number | null>(null);
   const [timelapsed, setTimelapsed] = useState(0);
@@ -272,23 +274,33 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
 
   return (
     <>
-      <VideoBox
-        id={videoId}
-        setPlayer={setPlayer}
-        noteTime={noteTime}
-        takeNote={takeNote}
-        videoState={videoState}
-        setVideoState={(param: VideoState) => {
-          setVideoState(param);
-        }}
-      />
-      <NoteContainer
-        videoId={videoId}
-        noteTime={noteTime}
-        skipNote={skipNote}
-        playAt={playAt}
-        timelapsed={timelapsed}
-      />
+      {isAuthorized ? (
+        <>
+          <VideoBox
+            id={videoId}
+            setPlayer={setPlayer}
+            noteTime={noteTime}
+            takeNote={takeNote}
+            videoState={videoState}
+            setVideoState={(param: VideoState) => {
+              setVideoState(param);
+            }}
+          />
+          <NoteContainer
+            videoId={videoId}
+            noteTime={noteTime}
+            skipNote={skipNote}
+            playAt={playAt}
+            timelapsed={timelapsed}
+          />
+        </>
+      ) : (
+        <div className="col-span-2 flex items-center justify-center bg-red-50 text-center text-xl font-bold uppercase">
+          <p className="max-w-[600px]">
+            This feature is used for those who want to take note on youtube
+          </p>
+        </div>
+      )}
     </>
   );
 };
