@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-// import { AuthContext } from "@/components/authContext";
+import { useRef, useContext } from "react";
+import { AuthContext } from "@/components/authContext";
 import useSWR from "swr";
 import { getWithCredential, postWithCredential } from "@/utils/fetcher";
 import Link from "next/link";
@@ -65,7 +65,7 @@ const ImportYoutube = () => {
 };
 
 const Carousel = () => {
-  // const { isAuthorized } = useContext(AuthContext);
+  const { isAuthorized } = useContext(AuthContext);
 
   const { data, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_BE_ORIGIN}/api/videos`,
@@ -81,102 +81,114 @@ const Carousel = () => {
 
   const currentRef = useRef<HTMLDivElement>(null);
 
-  const renderLoading = () => {
-    return <div className="">Loading</div>;
+  const renderContent = () => {
+    if (!isAuthorized) {
+      return (
+        <p className="mx-auto text-xs font-bold uppercase text-red-900 sm:text-xl">
+          Sign in to use this feature
+        </p>
+      );
+    }
+
+    if (isAuthorized) {
+      if (isLoading) {
+        return <div className="">Loading</div>;
+      }
+    }
+
+    return (
+      <>
+        <ImportYoutube />
+        <div
+          ref={currentRef}
+          className="customScrollBarUtube flex snap-x snap-mandatory gap-2 overflow-x-scroll scroll-smooth"
+        >
+          {_data?.data &&
+            _data?.data.map((i) => {
+              return (
+                <Link
+                  key={i.youtubeId}
+                  href={`/utubeNote/${i.youtubeId}`}
+                  className="cursor-pointer"
+                >
+                  <div className="flex h-fit w-[150px] flex-shrink-0 snap-start flex-col place-content-center truncate text-wrap sm:w-[200px]">
+                    <div className="relative aspect-[3/2]">
+                      <Image
+                        role="presentation"
+                        priority={false}
+                        fill
+                        style={{ objectFit: "contain" }}
+                        sizes="(max-width: 768px) 200px, 100px"
+                        src={`https://img.youtube.com/vi/${i.youtubeId}/0.jpg`}
+                        alt=""
+                      />
+                    </div>
+
+                    <p className="max-w-full truncate text-ellipsis text-center">
+                      {i.customName || "no name"}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
+        </div>
+        {_data?.data && (
+          <>
+            <div
+              className="navBtn absolute left-[170px] sm:left-[220px]"
+              onClick={() => {
+                if (currentRef.current) {
+                  currentRef.current.scrollLeft -= 400;
+                }
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+                />
+              </svg>
+            </div>
+            <div
+              onClick={() => {
+                if (currentRef.current) {
+                  currentRef.current.scrollLeft += 400;
+                }
+              }}
+              className="navBtn absolute right-0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                />
+              </svg>
+            </div>
+          </>
+        )}
+      </>
+    );
   };
 
   return (
     <div className="relative flex max-w-full items-center gap-3 border-2 border-solid border-red-900 px-2 py-3 sm:col-span-2">
-      {isLoading ? (
-        renderLoading()
-      ) : (
-        <>
-          <ImportYoutube />
-          <div
-            ref={currentRef}
-            className="customScrollBarUtube flex snap-x snap-mandatory gap-2 overflow-x-scroll scroll-smooth"
-          >
-            {_data?.data &&
-              _data?.data.map((i) => {
-                return (
-                  <Link
-                    key={i.youtubeId}
-                    href={`/utubeNote/${i.youtubeId}`}
-                    className="cursor-pointer"
-                  >
-                    <div className="flex h-fit w-[150px] flex-shrink-0 snap-start flex-col place-content-center truncate text-wrap sm:w-[200px]">
-                      <div className="relative aspect-[3/2]">
-                        <Image
-                          role="presentation"
-                          priority={false}
-                          fill
-                          style={{ objectFit: "contain" }}
-                          sizes="(max-width: 768px) 200px, 100px"
-                          src={`https://img.youtube.com/vi/${i.youtubeId}/0.jpg`}
-                          alt=""
-                        />
-                      </div>
-
-                      <p className="max-w-full truncate text-ellipsis text-center">
-                        {i.customName || "no name"}
-                      </p>
-                    </div>
-                  </Link>
-                );
-              })}
-          </div>
-          {_data?.data && (
-            <>
-              <div
-                className="navBtn absolute left-[170px] sm:left-[220px]"
-                onClick={() => {
-                  if (currentRef.current) {
-                    currentRef.current.scrollLeft -= 400;
-                  }
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-                  />
-                </svg>
-              </div>
-              <div
-                onClick={() => {
-                  if (currentRef.current) {
-                    currentRef.current.scrollLeft += 400;
-                  }
-                }}
-                className="navBtn absolute right-0"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                  />
-                </svg>
-              </div>
-            </>
-          )}
-        </>
-      )}
+      {renderContent()}
     </div>
   );
 };
