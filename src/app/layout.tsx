@@ -7,7 +7,7 @@ import AuthProvider from "@/components/authContext";
 import { Tinos } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "Chau Portfolio",
+  title: "Chau tech diary",
 };
 
 export function generateViewport() {

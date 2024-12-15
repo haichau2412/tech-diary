@@ -69,7 +69,7 @@ export default function WantedBanner() {
             <a
               target="_blank"
               rel="noopener"
-              href="https://https://github.com/haichau2412"
+              href="https://github.com/haichau2412"
               className="linkedIn socialLink"
             >
               Linkedin
