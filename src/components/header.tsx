@@ -3,6 +3,7 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "@/components/authContext";
+import { postWithCredential } from "@/utils/fetcher";
 
 const Header = () => {
   const [{ greeting, dateStr }, setData] = useState({
@@ -55,6 +56,11 @@ const Header = () => {
     window.location.href = `${process.env.NEXT_PUBLIC_BE_ORIGIN}/auth/google`;
   };
 
+  const handleLogout = async () => {
+    await postWithCredential(`${process.env.NEXT_PUBLIC_BE_ORIGIN}/logout`);
+    data.onLogout();
+  };
+
   return (
     <div className="flex items-center justify-between px-1 py-2 sm:px-3">
       <div className="flex flex-grow basis-0 flex-col">
@@ -70,10 +76,13 @@ const Header = () => {
       </div>
       <div className="flex flex-grow basis-0 flex-col items-end text-sm sm:text-2xl">
         {data.isAuthorized ? (
-          <div className="text-bold text-right">Hello Chau</div>
+          <>
+            <button onClick={handleLogout} className="logout">
+              Log out
+            </button>
+          </>
         ) : (
           <>
-            <div className="text-bold text-right">Are you Chau?</div>
             <button onClick={handleLogin} className="loggin">
               Gmail signin
             </button>

@@ -110,6 +110,16 @@ body {
     }
   }
 
+  .logout {
+    @apply px-1;
+    color: #fff;
+    background-color: var(--bannerDominantColor);
+
+    &:hover {
+      background-color: var(--themeRed);
+    }
+  }
+
   .customScrollBarUtube {
     &::-webkit-scrollbar {
       width: 4px;

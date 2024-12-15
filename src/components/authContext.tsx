@@ -5,10 +5,12 @@ import axios from "axios";
 
 type AuthContext = {
   isAuthorized: boolean;
+  onLogout: () => void;
 };
 
 export const AuthContext = createContext<AuthContext>({
   isAuthorized: false,
+  onLogout: () => {},
 });
 
 type responseData = {
@@ -76,6 +78,9 @@ export default function AuthProvider({
     <AuthContext.Provider
       value={{
         isAuthorized,
+        onLogout: () => {
+          setIsAuthorized(false);
+        },
       }}
     >
       {children}
