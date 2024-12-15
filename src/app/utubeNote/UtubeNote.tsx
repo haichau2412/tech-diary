@@ -161,7 +161,7 @@ const NoteContainer = ({
   }
 
   return (
-    <div className="relative col-span-1 row-span-1 border-2 border-b-0 border-l-0 border-solid border-red-900 p-2">
+    <div className="relative col-span-1 row-span-1 border-2 border-b-0 border-solid border-red-900 p-2 sm:border-l-0">
       <div className="customScrollBarUtube flex max-h-full min-h-0 flex-grow flex-col overflow-y-scroll">
         {notes.length === 0 && (
           <>
@@ -205,11 +205,11 @@ const VideoBox = ({
 
   return (
     <div
-      className={`col-span-1 row-span-1 flex max-h-full min-h-0 basis-1/2 flex-col items-center gap-2 border-2 border-b-0 border-solid border-red-900 p-2 ease-in-out ${videoState === "paused" ? "bg-red-300" : ""}`}
+      className={`flex flex-col items-center gap-2 border-2 border-b-0 border-solid border-red-900 p-2 ${videoState === "paused" ? "bg-red-200" : ""}`}
     >
       <YouTube
         iframeClassName="w-full h-full"
-        className="w-full flex-grow"
+        className="h-full w-full flex-grow"
         onPlay={() => {
           setVideoState("playing");
         }}

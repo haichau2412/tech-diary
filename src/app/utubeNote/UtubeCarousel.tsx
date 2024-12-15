@@ -86,7 +86,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative col-span-2 flex max-w-full items-center gap-3 border-2 border-solid border-red-900 px-2 py-3">
+    <div className="relative flex max-w-full items-center gap-3 border-2 border-solid border-red-900 px-2 py-3 sm:col-span-2">
       {isLoading ? (
         renderLoading()
       ) : (
@@ -98,34 +98,30 @@ const Carousel = () => {
           >
             {(_data?.data || []).map((i) => {
               return (
-                <div
-                  key={i.youtubeId}
-                  className="flex h-fit w-[200px] flex-shrink-0 snap-start flex-col place-content-center truncate text-wrap"
-                >
-                  <div className="relative w-[200px] h-[150px]">
-                    <Image
-                      role="presentation"
-                      priority={false}
-                      fill
-                      style={{ objectFit: "contain" }}
-                      sizes="200px"
-                      src={`https://img.youtube.com/vi/${i.youtubeId}/0.jpg`}
-                      alt=""
-                    />
-                  </div>
+                <Link key={i.youtubeId} href={`/utubeNote/${i.youtubeId}`} className="cursor-pointer">
+                  <div className="flex h-fit w-[150px] flex-shrink-0 snap-start flex-col place-content-center truncate text-wrap sm:w-[200px]">
+                    <div className="relative aspect-[3/2]">
+                      <Image
+                        role="presentation"
+                        priority={false}
+                        fill
+                        style={{ objectFit: "contain" }}
+                        sizes="(max-width: 768px) 200px, 100px"
+                        src={`https://img.youtube.com/vi/${i.youtubeId}/0.jpg`}
+                        alt=""
+                      />
+                    </div>
 
-                  <Link
-                    className="max-w-full truncate text-ellipsis text-center"
-                    href={`/utubeNote/${i.youtubeId}`}
-                  >
-                    {i.customName || "no name"}
-                  </Link>
-                </div>
+                    <p className="max-w-full truncate text-ellipsis text-center">
+                      {i.customName || "no name"}
+                    </p>
+                  </div>
+                </Link>
               );
             })}
           </div>
           <div
-            className="absolute left-[220px] top-1/2 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-red-300 p-1 hover:bg-red-800 active:bg-red-700"
+            className="navBtn absolute left-[170px] sm:left-[220px]"
             onClick={() => {
               if (currentRef.current) {
                 currentRef.current.scrollLeft -= 400;
@@ -153,7 +149,7 @@ const Carousel = () => {
                 currentRef.current.scrollLeft += 400;
               }
             }}
-            className="absolute right-0 top-1/2 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-red-300 p-1 hover:bg-red-800 active:bg-red-700"
+            className="navBtn absolute right-0"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

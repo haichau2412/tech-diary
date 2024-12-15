@@ -8,15 +8,17 @@ const rye = Rye({
 
 const Home = () => {
   return (
-    <div className={`flex h-full flex-col items-center bg-green-900`}>
+    <div
+      className={`flex h-full flex-col items-center justify-center bg-green-900`}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 600 200"
-        className={`${rye.className} h-[400px] w-full`}
+        viewBox="0 0 120 20"
+        className={`${rye.className} h-[100px] w-full translate-y-[20px]`}
       >
         <path
           id="curve"
-          d="M 0 200 Q 300 -100 600 200"
+          d="M 0 20 Q 60 -10 120 20"
           fill="none"
           stroke="none"
           strokeMiterlimit="10"
@@ -24,15 +26,15 @@ const Home = () => {
         <text textAnchor="middle">
           <textPath
             href="#curve"
-            startOffset="50.5%"
+            startOffset="50%"
             letterSpacing=".05em"
-            className="fill-slate-50 text-xl"
+            className="fill-slate-50 text-[7px] sm:text-[6px]"
           >
             The journey to this page
           </textPath>
         </text>
       </svg>
-      <div className="-mt-[200px] w-[600px] text-left text-sm text-white sm:text-xl">
+      <div className="max-w-[600px] px-2 text-left text-white sm:mt-8 sm:text-xl">
         <p>I am Chau, a frontend dev with 4 years of experience.</p>
         <p>I made the toughest decision: to quit my job at my first company.</p>
         <p>I felt the need to find a new environment to advance my career.</p>

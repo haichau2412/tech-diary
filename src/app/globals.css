@@ -121,14 +121,14 @@ body {
   }
 
   .addUtubeForm {
-    @apply flex flex-shrink-0 flex-grow-0 basis-[200px] flex-col items-center self-stretch border-2 border-green-900 px-1 pt-3 bg-green-50;
+    @apply flex flex-shrink-0 flex-grow-0 flex-col items-center justify-center gap-1 self-stretch border-2 border-green-900 bg-green-50 px-1 pt-3 text-xs sm:basis-[200px] sm:text-sm;
 
     label {
       @apply font-bold uppercase text-green-900;
     }
 
     input {
-      @apply border border-green-900 bg-transparent px-1 text-sm text-slate-700 shadow-sm placeholder:text-slate-400 hover:border-green-700 focus:border-green-500 focus:shadow focus:outline-none;
+      @apply border border-green-900 bg-transparent px-1 text-slate-700 shadow-sm placeholder:text-slate-400 hover:border-green-700 focus:border-green-500 focus:shadow focus:outline-none;
 
       &[type="submit"] {
         @apply mt-3 w-fit bg-green-900 px-2 py-1 uppercase text-white hover:bg-green-600 active:bg-green-800;
@@ -138,7 +138,14 @@ body {
 
   .customScrollBarUtube {
     &::-webkit-scrollbar {
-      height: 2px;
+      height: 3px;
     }
+    &::-webkit-scrollbar-thumb {
+      @apply bg-red-900;
+    }
+  }
+
+  .navBtn {
+    @apply top-1/2 h-8 w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-red-300 p-1 hover:bg-red-800 active:bg-red-700;
   }
 }

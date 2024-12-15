@@ -58,7 +58,7 @@ const Header = () => {
   return (
     <div className="flex items-center justify-between px-1 py-2 sm:px-3">
       <div className="flex flex-grow basis-0 flex-col">
-        <div className="text-sm sm:text-2xl">{greeting}</div>
+        <div className="text-sm sm:text-2xl">{`${greeting}, ${data.isAuthorized ? "Chau" : "stranger"} !`}</div>
       </div>
       <div className="flex flex-col items-center">
         <Link href="/">
