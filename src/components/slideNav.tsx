@@ -14,18 +14,17 @@ const SlideNav = ({
   const currentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative h-full overflow-hidden">
+    <div className="relative h-full w-max flex-shrink-0 overflow-hidden border-r-2 border-black pr-1">
       <div
         ref={currentRef}
-        className="flex max-h-full snap-both snap-mandatory flex-col gap-2 overflow-y-scroll scroll-smooth"
-        style={{ scrollbarWidth: "none" }}
+        className="customScrollBarUtube flex max-h-full w-full snap-both snap-mandatory flex-col gap-2 overflow-y-scroll scroll-smooth pr-3"
       >
         {items.map((i) => {
           return (
             <Link key={i.id} href={`/blog/${i.id}`}>
               <div
                 key={i.id}
-                className="grid aspect-[3/2] w-[150px] flex-shrink-0 snap-start place-content-center truncate text-wrap bg-red-300"
+                className="grid aspect-[3/2] w-[150px] flex-shrink-0 snap-start place-content-center truncate text-wrap border-b border-blue-950"
               >
                 {i.title}
               </div>
@@ -33,24 +32,6 @@ const SlideNav = ({
           );
         })}
       </div>
-      <div
-        className="absolute top-0 flex h-6 w-6 items-center justify-center rounded-full bg-pink-200"
-        onClick={() => {
-          if (currentRef.current) {
-            currentRef.current.scrollTop += 300;
-            console.log("click", currentRef.current.scrollTop);
-          }
-        }}
-      >{`<`}</div>
-      <div
-        onClick={() => {
-          if (currentRef.current) {
-            currentRef.current.scrollTop = 300;
-            console.log("click", currentRef.current.scrollTop);
-          }
-        }}
-        className="absolute right-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-pink-200"
-      >{`>`}</div>
     </div>
   );
 };

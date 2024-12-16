@@ -158,4 +158,12 @@ body {
   .navBtn {
     @apply top-1/2 h-8 w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-red-300 p-1 hover:bg-red-800 active:bg-red-700;
   }
+
+  .blog {
+    @apply px-3 pt-3;
+
+    h1 {
+      @apply text-center text-4xl font-bold uppercase;
+    }
+  }
 }

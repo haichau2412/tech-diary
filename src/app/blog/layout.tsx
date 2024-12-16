@@ -2,15 +2,11 @@ import SlideNav from "@/components/slideNav.tsx";
 
 const DUMMY_DATA = [
   {
-    id: "9e6da701-1c9b-4d46-a63e-ec7353f73a35",
-    title: "Mobile first experiments",
+    id: "brainstorming",
+    title: "Portfolio brainstorming",
   },
   {
-    id: "d011bcac-4d5a-43ef-837a-1e04780c20f4",
-    title: "Item title",
-  },
-  {
-    id: "789beece-f8b1-463c-a4e5-7495b41f3d1c",
+    id: "about",
     title: "Item title",
   },
   {
