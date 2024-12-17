@@ -88,6 +88,7 @@ export default function AuthProvider({
         name,
         onLogout: () => {
           setIsAuthorized(false);
+          window.sessionStorage.setItem("isAuthorized", "false");
         },
       }}
     >
