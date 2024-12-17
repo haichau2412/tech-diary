@@ -42,8 +42,8 @@ const Home = () => {
       <h2>Hosting flatform:</h2>
       <p>
         Vercel provides a very intuitive UI for deploying and monitoring
-        application. I don&apos;t want to focus to much on DevOps right now so
-        this would be good enough.
+        applications. I don&apos;t want to focus too much on DevOps right now so
+        this is good enough.
       </p>
       <h2>Ideas for features:</h2>
       <ul>
@@ -51,7 +51,7 @@ const Home = () => {
           <h3 className="!text-red-900">Youtube note</h3>
           <p>
             Not Facebook, not Tiktok - Youtube is the flatform where I spend a
-            lot of the time in a day. It always need my need for both
+            lot of the time in a day. It always meets my need for both
             entertainment and learning.
           </p>
           <p>
