@@ -59,7 +59,7 @@ const AddNote = ({
           </button>
         </div>
         <textarea
-          className="customScrollBarUtube col-span-1 row-span-2 mr-1 h-16 flex-grow resize-none bg-red-100 px-1 focus:outline-red-900"
+          className="customScrollBar col-span-1 row-span-2 mr-1 h-16 flex-grow resize-none bg-red-100 px-1 focus:outline-red-900"
           value={note}
           onInput={onInput}
         ></textarea>
@@ -163,7 +163,7 @@ const NoteContainer = ({
 
   return (
     <div className="relative col-span-1 row-span-1 border-2 border-b-0 border-solid border-red-900 p-2 sm:border-l-0">
-      <div className="customScrollBarUtube flex max-h-full min-h-0 flex-grow flex-col overflow-y-scroll">
+      <div className="customScrollBar flex max-h-full min-h-0 flex-grow flex-col overflow-y-scroll">
         {notes.length === 0 && (
           <>
             <div className=""> No note for this clip</div>

@@ -101,7 +101,7 @@ const Carousel = () => {
         <ImportYoutube />
         <div
           ref={currentRef}
-          className="customScrollBarUtube flex snap-x snap-mandatory gap-2 overflow-x-scroll scroll-smooth"
+          className="customScrollBar flex snap-x snap-mandatory gap-2 overflow-x-scroll scroll-smooth"
         >
           {_data?.data &&
             _data?.data.map((i) => {

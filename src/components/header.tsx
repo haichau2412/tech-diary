@@ -74,8 +74,8 @@ const Header = () => {
       </div>
       <div className="flex flex-col items-center">
         <Link href="/">
-          <h1 className="themeGradientText text-2xl font-bold uppercase sm:text-4xl">
-            Chau&apos;s Tech
+          <h1 className="text-2xl font-bold uppercase text-green-900 sm:text-4xl">
+            Tech Diary
           </h1>
         </Link>
         <div className="text-xs">{dateStr}</div>

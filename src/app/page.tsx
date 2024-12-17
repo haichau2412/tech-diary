@@ -56,6 +56,7 @@ const Home = () => {
         </p>
         <p>And that is how I created this project !</p>
         <p className="mt-2 text-center">Nov 27, 2024.</p>
+        <p className="mt-2 text-center uppercase">Period</p>
       </div>
     </div>
   );
