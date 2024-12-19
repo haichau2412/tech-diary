@@ -6,6 +6,7 @@ import { useState, useRef, useEffect, useContext } from "react";
 import { postWithCredential, getWithCredential } from "@/utils/fetcher";
 import useSWR from "swr";
 import { AuthContext } from "@/components/authContext";
+import guestDataManager from "../lib/guestDataManager";
 
 const formatTime = (time: number) => {
   const sec = time % 60;
@@ -110,45 +111,46 @@ const NoteContainer = ({
   skipNote: () => void;
   playAt: (timeStamp: number) => void;
 }) => {
+  const { isAuthorized } = useContext(AuthContext);
+
   const { data } = useSWR(
-    `${process.env.NEXT_PUBLIC_BE_ORIGIN}/api/notes/${videoId}`,
-    getWithCredential,
+    isAuthorized
+      ? `${process.env.NEXT_PUBLIC_BE_ORIGIN}/api/notes/${videoId}`
+      : null,
+    getWithCredential<{ data: Note[] }>,
   );
 
-  const [notes, setNotes] = useState<{ from: number; text: string }[]>([]);
+  const [notes, setNotes] = useState(guestDataManager.getNotes(videoId));
 
   useEffect(() => {
     if (data) {
-      const _data = data as unknown as {
-        data: { from: number; text: string }[];
-      };
-      const notes = _data.data;
-
-      setNotes(notes.sort((a, b) => a.from - b.from));
+      const notes = data.data;
+      setNotes(
+        notes.sort((a, b) => {
+          return a.from - b.from;
+        }),
+      );
     }
   }, [data]);
 
   const addNote = async (from: number, text: string) => {
-    const _notes = structuredClone(notes);
-    _notes.push({
-      from,
-      text,
-    });
-    setNotes(_notes.sort((a, b) => a.from - b.from));
+    if (!isAuthorized) {
+      guestDataManager.setNote(videoId, { from, text });
 
-    const data = await postWithCredential(
-      `${process.env.NEXT_PUBLIC_BE_ORIGIN}/api/notes/${videoId}`,
-      {
-        from,
-        text,
-      },
-    );
-
-    const _data = data as unknown as {
-      data?: { from: number; text: string }[];
-    };
-
-    setNotes((_data.data || []).sort((a, b) => a.from - b.from));
+      setNotes(
+        guestDataManager.getNotes(videoId).sort((a, b) => {
+          return a.from - b.from;
+        }),
+      );
+    } else {
+      await postWithCredential(
+        `${process.env.NEXT_PUBLIC_BE_ORIGIN}/api/notes/${videoId}`,
+        {
+          from,
+          text,
+        },
+      );
+    }
   };
 
   let currentNoteIndex = -1;
@@ -160,6 +162,7 @@ const NoteContainer = ({
     if (notes[notes.length - 1]?.from < timelapsed)
       currentNoteIndex = notes.length - 1;
   }
+  console.log("setNotes");
 
   return (
     <div className="relative col-span-1 row-span-1 border-2 border-b-0 border-solid border-red-900 p-2 sm:border-l-0">
@@ -231,7 +234,6 @@ const VideoBox = ({
 };
 
 const UtubeNote = ({ videoId }: { videoId: string }) => {
-  const { isAuthorized } = useContext(AuthContext);
   const [videoState, setVideoState] = useState<VideoState>("paused");
   const [noteTime, setNoteTime] = useState<number | null>(null);
   const [timelapsed, setTimelapsed] = useState(0);
@@ -274,33 +276,23 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
 
   return (
     <>
-      {isAuthorized ? (
-        <>
-          <VideoBox
-            id={videoId}
-            setPlayer={setPlayer}
-            noteTime={noteTime}
-            takeNote={takeNote}
-            videoState={videoState}
-            setVideoState={(param: VideoState) => {
-              setVideoState(param);
-            }}
-          />
-          <NoteContainer
-            videoId={videoId}
-            noteTime={noteTime}
-            skipNote={skipNote}
-            playAt={playAt}
-            timelapsed={timelapsed}
-          />
-        </>
-      ) : (
-        <div className="col-span-2 flex items-center justify-center bg-red-50 text-center text-xl font-bold uppercase">
-          <p className="max-w-[600px]">
-            This feature is used for those who want to take note on youtube
-          </p>
-        </div>
-      )}
+      <VideoBox
+        id={videoId}
+        setPlayer={setPlayer}
+        noteTime={noteTime}
+        takeNote={takeNote}
+        videoState={videoState}
+        setVideoState={(param: VideoState) => {
+          setVideoState(param);
+        }}
+      />
+      <NoteContainer
+        videoId={videoId}
+        noteTime={noteTime}
+        skipNote={skipNote}
+        playAt={playAt}
+        timelapsed={timelapsed}
+      />
     </>
   );
 };

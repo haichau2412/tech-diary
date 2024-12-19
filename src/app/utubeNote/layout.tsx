@@ -1,5 +1,3 @@
-"use client";
-
 import UtubeCarousel from "./UtubeCarousel";
 
 const YouTubeNote = ({
@@ -8,7 +6,7 @@ const YouTubeNote = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="sm:grid-cols-utubeNoteSm sm:grid-rows-utubeNoteSm grid h-full max-h-full grid-cols-utubeNote grid-rows-utubeNote overflow-hidden text-sm sm:text-base">
+    <div className="grid h-full max-h-full grid-cols-utubeNote grid-rows-utubeNote overflow-hidden text-sm sm:grid-cols-utubeNoteSm sm:grid-rows-utubeNoteSm sm:text-base">
       <>{children}</>
       <UtubeCarousel />
     </div>

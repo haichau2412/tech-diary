@@ -1,10 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useContext } from "react";
+import { AuthContext } from "./authContext";
 
 import Link from "next/link";
 
 export default function Nav() {
+  const data = useContext(AuthContext);
   const pathname = usePathname();
 
   return (
@@ -19,7 +22,7 @@ export default function Nav() {
         className={`px-4 decoration-red-900 ${pathname === "/utubeNote" ? "activeLink" : ""}`}
         href="/utubeNote"
       >
-        Utube Note
+        {`Utube Note ${data.isAuthorized ? "" : "(Guest)"}`}
       </Link>
       <Link
         className={`px-4 decoration-blue-900 ${pathname === "/blog" ? "activeLink" : ""}`}
