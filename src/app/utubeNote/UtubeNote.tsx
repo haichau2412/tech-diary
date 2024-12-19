@@ -100,18 +100,132 @@ const NoteItem = ({
 
 const NoteContainer = ({
   noteTime,
-  videoId,
   playAt,
-  timelapsed,
   skipNote,
+  notes,
+  currentNoteIndex,
+  addNote,
 }: {
+  notes: Note[];
   videoId: string;
   noteTime: number | null;
-  timelapsed: number;
   skipNote: () => void;
   playAt: (timeStamp: number) => void;
+  currentNoteIndex: number;
+  addNote: (from: number, text: string) => void;
 }) => {
+  return (
+    <div className="relative col-span-1 row-span-1 border-2 border-b-0 border-solid border-red-900 p-2 sm:border-l-0">
+      <div className="customScrollBar flex max-h-full min-h-0 flex-grow flex-col overflow-y-scroll">
+        {notes.length === 0 && (
+          <>
+            <div className=""> No note for this clip</div>
+          </>
+        )}
+        {notes.map((d, index) => {
+          return (
+            <NoteItem
+              key={d.from}
+              {...d}
+              playAt={playAt}
+              highlighted={currentNoteIndex === index}
+            />
+          );
+        })}
+      </div>
+      {typeof noteTime === "number" ? (
+        <AddNote skipNote={skipNote} addNote={addNote} noteTime={noteTime} />
+      ) : null}
+    </div>
+  );
+};
+
+const VideoBox = ({
+  id,
+  isValidId,
+  takeNote,
+  setPlayer,
+  setVideoState,
+  videoState,
+}: Partial<YouTubeNote> & {
+  takeNote: () => void;
+  isValidId: boolean;
+  noteTime: number | null;
+  videoState: VideoState;
+  setPlayer: (param: YouTubePlayer) => void;
+  setVideoState: (param: VideoState) => void;
+}) => {
+  const onPlayerReady = ({ target }: { target: YouTubePlayer }) => {
+    setPlayer(target);
+  };
+
+  return (
+    <div
+      className={`flex flex-col items-center gap-2 border-2 border-b-0 border-solid border-red-900 p-2 ${videoState === "paused" ? "bg-red-200" : ""}`}
+    >
+      {isValidId ? (
+        <>
+          <YouTube
+            iframeClassName="w-full h-full"
+            className="h-full w-full flex-grow"
+            onPlay={() => {
+              setVideoState("playing");
+            }}
+            onPause={() => {
+              setVideoState("paused");
+            }}
+            videoId={id}
+            onReady={onPlayerReady}
+          />
+          <button
+            className="bg-red-900 px-2 py-1 text-white hover:bg-red-700 active:bg-red-700"
+            onClick={takeNote}
+          >
+            Take note
+          </button>
+        </>
+      ) : (
+        <div className="grid h-full place-items-center text-red-900">
+          Invalid video ID, please add video before viewing it
+        </div>
+      )}
+    </div>
+  );
+};
+
+const UtubeNote = ({ videoId }: { videoId: string }) => {
   const { isAuthorized } = useContext(AuthContext);
+  const [videoState, setVideoState] = useState<VideoState>("paused");
+  const [noteTime, setNoteTime] = useState<number | null>(null);
+  const [timelapsed, setTimelapsed] = useState(0);
+  const [notes, setNotes] = useState(guestDataManager.getNotes(videoId));
+  const [guestVideo, setGuestVideo] = useState(guestDataManager.getVideos());
+
+  const { data: data_video } = useSWR(
+    isAuthorized ? `${process.env.NEXT_PUBLIC_BE_ORIGIN}/api/videos` : null,
+    getWithCredential<{ data: Video[] }>,
+  );
+
+  let _data_videos = guestVideo;
+
+  if (isAuthorized && data_video) {
+    _data_videos = data_video.data;
+  }
+
+  useEffect(() => {
+    const listener = () => {
+      setGuestVideo(guestDataManager.getVideos());
+    };
+    if (!isAuthorized) {
+      guestDataManager.eventEmitter.on("videoAdded", listener);
+    }
+
+    return () => {
+      if (!isAuthorized) {
+        guestDataManager.eventEmitter.off("videoAdded", listener);
+      }
+    };
+  }, [isAuthorized]);
 
   const { data } = useSWR(
     isAuthorized
@@ -119,8 +233,6 @@ const NoteContainer = ({
       : null,
     getWithCredential<{ data: Note[] }>,
   );
-
-  const [notes, setNotes] = useState(guestDataManager.getNotes(videoId));
 
   useEffect(() => {
     if (data) {
@@ -162,81 +274,6 @@ const NoteContainer = ({
     if (notes[notes.length - 1]?.from < timelapsed)
       currentNoteIndex = notes.length - 1;
   }
-  console.log("setNotes");
-
-  return (
-    <div className="relative col-span-1 row-span-1 border-2 border-b-0 border-solid border-red-900 p-2 sm:border-l-0">
-      <div className="customScrollBar flex max-h-full min-h-0 flex-grow flex-col overflow-y-scroll">
-        {notes.length === 0 && (
-          <>
-            <div className=""> No note for this clip</div>
-          </>
-        )}
-        {notes.map((d, index) => {
-          return (
-            <NoteItem
-              key={d.from}
-              {...d}
-              playAt={playAt}
-              highlighted={currentNoteIndex === index}
-            />
-          );
-        })}
-      </div>
-      {typeof noteTime === "number" ? (
-        <AddNote skipNote={skipNote} addNote={addNote} noteTime={noteTime} />
-      ) : null}
-    </div>
-  );
-};
-
-const VideoBox = ({
-  id,
-  takeNote,
-  setPlayer,
-  setVideoState,
-  videoState,
-}: Partial<YouTubeNote> & {
-  takeNote: () => void;
-  noteTime: number | null;
-  videoState: VideoState;
-  setPlayer: (param: YouTubePlayer) => void;
-  setVideoState: (param: VideoState) => void;
-}) => {
-  const onPlayerReady = ({ target }: { target: YouTubePlayer }) => {
-    setPlayer(target);
-  };
-
-  return (
-    <div
-      className={`flex flex-col items-center gap-2 border-2 border-b-0 border-solid border-red-900 p-2 ${videoState === "paused" ? "bg-red-200" : ""}`}
-    >
-      <YouTube
-        iframeClassName="w-full h-full"
-        className="h-full w-full flex-grow"
-        onPlay={() => {
-          setVideoState("playing");
-        }}
-        onPause={() => {
-          setVideoState("paused");
-        }}
-        videoId={id}
-        onReady={onPlayerReady}
-      />
-      <button
-        className="bg-red-900 px-2 py-1 text-white hover:bg-red-700 active:bg-red-700"
-        onClick={takeNote}
-      >
-        Take note
-      </button>
-    </div>
-  );
-};
-
-const UtubeNote = ({ videoId }: { videoId: string }) => {
-  const [videoState, setVideoState] = useState<VideoState>("paused");
-  const [noteTime, setNoteTime] = useState<number | null>(null);
-  const [timelapsed, setTimelapsed] = useState(0);
 
   const playerRef = useRef<YouTubePlayer>(null);
 
@@ -274,9 +311,12 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
     setNoteTime(null);
   };
 
+  const isValidId = _data_videos.some((video) => video.youtubeId === videoId);
+
   return (
     <>
       <VideoBox
+        isValidId={isValidId}
         id={videoId}
         setPlayer={setPlayer}
         noteTime={noteTime}
@@ -291,7 +331,9 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
         noteTime={noteTime}
         skipNote={skipNote}
         playAt={playAt}
-        timelapsed={timelapsed}
+        currentNoteIndex={currentNoteIndex}
+        addNote={addNote}
+        notes={notes}
       />
     </>
   );
