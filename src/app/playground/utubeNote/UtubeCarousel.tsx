@@ -110,7 +110,7 @@ const Carousel = () => {
             return (
               <Link
                 key={i.youtubeId}
-                href={`/utubeNote/${i.youtubeId}`}
+                href={`/playground/utubeNote/${i.youtubeId}`}
                 className="cursor-pointer"
               >
                 <div className="flex h-fit w-[150px] flex-shrink-0 snap-start flex-col place-content-center truncate text-wrap sm:w-[200px]">
