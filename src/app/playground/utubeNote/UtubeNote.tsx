@@ -6,7 +6,7 @@ import { useState, useRef, useEffect, useContext } from "react";
 import { postWithCredential, getWithCredential } from "@/utils/fetcher";
 import useSWR from "swr";
 import { AuthContext } from "@/components/authContext";
-import guestDataManager from "../lib/guestDataManager";
+import guestDataManager from "../../lib/guestDataManager";
 
 const formatTime = (time: number) => {
   const sec = time % 60;
