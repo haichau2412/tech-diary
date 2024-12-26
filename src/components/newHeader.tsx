@@ -20,7 +20,7 @@ const Header = () => {
           href="https://www.linkedin.com/in/chau-luu-0a3378179/"
           className="github socialLink"
         >
-          Github
+          Linkedin
         </a>
         <a
           target="_blank"
@@ -28,7 +28,7 @@ const Header = () => {
           href="https://github.com/haichau2412"
           className="linkedIn socialLink"
         >
-          Linkedin
+          Github
         </a>
       </div>
     </header>
