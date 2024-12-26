@@ -1,65 +1,69 @@
-import { Rye } from "next/font/google";
+import Image from "next/image";
+import criminalPic from "@/assets/human.png";
 
-const rye = Rye({
-  subsets: ["latin"],
-  weight: ["400"],
-  display: "swap",
-});
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: "Chau Hai Luu",
+    jobTitle: "Frontend Developer",
+    address: "Ho Chi Minh City, Vietnam",
+    description: "Chau's portfolio",
+  },
+};
 
-const Home = () => {
+const Home2 = () => {
   return (
-    <div
-      className={`flex h-full flex-col items-center justify-center bg-green-900`}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 120 20"
-        className={`${rye.className} h-[100px] w-full translate-y-[20px]`}
-      >
-        <path
-          id="curve"
-          d="M 0 20 Q 60 -10 120 20"
-          fill="none"
-          stroke="none"
-          strokeMiterlimit="10"
-        />
-        <text textAnchor="middle">
-          <textPath
-            href="#curve"
-            startOffset="50%"
-            letterSpacing=".05em"
-            className="fill-slate-50 text-[7px] sm:text-[6px]"
-          >
-            The journey to this page
-          </textPath>
-        </text>
-      </svg>
-      <div className="max-w-[600px] px-2 text-left text-white sm:mt-8 sm:text-xl">
-        <p>I am Chau, a frontend dev with 4 years of experience.</p>
-        <p>I made the toughest decision: to quit my job at my first company.</p>
-        <p>I felt the need to find a new environment to advance my career.</p>
-        <p>
-          When I applied for jobs, I got rejected a lot during CV screening.
-        </p>
-        <p>
-          Even though I used to work dedicatedly on my last project,which is now
-          used by a large number of people.
-        </p>
-        <p>I know my work ethic, I know I can get things done.</p>
-        <p>But how can I make people trust ME ?</p>
-        <p>
-          They can&apos;t blindlessly trust me. They need to see{" "}
-          <a className="underline" href="http://chautechdiary.tech/">
-            PROOF
-          </a>
-          .
-        </p>
-        <p>And that is how I created this project !</p>
-        <p className="mt-2 text-center">Nov 27, 2024.</p>
-        <p className="mt-2 text-center uppercase">Period</p>
+    <div className="relative flex h-screen max-h-screen flex-col bg-gradient-to-tr from-violet-950 to-green-900 px-5 sm:pl-[50px] sm:text-lg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="flex flex-col items-baseline justify-between gap-10 pt-[50px] sm:flex-row">
+        <div className="text-stone-300 sm:w-1/3">
+          <p>
+            I am a frontend developer, who loves to create useful and creative
+            websites, on my journey to become a fullstack developer. In my
+            perspective, a website should be esthetical to the eyes while
+            serving its greatest purpose: cater to the users&apos; needs.
+          </p>
+          <p>A team player, a friend in disguise.</p>
+        </div>
+
+        <div className="text-stone-100 sm:mr-[100px]">
+          <h2 className="sm:text-2xl">My tech stacks</h2>
+          <ul>
+            <li>
+              Frontend: React (to v.18), Redux, Next.js, Tailwind CSS, SASS
+            </li>
+            <li>Backend: Express, Restful</li>
+            <li>Common: Vanilla JS, Jest</li>
+            <li>Others: Git, CI/CD</li>
+            <li>Upper-intermediate English level in Speaking/Writing</li>
+            <li>Upcomming techs: GraphQL, AWS, React v19</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <h2 className="relative mt-[60px] text-9xl font-bold uppercase leading-none text-white sm:mt-[50px] sm:leading-tight sm:tracking-wide">
+          Chau Hai Luu
+          <div className="absolute -top-[40px] left-[150px] sm:-top-[50px]">
+            <div className="relative aspect-[370/470] w-[80px] shadow-lg shadow-blue-500">
+              <Image
+                priority={false}
+                className="bg-slate-400"
+                src={criminalPic}
+                fill={true}
+                alt="Developer's potrait"
+              />
+            </div>
+          </div>
+        </h2>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Home2;

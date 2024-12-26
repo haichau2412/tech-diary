@@ -183,4 +183,10 @@ body {
       }
     }
   }
+
+  .page-header {
+    @apply relative text-stone-200;
+    height: 100vh;
+    width: 100vw;
+  }
 }

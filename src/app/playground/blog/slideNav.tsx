@@ -21,7 +21,7 @@ const SlideNav = ({
       >
         {items.map((i) => {
           return (
-            <Link key={i.id} href={`/blog/${i.id}`}>
+            <Link key={i.id} href={`/playground/blog/${i.id}`}>
               <div
                 key={i.id}
                 className="grid aspect-[3/2] w-[140px] flex-shrink-0 snap-start place-content-center truncate text-wrap text-center text-blue-950 sm:w-[150px]"

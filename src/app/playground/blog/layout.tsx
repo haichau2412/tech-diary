@@ -1,4 +1,4 @@
-import SlideNav from "@/app/blog/slideNav";
+import SlideNav from "@/app/playground/blog/slideNav";
 import { posts } from "./[id]/page";
 
 export default function Blog({

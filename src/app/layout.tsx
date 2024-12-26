@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import Nav from "@/components/nav.tsx";
-import Header from "@/components/header.tsx";
-import AuthProvider from "@/components/authContext";
+import NewHeader from "@/components/newHeader";
+import { PT_Sans_Narrow } from "next/font/google";
 
-import { Tinos } from "next/font/google";
+const font = PT_Sans_Narrow({
+  display: "swap",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export const metadata: Metadata = {
-  title: "Chau tech diary",
+  title: "Tech diary",
+  description: "Chau's portfolio",
 };
 
 export function generateViewport() {
@@ -16,28 +20,19 @@ export function generateViewport() {
   };
 }
 
-const tinos = Tinos({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "700"],
-});
-
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`${tinos.className}`}>
-        <div className="flex h-screen max-h-screen w-screen cursor-default flex-col sm:px-5 sm:py-3">
-          <AuthProvider>
-            <Header />
-            <Nav />
-            <div className="flex-shrink flex-grow overflow-hidden">
-              {children}
-            </div>
-          </AuthProvider>
+      <body className={`${font.className}`}>
+        <div className="flex h-screen max-h-screen w-screen cursor-default flex-col">
+          <NewHeader />
+          <main className="flex-shrink flex-grow overflow-hidden">
+            {children}
+          </main>
         </div>
       </body>
     </html>

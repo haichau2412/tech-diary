@@ -7,8 +7,8 @@ import { getWithCredential } from "@/utils/fetcher";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
-import { verifyUtube, addUtube } from "../lib/utubeApi";
-import guestDataManager from "../lib/guestDataManager";
+import { verifyUtube, addUtube } from "../../lib/utubeApi";
+import guestDataManager from "../../lib/guestDataManager";
 
 type FormValues = {
   link: string;
