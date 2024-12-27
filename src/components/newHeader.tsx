@@ -4,7 +4,7 @@ import Link from "next/link";
 const Header = () => {
   return (
     <header className="flex items-center justify-between px-5 py-2 font-bold sm:px-[50px]">
-      <Link className="text-blue-800" href={"/playground"}>
+      <Link className="flex-grow basis-0 text-blue-800" href={"/playground"}>
         Chau&apos;s playground
       </Link>
       <Link href="/">
@@ -12,7 +12,7 @@ const Header = () => {
           Chau Tech Diary
         </h1>
       </Link>
-      <div className="flex justify-center gap-1 sm:text-xl">
+      <div className="flex flex-grow basis-0 justify-end gap-1 sm:text-xl">
         <p>My</p>
         <a
           target="_blank"

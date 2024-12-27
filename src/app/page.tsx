@@ -15,7 +15,7 @@ const jsonLd = {
 
 const Home2 = () => {
   return (
-    <div className="relative flex h-screen max-h-screen flex-col bg-gradient-to-tr from-violet-950 to-green-900 px-5 sm:pl-[50px] sm:text-lg">
+    <div className="relative flex h-full flex-col bg-gradient-to-tr from-violet-950 to-green-900 px-5 sm:mx-5 sm:mb-5 sm:pl-[50px] sm:text-lg">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
