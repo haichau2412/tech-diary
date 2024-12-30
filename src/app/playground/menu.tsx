@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRef } from "react";
 import { usePathname } from "next/navigation";
+import { useOnClickOutside } from "usehooks-ts";
 
 const PATH_TO_NAME = {
   utubeNote: "Utube Note",
@@ -13,7 +14,17 @@ const Menu = () => {
   const pathName = usePathname();
 
   const currentRef = useRef<HTMLUListElement>(null);
+
   const svgRef = useRef<SVGSVGElement>(null);
+
+  useOnClickOutside(currentRef, () => {
+    if (currentRef.current) {
+      currentRef.current.classList.remove("show");
+    }
+    if (svgRef.current) {
+      svgRef.current.classList.remove("show");
+    }
+  });
 
   const activeLink = pathName.split("/")[2];
 
