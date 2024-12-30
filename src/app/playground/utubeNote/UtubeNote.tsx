@@ -115,7 +115,7 @@ const NoteContainer = ({
   addNote: (from: number, text: string) => void;
 }) => {
   return (
-    <div className="relative flex-grow rounded-r-md border-2 border-solid border-red-900 p-2 sm:border-l-0">
+    <div className="relative flex-grow p-2">
       <div className="customScrollBar flex max-h-full min-h-0 flex-grow flex-col overflow-y-scroll">
         {notes.length === 0 && (
           <>
@@ -161,7 +161,7 @@ const VideoBox = ({
 
   return (
     <div
-      className={`flex w-3/5 flex-col items-center gap-2 rounded-l-md border-2 border-solid border-red-900 p-2 ${videoState === "paused" ? "bg-red-200" : ""}`}
+      className={`flex h-3/5 flex-col items-center gap-2 border-b-2 border-solid border-red-900 p-2 sm:h-full sm:w-3/5 sm:border-b-0 sm:border-r-2 ${videoState === "paused" ? "bg-red-200" : ""}`}
     >
       {isValidId ? (
         <>
@@ -205,6 +205,10 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
     isAuthorized ? `${process.env.NEXT_PUBLIC_BE_ORIGIN}/api/videos` : null,
     getWithCredential<{ data: Video[] }>,
   );
+
+  useEffect(() => {
+    setNotes(guestDataManager.getNotes(videoId));
+  }, [videoId]);
 
   let _data_videos = guestVideo;
 
@@ -317,6 +321,7 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
   const clickOutsideNote = () => {
     if (popOverRef.current) {
       popOverRef.current.hidePopover();
+      playerRef.current.pauseVideo();
     }
   };
 
@@ -332,31 +337,33 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
     >
       <div className="grid h-full w-full place-items-center">
         <div
-          className="flex h-4/5 w-4/5 bg-white p-5"
+          className="h-4/5 w-4/5 rounded-md bg-white p-1 sm:p-2"
           onClick={(e) => {
             e.stopPropagation();
           }}
         >
-          <VideoBox
-            isValidId={isValidId}
-            id={videoId}
-            setPlayer={setPlayer}
-            noteTime={noteTime}
-            takeNote={takeNote}
-            videoState={videoState}
-            setVideoState={(param: VideoState) => {
-              setVideoState(param);
-            }}
-          />
-          <NoteContainer
-            videoId={videoId}
-            noteTime={noteTime}
-            skipNote={skipNote}
-            playAt={playAt}
-            currentNoteIndex={currentNoteIndex}
-            addNote={addNote}
-            notes={notes}
-          />
+          <div className="flex h-full w-full flex-col items-stretch justify-center overflow-hidden rounded-md border-2 border-solid border-red-900 sm:flex-row">
+            <VideoBox
+              isValidId={isValidId}
+              id={videoId}
+              setPlayer={setPlayer}
+              noteTime={noteTime}
+              takeNote={takeNote}
+              videoState={videoState}
+              setVideoState={(param: VideoState) => {
+                setVideoState(param);
+              }}
+            />
+            <NoteContainer
+              videoId={videoId}
+              noteTime={noteTime}
+              skipNote={skipNote}
+              playAt={playAt}
+              currentNoteIndex={currentNoteIndex}
+              addNote={addNote}
+              notes={notes}
+            />
+          </div>
         </div>
       </div>
     </div>

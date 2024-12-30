@@ -49,7 +49,7 @@ const UtubeList = () => {
   };
 
   return (
-    <div className="relative mt-4 grid h-full w-full grid-cols-utubeDashboard grid-rows-utubeDashboard gap-4">
+    <div className="relative mt-4 grid h-full w-fit grid-cols-utubeDashboard grid-rows-utubeDashboard gap-4 sm:w-full">
       <VideoAdd />
       {_data.map((i) => {
         return (
