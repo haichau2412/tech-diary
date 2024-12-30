@@ -27,9 +27,9 @@ const Menu = () => {
   };
 
   return (
-    <div className="my-1 flex items-center justify-center gap-2 bg-green-100 py-[2px] sm:text-lg">
-      <nav className="navPlaygroud flex w-min flex-col gap-2">
-        <button className="relative" onClick={toggleMenu}>
+    <div className="relative my-1 flex items-center justify-center gap-2 bg-green-100 py-[2px] sm:text-lg">
+      <nav className="navPlaygroud z-10 flex w-min flex-col gap-2">
+        <button onClick={toggleMenu}>
           <div className="flex items-center justify-between text-nowrap">
             <span className="font-bold">Choose experiment</span>
             <svg

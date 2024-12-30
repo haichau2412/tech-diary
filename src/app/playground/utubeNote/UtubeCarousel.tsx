@@ -188,9 +188,12 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative flex max-w-full items-center gap-3 border-2 border-solid border-red-900 px-2 py-3 sm:col-span-2">
-      {renderContent()}
-    </div>
+    <>
+      <button popoverTarget="my-popover">Open Popover</button>
+      <div className="relative flex max-w-full items-center gap-3 border-2 border-solid border-red-900 px-2 py-3 sm:col-span-2">
+        {renderContent()}
+      </div>
+    </>
   );
 };
 

@@ -126,7 +126,7 @@ body {
   }
 
   .addUtubeForm {
-    @apply flex flex-shrink-0 flex-grow-0 flex-col items-center justify-center gap-1 self-stretch border-2 border-green-900 bg-green-50 px-1 pt-3 text-xs sm:basis-[200px] sm:text-sm;
+    @apply flex flex-shrink-0 flex-grow-0 flex-col items-center justify-center gap-1 border-[2px] border-dashed border-green-900 bg-green-50 px-1 pt-3 text-xs sm:text-sm;
 
     label {
       @apply font-bold uppercase text-green-900;
@@ -135,8 +135,12 @@ body {
     input {
       @apply border border-green-900 bg-transparent px-1 text-slate-700 shadow-sm placeholder:text-slate-400 hover:border-green-700 focus:border-green-500 focus:shadow focus:outline-none;
 
+      &:not([type="submit"]) {
+        @apply w-4/5;
+      }
+
       &[type="submit"] {
-        @apply mt-3 w-fit bg-green-900 px-2 py-1 uppercase text-white hover:bg-green-600 active:bg-green-800;
+        @apply mt-2 w-fit cursor-pointer bg-green-900 px-2 py-1 uppercase text-white hover:bg-green-600 active:bg-green-800;
       }
     }
   }
@@ -196,7 +200,7 @@ body {
       transform: rotate(-360deg);
 
       &.active {
-        transform: rotate(90deg);
+        transform: rotate(0deg);
       }
 
       &.show {
@@ -216,6 +220,100 @@ body {
 
       &.show {
         grid-template-rows: 1fr;
+      }
+    }
+  }
+
+  .utubeSearchBar {
+    @apply relative flex h-fit w-fit items-center justify-center gap-1 self-start;
+
+    &:has(input:placeholder-shown) .searchIcon,
+    &:has(input:not(:placeholder-shown)) button {
+      pointer-events: all;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &:has(input:not(:placeholder-shown)) button {
+      &:hover {
+        @apply bg-red-300;
+      }
+    }
+
+    input {
+      @apply w-32 bg-red-200 py-[1px] pl-1 text-red-800 outline-none;
+
+      &::-webkit-search-cancel-button {
+        @apply h-0 w-0 appearance-none;
+      }
+
+      transition: width 200ms ease-in-out;
+
+      &::placeholder {
+        @apply text-red-900;
+      }
+
+      &:focus,
+      &:not(:placeholder-shown) {
+        @apply w-40;
+      }
+
+      &:focus-visible {
+        @apply shadow shadow-red-400;
+
+        box-shadow: 0 0 0 2px #f871716e;
+      }
+    }
+
+    button {
+      all: unset;
+      cursor: pointer;
+
+      &:focus-visible {
+        @apply shadow shadow-red-400;
+        box-shadow: 0 0 0 2px #f871716e;
+      }
+    }
+
+    svg.searchIcon,
+    button {
+      @apply pointer-events-none absolute right-2 top-1/2 h-5 w-5 -translate-y-1/2 fill-red-800;
+
+      visibility: hidden;
+      opacity: 0;
+      transform-origin: center;
+      transition: opacity 0.2s;
+    }
+  }
+
+  .utubeElement {
+    @apply aspect-[5/4] rounded-md;
+  }
+
+  .confirmDiv {
+    @apply flex gap-2;
+
+    button {
+      all: unset;
+      @apply inline-grid cursor-pointer place-items-center bg-red-900 px-3 py-[2px];
+
+      &:hover {
+        @apply bg-red-700;
+      }
+      &:active {
+        @apply bg-red-800;
+      }
+
+      &:first-child {
+        @apply bg-green-900;
+
+        &:hover {
+          @apply bg-green-700;
+        }
+
+        &:active {
+          @apply bg-green-800;
+        }
       }
     }
   }

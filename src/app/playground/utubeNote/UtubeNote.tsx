@@ -314,7 +314,7 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
   const isValidId = _data_videos.some((video) => video.youtubeId === videoId);
 
   return (
-    <>
+    <div id="my-popover" popover="">
       <VideoBox
         isValidId={isValidId}
         id={videoId}
@@ -335,7 +335,7 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
         addNote={addNote}
         notes={notes}
       />
-    </>
+    </div>
   );
 };
 

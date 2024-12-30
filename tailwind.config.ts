@@ -12,15 +12,17 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+
+
       gridTemplateColumns: {
         main: "300px 1fr",
         mainSm: "200px 1fr",
         utubeNote: "100%",
-        utubeNoteSm: "minmax(50%, 55%) 1fr"
+        utubeDashboard: "repeat(auto-fill, 250px)"
       },
       gridTemplateRows: {
         main: "fit-content(50px) fit-content(50px) minmax(auto,1fr)",
-        utubeNoteSm: "calc(100% - 200px) 200px",
+        utubeDashboard: "200px",
         utubeNote: "50% 25% 1fr"
       },
     },
