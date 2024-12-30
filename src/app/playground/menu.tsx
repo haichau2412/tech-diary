@@ -34,7 +34,7 @@ const Menu = () => {
   const currentName = PATH_TO_NAME[activeLink as keyof typeof PATH_TO_NAME];
 
   const toggleMenu = () => {
-    if (currentRef.current && svgRef.current && !shown) {
+    if (currentRef.current && svgRef.current) {
       setShown(true);
       currentRef.current.classList.toggle("show");
       svgRef.current.classList.toggle("show");
