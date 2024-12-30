@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useOnClickOutside } from "usehooks-ts";
 
@@ -12,17 +12,20 @@ const PATH_TO_NAME = {
 
 const Menu = () => {
   const pathName = usePathname();
-
   const currentRef = useRef<HTMLUListElement>(null);
-
+  const btnRef = useRef<HTMLButtonElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const [shown, setShown] = useState(false);
 
-  useOnClickOutside(currentRef, () => {
-    if (currentRef.current) {
-      currentRef.current.classList.remove("show");
-    }
-    if (svgRef.current) {
-      svgRef.current.classList.remove("show");
+  useOnClickOutside(currentRef, (e) => {
+    if (shown && e.target && !btnRef.current?.contains(e.target as Node)) {
+      if (currentRef.current) {
+        currentRef.current.classList.remove("show");
+      }
+      if (svgRef.current) {
+        svgRef.current.classList.remove("show");
+      }
+      setShown(false);
     }
   });
 
@@ -31,7 +34,8 @@ const Menu = () => {
   const currentName = PATH_TO_NAME[activeLink as keyof typeof PATH_TO_NAME];
 
   const toggleMenu = () => {
-    if (currentRef.current && svgRef.current) {
+    if (currentRef.current && svgRef.current && !shown) {
+      setShown(true);
       currentRef.current.classList.toggle("show");
       svgRef.current.classList.toggle("show");
     }
@@ -40,7 +44,7 @@ const Menu = () => {
   return (
     <div className="relative my-1 flex items-center justify-center gap-2 bg-green-100 py-[2px] sm:text-lg">
       <nav className="navPlaygroud z-10 flex w-min flex-col gap-2">
-        <button onClick={toggleMenu}>
+        <button ref={btnRef} onClick={toggleMenu}>
           <div className="flex items-center justify-between text-nowrap">
             <span className="font-bold">Choose experiment</span>
             <svg
