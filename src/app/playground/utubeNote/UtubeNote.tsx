@@ -115,7 +115,7 @@ const NoteContainer = ({
   addNote: (from: number, text: string) => void;
 }) => {
   return (
-    <div className="relative col-span-1 row-span-1 border-2 border-b-0 border-solid border-red-900 p-2 sm:border-l-0">
+    <div className="relative flex-grow rounded-r-md border-2 border-solid border-red-900 p-2 sm:border-l-0">
       <div className="customScrollBar flex max-h-full min-h-0 flex-grow flex-col overflow-y-scroll">
         {notes.length === 0 && (
           <>
@@ -161,7 +161,7 @@ const VideoBox = ({
 
   return (
     <div
-      className={`flex flex-col items-center gap-2 border-2 border-b-0 border-solid border-red-900 p-2 ${videoState === "paused" ? "bg-red-200" : ""}`}
+      className={`flex w-3/5 flex-col items-center gap-2 rounded-l-md border-2 border-solid border-red-900 p-2 ${videoState === "paused" ? "bg-red-200" : ""}`}
     >
       {isValidId ? (
         <>
@@ -276,6 +276,7 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
   }
 
   const playerRef = useRef<YouTubePlayer>(null);
+  const popOverRef = useRef<HTMLDivElement>(null);
 
   const setPlayer = (player: YouTubePlayer) => {
     playerRef.current = player;
@@ -313,28 +314,51 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
 
   const isValidId = _data_videos.some((video) => video.youtubeId === videoId);
 
+  const clickOutsideNote = () => {
+    if (popOverRef.current) {
+      popOverRef.current.hidePopover();
+    }
+  };
+
   return (
-    <div id="my-popover" popover="">
-      <VideoBox
-        isValidId={isValidId}
-        id={videoId}
-        setPlayer={setPlayer}
-        noteTime={noteTime}
-        takeNote={takeNote}
-        videoState={videoState}
-        setVideoState={(param: VideoState) => {
-          setVideoState(param);
-        }}
-      />
-      <NoteContainer
-        videoId={videoId}
-        noteTime={noteTime}
-        skipNote={skipNote}
-        playAt={playAt}
-        currentNoteIndex={currentNoteIndex}
-        addNote={addNote}
-        notes={notes}
-      />
+    <div
+      onClick={() => {
+        clickOutsideNote();
+      }}
+      ref={popOverRef}
+      id="utubeNote-popover"
+      popover=""
+      className="absolute left-0 top-0 h-full w-full bg-black bg-opacity-80"
+    >
+      <div className="grid h-full w-full place-items-center">
+        <div
+          className="flex h-4/5 w-4/5 bg-white p-5"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <VideoBox
+            isValidId={isValidId}
+            id={videoId}
+            setPlayer={setPlayer}
+            noteTime={noteTime}
+            takeNote={takeNote}
+            videoState={videoState}
+            setVideoState={(param: VideoState) => {
+              setVideoState(param);
+            }}
+          />
+          <NoteContainer
+            videoId={videoId}
+            noteTime={noteTime}
+            skipNote={skipNote}
+            playAt={playAt}
+            currentNoteIndex={currentNoteIndex}
+            addNote={addNote}
+            notes={notes}
+          />
+        </div>
+      </div>
     </div>
   );
 };

@@ -9,28 +9,47 @@ const VideoBox = ({
   setRename,
   renameValue,
   onCancelRename,
+  setVideoId,
+  id,
 }: {
   srcSet: string;
   customName: string;
   renameValue: string;
+  id: string;
   onCancelRename: (cb: () => void) => void;
   setRename: (value: string) => void;
+  setVideoId: (value: string) => void;
 }) => {
   const [inputValue, setInputValue] = useState(customName || "Empty name");
 
   const showPopover = () => {
     const popover = document.getElementById("rename-popover");
-    if (popover && renameValue !== "") {
-      onCancelRename(() => {
+    if (popover) {
+      if (renameValue === "") {
         setInputValue(customName || "Empty name");
-      });
+      } else {
+        onCancelRename(() => {
+          setInputValue(customName || "Empty name");
+        });
+        popover.showPopover();
+      }
+    }
+  };
+
+  const showNote = () => {
+    const popover = document.getElementById("utubeNote-popover");
+    if (popover) {
+      setVideoId(id);
       popover.showPopover();
     }
   };
 
   return (
     <div className="utubeElement videoBox relative flex flex-col items-center justify-between gap-1 border border-transparent bg-red-200 hover:border-orange-300">
-      <div className="relative mt-1 aspect-[3/2] w-[240px] truncate rounded-t-md">
+      <div
+        className="relative mt-1 aspect-[3/2] w-[240px] cursor-pointer truncate rounded-t-md"
+        onClick={showNote}
+      >
         <Image
           role="presentation"
           priority={false}
