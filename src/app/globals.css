@@ -295,7 +295,7 @@ body {
 
     button {
       all: unset;
-      @apply inline-grid cursor-pointer place-items-center bg-red-900 px-3 py-[2px];
+      @apply inline-grid cursor-pointer place-items-center bg-red-900 px-3 py-[2px] text-white;
 
       &:hover {
         @apply bg-red-700;

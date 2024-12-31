@@ -1,54 +1,34 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
+
+interface Props {
+  srcSet: string;
+  customName: string;
+  setCustomName: (value: {
+    id: string;
+    newName: string;
+    oldName: string;
+  }) => void;
+  newCustomName?: string;
+  openNotePopover: (id: string) => void;
+  openRenamePopover: () => void;
+  id: string;
+}
 
 const VideoBox = ({
   srcSet,
   customName,
-  setRename,
-  renameValue,
-  onCancelRename,
-  setVideoId,
+  setCustomName,
+  newCustomName,
+  openNotePopover,
+  openRenamePopover,
   id,
-}: {
-  srcSet: string;
-  customName: string;
-  renameValue: string;
-  id: string;
-  onCancelRename: (cb: () => void) => void;
-  setRename: (value: string) => void;
-  setVideoId: (value: string) => void;
-}) => {
-  const [inputValue, setInputValue] = useState(customName || "Empty name");
-
-  const showPopover = () => {
-    const popover = document.getElementById("rename-popover");
-    if (popover) {
-      if (renameValue === "") {
-        setInputValue(customName || "Empty name");
-      } else {
-        onCancelRename(() => {
-          setInputValue(customName || "Empty name");
-        });
-        popover.showPopover();
-      }
-    }
-  };
-
-  const showNote = () => {
-    const popover = document.getElementById("utubeNote-popover");
-    if (popover) {
-      setVideoId(id);
-      popover.showPopover();
-    }
-  };
-
+}: Props) => {
+  const videoName = newCustomName || customName || "Empty name";
   return (
     <div className="utubeElement videoBox relative flex flex-col items-center justify-between gap-1 border border-transparent bg-red-200 hover:border-orange-300">
       <div
         className="relative mt-1 aspect-[3/2] w-[240px] cursor-pointer truncate rounded-t-md"
-        onClick={showNote}
+        onClick={() => openNotePopover(id)}
       >
         <Image
           role="presentation"
@@ -72,13 +52,16 @@ const VideoBox = ({
 
       <input
         onChange={(e) => {
-          setInputValue(e.target.value);
-          setRename(e.target.value);
+          setCustomName({
+            id,
+            newName: e.target.value,
+            oldName: customName,
+          });
         }}
-        onBlur={showPopover}
+        onBlur={openRenamePopover}
         type="text"
         className="max-w-full truncate text-ellipsis rounded-t-md border-none bg-red-900 py-[2px] text-center leading-tight text-slate-200 outline-none hover:bg-red-800"
-        value={inputValue}
+        value={videoName}
       />
     </div>
   );

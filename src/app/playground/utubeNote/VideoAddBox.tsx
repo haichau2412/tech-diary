@@ -9,8 +9,9 @@ type FormValues = {
   customName?: string;
 };
 
-const VideoAdd = () => {
+const VideoAddBox = () => {
   const { register, handleSubmit } = useForm<FormValues>({});
+
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const youtubeId = await verifyUtube(data.link);
     if (youtubeId) {
@@ -42,4 +43,4 @@ const VideoAdd = () => {
   );
 };
 
-export default VideoAdd;
+export default VideoAddBox;

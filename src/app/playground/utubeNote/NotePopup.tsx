@@ -2,7 +2,7 @@
 
 import YouTube, { YouTubePlayer } from "react-youtube";
 import { YouTubeNote, Note as NoteType, VideoState } from "./youtubeData";
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect, useContext, forwardRef } from "react";
 import { postWithCredential, getWithCredential } from "@/utils/fetcher";
 import useSWR from "swr";
 import { AuthContext } from "@/components/authContext";
@@ -193,7 +193,14 @@ const VideoBox = ({
   );
 };
 
-const UtubeNote = ({ videoId }: { videoId: string }) => {
+interface NotePopupProps {
+  videoId: string;
+}
+
+const NotePopup = forwardRef<HTMLDivElement, NotePopupProps>(function NotePopup(
+  { videoId },
+  popOverRef,
+) {
   const { isAuthorized } = useContext(AuthContext);
   const [videoState, setVideoState] = useState<VideoState>("paused");
   const [noteTime, setNoteTime] = useState<number | null>(null);
@@ -280,7 +287,6 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
   }
 
   const playerRef = useRef<YouTubePlayer>(null);
-  const popOverRef = useRef<HTMLDivElement>(null);
 
   const setPlayer = (player: YouTubePlayer) => {
     playerRef.current = player;
@@ -318,9 +324,10 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
 
   const isValidId = _data_videos.some((video) => video.youtubeId === videoId);
 
-  const clickOutsideNote = () => {
-    if (popOverRef.current) {
-      popOverRef.current.hidePopover();
+  const clickOnPopup = () => {
+    const _popOverRef = popOverRef as React.MutableRefObject<HTMLDivElement>;
+    if (_popOverRef.current) {
+      _popOverRef.current.hidePopover();
       playerRef.current.pauseVideo();
     }
   };
@@ -328,7 +335,7 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
   return (
     <div
       onClick={() => {
-        clickOutsideNote();
+        clickOnPopup();
       }}
       ref={popOverRef}
       id="utubeNote-popover"
@@ -368,6 +375,6 @@ const UtubeNote = ({ videoId }: { videoId: string }) => {
       </div>
     </div>
   );
-};
+});
 
-export default UtubeNote;
+export default NotePopup;
