@@ -8,6 +8,7 @@ import { useOnClickOutside } from "usehooks-ts";
 const PATH_TO_NAME = {
   utubeNote: "Utube Note",
   blog: "Blog",
+  feelthebeat: "Feel the beat",
 };
 
 const Menu = () => {
@@ -74,7 +75,7 @@ const Menu = () => {
             <div className="text-white">
               <li>
                 <Link
-                  className="block bg-red-800 px-2 py-1 hover:bg-red-700 active:bg-red-700"
+                  className="block bg-red-800 px-2 py-1 hover:bg-red-600 active:bg-red-700"
                   href="/playground/utubeNote"
                 >
                   Utube Note
@@ -82,7 +83,15 @@ const Menu = () => {
               </li>
               <li>
                 <Link
-                  className="block bg-blue-800 px-2 py-1 hover:bg-blue-700 active:bg-blue-700"
+                  className="block bg-orange-800 px-2 py-1 hover:bg-orange-600 active:bg-orange-700"
+                  href="/playground/feelthebeat"
+                >
+                  Feel the beat
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="block bg-blue-800 px-2 py-1 hover:bg-blue-600 active:bg-blue-700"
                   href="/playground/blog"
                 >
                   Blog post
