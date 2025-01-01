@@ -72,7 +72,7 @@ const UtubeList = () => {
   };
 
   return (
-    <div className="relative mt-4 grid h-full w-fit grid-cols-utubeDashboard grid-rows-utubeDashboard gap-4 sm:w-full">
+    <div className="customScrollBar relative mt-4 grid h-full w-fit grid-cols-utubeDashboard grid-rows-utubeDashboard gap-4 overflow-y-scroll p-4 sm:w-full sm:p-0">
       <VideoAdd />
       {_data.map((i) => {
         return (

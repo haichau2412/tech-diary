@@ -12,7 +12,20 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
-
+      keyframes: {
+        "fade-out": {
+          "0%": { opacity: "1", transform: "scale(1)" },
+          "100%": { opacity: "0", transform: "scale(1.4)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0", transform: "scale(0)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+      },
+      animation: {
+        "fade-out": "fade-out 0.5s ease-in-out",
+        "fade-in-zoom": "fade-in 0.5s ease-in-out",
+      },
 
       gridTemplateColumns: {
         main: "300px 1fr",

@@ -317,4 +317,32 @@ body {
       }
     }
   }
+
+  @keyframes grow-progress {
+    0% {
+      width: scaleX(0);
+    }
+    100% {
+      width: scaleX(1);
+    }
+  }
+
+  .scrollProgress {
+    @apply absolute left-0 top-0 z-10 h-[4px] w-full bg-green-200;
+    animation: grow-progress auto linear;
+    animation-timeline: scroll;
+  }
+
+  .scrollPlayground {
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+      @apply bg-green-800;
+    }
+  }
+
+  .playgroundText {
+    @apply sticky mx-auto w-[400px] animate-fade-in-zoom leading-normal text-green-800 [animation-range:0px_500px] [animation-timeline:scroll()];
+  }
 }
