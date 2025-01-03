@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+import image from "./Run.png";
+import image2 from "./Run2.png";
 
 interface Props {
   ctx: CanvasRenderingContext2D;
@@ -8,78 +10,67 @@ interface Props {
     x: number;
     y: number;
   };
+  imgNum: number;
 }
 
-const Sprite = ({ ctx, position }: Props) => {
-  const draw = () => {
-    ctx.fillStyle = "blue";
-    ctx.fillRect(position.x, position.y, 10, 20);
-  };
-  const clear = () => {
-    ctx.clearRect(position.x, position.y, 10, 20);
-  };
+const Sprite = ({ ctx, position, imgNum = 1 }: Props) => {
+  const draw = (img: CanvasImageSource, index: number) => {
+    if (!img) return;
 
-  const draw1 = () => {
-    ctx.fillStyle = "white";
-    ctx.fillRect(position.x, position.y, 20, 10);
-  };
+    ctx.fillStyle = "black";
+    ctx.fillRect(position.x, position.y, image.width / 4, image.height * 2);
 
-  const clear1 = () => {
-    ctx.clearRect(position.x, position.y, 20, 10);
+    ctx.drawImage(
+      img,
+      index * (image.width / 8),
+      0,
+      image.width / 8,
+      image.height,
+      position.x,
+      position.y,
+      image.width / 4,
+      image.height * 2,
+    );
   };
 
   useEffect(() => {
-    const coss = [draw, draw1];
-    const clear11 = [clear1, clear];
-    const fps = 40;
+    const img = new Image();
+    if (imgNum === 1) {
+      img.src = image.src;
+    } else {
+      img.src = image2.src;
+    }
+
+    const fps = 12;
     const frameDuration = 1000 / fps;
     let lastTime = 0;
     let index = 0;
-    let interval: ReturnType<typeof setInterval> | null = null;
-
-    interval = setInterval(() => {
-      if (index) {
-        index = 0;
-      } else {
-        index = 1;
-      }
-    }, 500);
 
     let animatioHandler: ReturnType<typeof requestAnimationFrame>;
-
-    let lastIndex = index;
-    let drawed = false;
 
     const animate = (timestamp: number) => {
       const deltaTime = timestamp - lastTime;
 
       if (deltaTime >= frameDuration) {
+        if (index === 7) {
+          index = 0;
+        } else {
+          index += 1;
+        }
+
+        draw(img, index);
         lastTime = timestamp;
       }
 
       animatioHandler = window.requestAnimationFrame(animate);
-
-      if (lastIndex !== index) {
-        if (!drawed) {
-          lastIndex = index;
-          clear11[index]();
-          coss[index]();
-          drawed = true;
-        }
-      } else {
-        drawed = false;
-      }
     };
 
     window.requestAnimationFrame(animate);
 
     return () => {
-      clearInterval(interval);
       window.cancelAnimationFrame(animatioHandler);
     };
   }, [ctx]);
-
-  draw();
 
   return null;
 };

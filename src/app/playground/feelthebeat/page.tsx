@@ -30,8 +30,12 @@ const TicTacToe = () => {
       <canvas ref={setRef}></canvas>
       {ctxRef.current && refReady && (
         <>
-          <Sprite ctx={ctxRef.current} position={{ x: 10, y: 10 }} />
-          <Sprite ctx={ctxRef.current} position={{ x: 100, y: 100 }} />
+          <Sprite ctx={ctxRef.current} position={{ x: 10, y: 10 }} imgNum={1} />
+          <Sprite
+            ctx={ctxRef.current}
+            position={{ x: 400, y: 10 }}
+            imgNum={2}
+          />
         </>
       )}
     </div>
