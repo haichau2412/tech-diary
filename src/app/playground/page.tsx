@@ -1,4 +1,7 @@
+"use client";
 import { Rye } from "next/font/google";
+import { useScroll, motion } from "motion/react";
+import { useRef } from "react";
 
 const rye = Rye({
   subsets: ["latin"],
@@ -7,9 +10,18 @@ const rye = Rye({
 });
 
 const Home = () => {
+  const carouselRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    container: carouselRef,
+  });
+
   return (
     <div className={`flex h-full flex-col items-center justify-center`}>
-      <div className="scrollPlayground h-full w-full overflow-scroll bg-green-50 text-center">
+      <div
+        ref={carouselRef}
+        className="scrollHidden h-full w-full overflow-scroll bg-green-50 text-center"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 120 20"
@@ -33,6 +45,40 @@ const Home = () => {
             </textPath>
           </text>
         </svg>
+        <div className="sticky top-0 flex justify-center">
+          <svg id="progress" width="50" height="50" viewBox="0 0 50 50">
+            <circle
+              className="stroke-green-200"
+              strokeDashoffset={0}
+              cx="25"
+              cy="25"
+              r="20"
+              strokeWidth={5}
+              fill="none"
+            />
+            <motion.circle
+              cx="25"
+              cy="25"
+              r="20"
+              className="stroke-green-700"
+              strokeWidth={5}
+              strokeDasharray="0 1px"
+              fill={"none"}
+              strokeDashoffset={0}
+              pathLength={1}
+              style={{ pathLength: scrollYProgress }}
+            />
+          </svg>
+          <svg
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform"
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+          >
+            <path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z" />
+          </svg>
+        </div>
         <p className="playgroundText top-[50px] [animation-range:0px_200px]">
           Here at ChauTechDiary, I am building a playground for myself to test
           out new features and ideas. These projects are not meant to be

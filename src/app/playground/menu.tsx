@@ -4,6 +4,13 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useOnClickOutside } from "usehooks-ts";
+import { Pixelify_Sans } from "next/font/google";
+
+const font = Pixelify_Sans({
+  display: "swap",
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 const PATH_TO_NAME = {
   utubeNote: "Utube Note",
@@ -83,7 +90,7 @@ const Menu = () => {
               </li>
               <li>
                 <Link
-                  className="block bg-orange-800 px-2 py-1 hover:bg-orange-600 active:bg-orange-700"
+                  className={`block ${font.className} bg-gray-800 px-2 py-1 text-slate-200 hover:bg-gray-600 active:bg-gray-700`}
                   href="/playground/feelthebeat"
                 >
                   Feel the beat

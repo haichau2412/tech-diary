@@ -30,6 +30,7 @@
     "graphql": "^16.9.0",
     "http": "^0.0.1-security",
     "mongoose": "^8.8.4",
+    "motion": "^11.15.0",
     "next": "15.0.3",
     "next-auth": "^4.24.11",
     "next-intl": "^3.25.3",
