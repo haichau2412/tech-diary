@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .beat {
+    @apply flex items-center justify-center;
+  }
+
+  canvas {
+    width: 1024px;
+    height: 576px;
+  }
+}
