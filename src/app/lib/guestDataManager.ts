@@ -23,8 +23,24 @@ let initalized = false;
 
 const init = () => {
   if (initalized) return;
-  videos = getLocalStorage(LOCAL_KEY_VIDEOS, []);
-  notes = getLocalStorage(LOCAL_KEY_NOTES, []);
+  videos = getLocalStorage(LOCAL_KEY_VIDEOS, [
+    { youtubeId: "2PiM2e4RtTg", customName: "Job in 2025" },
+  ]);
+  notes = getLocalStorage(LOCAL_KEY_NOTES, [
+    {
+      youtubeId: "2PiM2e4RtTg",
+      notes: [
+        {
+          from: 71,
+          text: "not mince (your) words : to say what you mean clearly and directly, even if you upset people by doing this ~ nói vòng vo bóng gió ",
+        },
+        {
+          from: 1069,
+          text: "poach: to persuade someone who works for someone else to come and work for you ~ chiêu mộ",
+        },
+      ],
+    },
+  ]);
   initalized = true;
 };
 

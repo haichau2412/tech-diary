@@ -294,7 +294,8 @@ const NotePopup = forwardRef<HTMLDivElement, NotePopupProps>(function NotePopup(
 
   const takeNote = () => {
     playerRef.current.pauseVideo();
-    setNoteTime(Math.floor(playerRef.current.getCurrentTime()));
+    const noteTime = Math.floor(playerRef.current.getCurrentTime());
+    setNoteTime(noteTime > 0 ? noteTime - 1 : noteTime);
   };
 
   const playAt = (timeStamp: number) => {
