@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 // import Sprite from "./gameElement/Sprite";
 import KBEvents from "./gameLogic/KBEvents";
 import GameStartCanvas from "./GameStart";
+import StartGameMenu from "./StartGameMenu";
 
 const TicTacToe = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -31,7 +32,7 @@ const TicTacToe = () => {
 
   return (
     <div className="beat">
-      <div className="border border-white p-3">
+      <div className="relative border border-white p-3">
         <canvas className="bg-white" ref={setRef}>
           {ctxRef.current && refReady && (
             <>
@@ -53,6 +54,7 @@ const TicTacToe = () => {
             </>
           )}
         </canvas>
+        <StartGameMenu />
       </div>
     </div>
   );

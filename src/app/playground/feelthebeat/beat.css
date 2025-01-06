@@ -11,4 +11,38 @@
     width: 1024px;
     height: 576px;
   }
+
+  .startGameMenu {
+    @apply absolute left-1/2 top-3/4 flex -translate-x-1/2 transform rounded-md p-2 text-slate-50;
+
+    background-color: rgba(165, 171, 179, 0.932);
+
+    ul {
+      @apply flex items-baseline gap-4;
+
+      li {
+        @apply h-fit cursor-pointer select-none rounded-md px-2 py-1;
+      }
+
+      li:nth-child(odd):hover {
+        transform: scale(1.2) rotate(-5deg);
+      }
+      li:nth-child(even):hover {
+        transform: scale(1.2) rotate(5deg);
+      }
+
+      li:nth-child(1) {
+        @apply bg-blue-700 py-2;
+      }
+      li:nth-child(2) {
+        @apply bg-orange-700;
+      }
+      li:nth-child(3) {
+        @apply bg-red-700;
+      }
+      li:nth-child(4) {
+        @apply bg-green-700 py-2;
+      }
+    }
+  }
 }

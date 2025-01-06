@@ -15,7 +15,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       className={`${font.className} h-full bg-gray-800 py-3 text-lg text-slate-200`}
     >
       <header className="text-center">
-        <h1 className="text-4xl font-bold text-slate-50">Feel The Beat</h1>
+        <h1 className="text-4xl font-bold text-slate-50">
+          Feel The Beat (WIP)
+        </h1>
       </header>
 
       <main>{children}</main>
