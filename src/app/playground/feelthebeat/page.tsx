@@ -32,9 +32,9 @@ const TicTacToe = () => {
 
   return (
     <div className="beat">
-      <div className="relative border border-white p-3">
+      <div className="relative rounded-lg border-2 border-white p-2">
         <StartAudioNode />
-        <canvas className="bg-white" ref={setRef}>
+        <canvas className="rounded-md bg-white" ref={setRef}>
           {ctxRef.current && refReady && (
             <>
               <GameStartCanvas
@@ -55,6 +55,7 @@ const TicTacToe = () => {
             </>
           )}
         </canvas>
+
         <StartGameMenu />
       </div>
     </div>
