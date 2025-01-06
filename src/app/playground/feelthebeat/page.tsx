@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from "react";
 import KBEvents from "./gameLogic/KBEvents";
 import GameStartCanvas from "./GameStart";
 import StartGameMenu from "./StartGameMenu";
-
+import StartAudioNode from "./StartAudioNode";
 const TicTacToe = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -33,6 +33,7 @@ const TicTacToe = () => {
   return (
     <div className="beat">
       <div className="relative border border-white p-3">
+        <StartAudioNode />
         <canvas className="bg-white" ref={setRef}>
           {ctxRef.current && refReady && (
             <>
