@@ -285,6 +285,11 @@ body {
 
   .utubeElement {
     @apply aspect-[5/4] rounded-md;
+
+    .thumbnail {
+      border-top-left-radius: 0.15rem;
+      border-top-right-radius: 0.15rem;
+    }
   }
 
   .confirmDiv {

@@ -27,7 +27,7 @@ const VideoBox = ({
   return (
     <div className="utubeElement videoBox relative flex flex-col items-center justify-between gap-1 border border-transparent bg-red-200 hover:border-orange-300">
       <div
-        className="relative mt-1 aspect-[3/2] w-[240px] cursor-pointer truncate rounded-t-md"
+        className="thumbnail relative mt-1 aspect-[3/2] w-[240px] cursor-pointer truncate"
         onClick={() => openNotePopover(id)}
       >
         <Image

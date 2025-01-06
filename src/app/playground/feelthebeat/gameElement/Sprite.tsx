@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import image from "./Run.png";
 import image2 from "./Run2.png";
+import CanvasCharacter from "../gameLogic/CanvasCharacter";
 
 interface Props {
   ctx: CanvasRenderingContext2D;
@@ -14,63 +15,56 @@ interface Props {
 }
 
 const Sprite = ({ ctx, position, imgNum = 1 }: Props) => {
-  const draw = (img: CanvasImageSource, index: number) => {
-    if (!img) return;
-
-    ctx.fillStyle = "black";
-    ctx.fillRect(position.x, position.y, image.width / 4, image.height * 2);
-
-    ctx.drawImage(
-      img,
-      index * (image.width / 8),
-      0,
-      image.width / 8,
-      image.height,
-      position.x,
-      position.y,
-      image.width / 4,
-      image.height * 2,
-    );
-  };
-
   useEffect(() => {
+    let maxFrames = 8;
     const img = new Image();
     if (imgNum === 1) {
       img.src = image.src;
     } else {
+      maxFrames = 7;
       img.src = image2.src;
     }
-
-    const fps = 12;
-    const frameDuration = 1000 / fps;
-    let lastTime = 0;
-    let index = 0;
-
     let animatioHandler: ReturnType<typeof requestAnimationFrame>;
 
-    const animate = (timestamp: number) => {
-      const deltaTime = timestamp - lastTime;
+    img.onload = function () {
+      const character = new CanvasCharacter({
+        img,
+        drawLocation: position,
+        width: img.width,
+        height: img.height,
+        ctx,
+        maxFrames,
+      });
 
-      if (deltaTime >= frameDuration) {
-        if (index === 7) {
-          index = 0;
-        } else {
-          index += 1;
+      const fps = 12;
+      const frameDuration = 1000 / fps;
+      let lastTime = 0;
+      let index = 0;
+
+      const animate = (timestamp: number) => {
+        const deltaTime = timestamp - lastTime;
+
+        if (deltaTime >= frameDuration) {
+          if (index === 7) {
+            index = 0;
+          } else {
+            index += 1;
+          }
+
+          character.draw(index);
+          lastTime = timestamp;
         }
 
-        draw(img, index);
-        lastTime = timestamp;
-      }
+        animatioHandler = window.requestAnimationFrame(animate);
+      };
 
-      animatioHandler = window.requestAnimationFrame(animate);
+      window.requestAnimationFrame(animate);
     };
-
-    window.requestAnimationFrame(animate);
 
     return () => {
       window.cancelAnimationFrame(animatioHandler);
     };
-  }, [ctx]);
+  }, [ctx, imgNum, position]);
 
   return null;
 };
