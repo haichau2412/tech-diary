@@ -20,7 +20,7 @@ const Home = () => {
     <div className={`flex h-full flex-col items-center justify-center`}>
       <div
         ref={carouselRef}
-        className="scrollHidden h-full w-full overflow-scroll bg-green-50 text-center"
+        className="scrollHidden h-full w-full overflow-x-hidden overflow-y-scroll bg-green-50 text-center"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
