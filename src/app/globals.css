@@ -335,10 +335,12 @@ body {
     animation-timeline: scroll;
   }
 
-  .scrollHidden {
+  .customScrollBarGreen {
     &::-webkit-scrollbar {
-      width: 0px;
-      height: 0px;
+      width: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+      @apply bg-green-900;
     }
   }
 

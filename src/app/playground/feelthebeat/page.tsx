@@ -7,10 +7,13 @@ import KBEvents from "./gameLogic/KBEvents";
 import GameStartCanvas from "./GameStart";
 import StartGameMenu from "./StartGameMenu";
 import StartAudioNode from "./StartAudioNode";
+import Store from "./Store";
+
 const TicTacToe = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const [refReady, setRefReady] = useState(false);
+  const [showStore, setShowStore] = useState(false);
 
   useEffect(() => {
     KBEvents.init();
@@ -31,9 +34,8 @@ const TicTacToe = () => {
   };
 
   return (
-    <div className="beat">
-      <div className="relative rounded-lg border-2 border-white p-2">
-        <StartAudioNode />
+    <div className="beat relative">
+      <div className="relative overflow-hidden rounded-lg border-2 border-white p-2">
         <canvas className="rounded-md bg-white" ref={setRef}>
           {ctxRef.current && refReady && (
             <>
@@ -55,8 +57,13 @@ const TicTacToe = () => {
             </>
           )}
         </canvas>
-
-        <StartGameMenu />
+        <StartAudioNode />
+        <Store show={showStore} />
+        <StartGameMenu
+          onStoreClick={() => {
+            setShowStore(true);
+          }}
+        />
       </div>
     </div>
   );

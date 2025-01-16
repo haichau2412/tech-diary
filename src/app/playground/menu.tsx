@@ -51,7 +51,7 @@ const Menu = () => {
 
   return (
     <div className="relative my-1 flex items-center justify-center gap-2 bg-green-100 py-[2px] sm:text-lg">
-      <nav className="navPlaygroud z-10 flex w-min flex-col gap-2">
+      <nav className="navPlaygroud z-50 flex w-min flex-col gap-2">
         <button ref={btnRef} onClick={toggleMenu}>
           <div className="flex items-center justify-between text-nowrap">
             <span className="font-bold">Choose experiment</span>

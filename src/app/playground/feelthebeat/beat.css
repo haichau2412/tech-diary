@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --btn-red: #bf2a2a;
+  --red-sd: #521212;
+  --btn-green: #025959;
+  --green-sh: #012525;
+  --btn-orange: #f29727;
+  --orange-sd: #89571a;
+  --btn-blue: #3365a6;
+  --blue-sd: #112237;
+}
+
 @layer components {
   .beat {
     @apply flex items-center justify-center;
@@ -12,6 +23,34 @@
     height: 576px;
   }
 
+  button.gameButton {
+    @apply h-fit cursor-pointer select-none rounded-md px-2 py-1;
+
+    &.blue {
+      @apply py-2;
+      background-color: var(--btn-blue);
+      box-shadow: 0 5px 0 var(--blue-sd);
+    }
+    &.orange {
+      background-color: var(--btn-orange);
+      box-shadow: 0 5px 0 var(--orange-sd);
+    }
+    &.red {
+      background-color: var(--btn-red);
+      box-shadow: 0 5px 0 var(--red-sd);
+    }
+    &.green {
+      @apply py-2;
+      background-color: var(--btn-green);
+      box-shadow: 0 5px 0 var(--green-sh);
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: translateY(5px);
+    }
+  }
+
   .startGameMenu {
     @apply absolute left-1/2 top-3/4 flex -translate-x-1/2 transform rounded-md p-2 text-slate-50;
 
@@ -19,29 +58,51 @@
 
     ul {
       @apply flex items-baseline gap-4;
+    }
+  }
 
-      li {
-        @apply h-fit cursor-pointer select-none rounded-md px-2 py-1;
+  .store {
+    &.show {
+      transform: translateY(-100%);
+      transition-duration: 0.5s;
+    }
+    .nav {
+      @apply w-[150px] bg-slate-500 py-1;
+
+      menu {
+        @apply flex flex-col gap-2;
+
+        button {
+          @apply px-2 py-1 outline-none;
+
+          &:hover,
+          &:focus {
+            @apply rounded-r-[18px] bg-black;
+          }
+        }
       }
 
-      li:nth-child(odd):hover {
-        transform: scale(1.2) rotate(-5deg);
-      }
-      li:nth-child(even):hover {
-        transform: scale(1.2) rotate(5deg);
-      }
+      .selectedElement {
+        @apply relative flex h-10 w-[160px] items-center justify-start bg-slate-500 pr-[5px];
 
-      li:nth-child(1) {
-        @apply bg-blue-700 py-2;
-      }
-      li:nth-child(2) {
-        @apply bg-orange-700;
-      }
-      li:nth-child(3) {
-        @apply bg-red-700;
-      }
-      li:nth-child(4) {
-        @apply bg-green-700 py-2;
+        border-top-right-radius: 15px 20px;
+        border-bottom-right-radius: 15px 20px;
+
+        .idicator {
+          @apply flex h-[36px] w-full items-center rounded-r-[18px] bg-black px-2;
+        }
+
+        &::before {
+          @apply absolute -top-[599px] right-[4px] block h-[600px] w-[10px] bg-black;
+          border-bottom-left-radius: 5px 5px;
+          content: "";
+        }
+
+        &::after {
+          @apply absolute right-[4px] top-[38px] block h-[600px] w-[10px] bg-black;
+          border-top-left-radius: 15px 12px;
+          content: "";
+        }
       }
     }
   }
