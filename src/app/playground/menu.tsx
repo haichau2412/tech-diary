@@ -78,7 +78,7 @@ const Menu = () => {
           </div>
           <ul
             ref={currentRef}
-            className="absolute left-1/2 top-full -translate-x-1/2 list-none text-nowrap text-center text-sm"
+            className="absolute top-full left-1/2 -translate-x-1/2 list-none text-center text-sm text-nowrap"
           >
             <div className="text-white">
               <li>
@@ -102,7 +102,7 @@ const Menu = () => {
                   className="block bg-blue-800 px-2 py-1 hover:bg-blue-600 active:bg-blue-700"
                   href="/playground/roadmap"
                 >
-                  Chau's tech diary
+                  Chau&apos;s tech diary
                 </Link>
               </li>
               <li>

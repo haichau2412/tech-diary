@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --btn-red: #bf2a2a;
@@ -11,6 +9,28 @@
   --orange-sd: #89571a;
   --btn-blue: #3365a6;
   --blue-sd: #112237;
+}
+
+@theme {
+  --animate-shaking: note-shaking 0.5s ease-in-out;
+
+  @keyframes note-shaking {
+    0% {
+      transform: rotate(-20deg);
+    }
+    25% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(20deg);
+    }
+    75% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-20deg);
+    }
+  }
 }
 
 @layer components {
@@ -24,7 +44,7 @@
   }
 
   button.gameButton {
-    @apply h-fit cursor-pointer select-none rounded-md px-2 py-1;
+    @apply h-fit cursor-pointer rounded-md px-2 py-1 select-none;
 
     &.blue {
       @apply py-2;
@@ -52,7 +72,7 @@
   }
 
   .startGameMenu {
-    @apply absolute left-1/2 top-3/4 flex -translate-x-1/2 transform rounded-md p-2 text-slate-50;
+    @apply absolute top-3/4 left-1/2 flex -translate-x-1/2 transform rounded-md p-2 text-slate-50;
 
     background-color: rgba(165, 171, 179, 0.932);
 
@@ -99,7 +119,7 @@
         }
 
         &::after {
-          @apply absolute right-[4px] top-[38px] block h-[600px] w-[10px] bg-black;
+          @apply absolute top-[38px] right-[4px] block h-[600px] w-[10px] bg-black;
           border-top-left-radius: 15px 12px;
           content: "";
         }

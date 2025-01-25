@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@layer components {
+  .stickyNav {
+    @apply absolute overflow-hidden;
+    top: calc(100% - 100px);
+  }
+}
