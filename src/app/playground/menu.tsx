@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useOnClickOutside } from "usehooks-ts";
 import { Pixelify_Sans } from "next/font/google";
+import useOnClickOutside from "../shared/hooks/use";
 
 const font = Pixelify_Sans({
   display: "swap",
@@ -16,6 +16,7 @@ const PATH_TO_NAME = {
   utubeNote: "Utube Note",
   blog: "Blog",
   feelthebeat: "Feel the beat",
+  roadmap: "Chau's tech diary",
 };
 
 const Menu = () => {
@@ -94,6 +95,14 @@ const Menu = () => {
                   href="/playground/feelthebeat"
                 >
                   Feel the beat
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="block bg-blue-800 px-2 py-1 hover:bg-blue-600 active:bg-blue-700"
+                  href="/playground/roadmap"
+                >
+                  Chau's tech diary
                 </Link>
               </li>
               <li>
