@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -50,11 +48,11 @@ body {
     @apply flex w-fit flex-col items-center;
 
     &::after {
+      @apply block h-[20px] w-[150px] translate-y-[-5px] bg-yellow-500 sm:translate-y-[-15px];
       content: "";
       display: block;
       mask-image: url("../assets/svg/star.svg");
       mask-repeat: repeat;
-      @apply block h-[20px] w-[150px] translate-y-[-5px] bg-yellow-500 sm:translate-y-[-15px];
     }
   }
 
@@ -126,7 +124,7 @@ body {
     @apply flex flex-shrink-0 flex-grow-0 flex-col items-center justify-center gap-1 border-[2px] border-dashed border-green-900 bg-green-50 px-1 pt-3 text-xs sm:text-sm;
 
     label {
-      @apply font-bold uppercase text-green-900;
+      @apply font-bold text-green-900 uppercase;
     }
 
     input {
@@ -137,7 +135,7 @@ body {
       }
 
       &[type="submit"] {
-        @apply mt-2 w-fit cursor-pointer bg-green-900 px-2 py-1 uppercase text-white hover:bg-green-600 active:bg-green-800;
+        @apply mt-2 w-fit cursor-pointer bg-green-900 px-2 py-1 text-white uppercase hover:bg-green-600 active:bg-green-800;
       }
     }
   }
@@ -167,11 +165,11 @@ body {
     }
 
     h2 {
-      @apply m-2 text-lg font-bold uppercase text-blue-950 underline sm:text-xl;
+      @apply m-2 text-lg font-bold text-blue-950 uppercase underline sm:text-xl;
     }
 
     h3 {
-      @apply ml-4 uppercase text-blue-900;
+      @apply ml-4 text-blue-900 uppercase;
     }
   }
 
@@ -180,7 +178,7 @@ body {
       @apply relative;
       &::after {
         content: "";
-        @apply absolute right-0 top-1/2 block h-5/6 w-[2px] -translate-y-1/2 bg-blue-950 sm:bottom-0 sm:left-1/2 sm:top-full sm:h-[2px] sm:w-5/6 sm:-translate-x-1/2 sm:translate-y-0;
+        @apply absolute top-1/2 right-0 block h-5/6 w-[2px] -translate-y-1/2 bg-blue-950 sm:top-full sm:bottom-0 sm:left-1/2 sm:h-[2px] sm:w-5/6 sm:-translate-x-1/2 sm:translate-y-0;
       }
     }
   }
@@ -274,7 +272,7 @@ body {
 
     svg.searchIcon,
     button {
-      @apply pointer-events-none absolute right-2 top-1/2 h-5 w-5 -translate-y-1/2 fill-red-800;
+      @apply pointer-events-none absolute top-1/2 right-2 h-5 w-5 -translate-y-1/2 fill-red-800;
 
       visibility: hidden;
       opacity: 0;
@@ -330,7 +328,7 @@ body {
   }
 
   .scrollProgress {
-    @apply absolute left-0 top-0 z-10 h-[4px] w-full bg-green-200;
+    @apply absolute top-0 left-0 z-10 h-[4px] w-full bg-green-200;
     animation: grow-progress auto linear;
     animation-timeline: scroll;
   }
@@ -345,7 +343,7 @@ body {
   }
 
   .playgroundText {
-    @apply sticky mx-auto w-[400px] animate-fade-in-zoom leading-normal text-green-800 [animation-timeline:scroll()];
+    @apply animate-fade-in-zoom sticky mx-auto w-[400px] leading-normal text-green-800 [animation-timeline:scroll()];
   }
 
   #app {
@@ -386,6 +384,43 @@ body {
       cursor: not-allowed;
       border: 1px solid rgba(255, 255, 255, 0.3);
       color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .griddd {
+    @apply grid;
+    width: 400px;
+    height: 400px;
+    column-gap: 10px;
+    row-gap: 10px;
+
+    & > div {
+      background: #000;
+    }
+
+    div:first-child {
+      grid-row: 1/3;
+      grid-column: 1/3;
+    }
+
+    div:nth-child(2) {
+      grid-row: 1/3;
+      grid-column: 3/5;
+    }
+
+    div:nth-child(3) {
+      grid-row: 3/5;
+      grid-column: 1/3;
+    }
+    div:nth-child(4) {
+      grid-row: 3/5;
+      grid-column: 3/5;
+    }
+    div:last-child {
+      grid-row: 2/4;
+      grid-column: 2/4;
+      transform: scale(1.2) rotate(45deg);
+      border: 5px solid wheat;
     }
   }
 }

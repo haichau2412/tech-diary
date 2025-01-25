@@ -14,7 +14,7 @@ const SlideNav = ({
   const currentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative order-1 h-full flex-shrink-0 basis-[100px] overflow-hidden border-black bg-blue-50 pr-1 sm:order-none sm:basis-auto sm:border-r-2">
+    <div className="stickyNav order-1 h-full flex-shrink-0 basis-[100px] overflow-hidden border-black bg-blue-50 pr-1 sm:order-none sm:basis-auto sm:border-r-2">
       <div
         ref={currentRef}
         className="customScrollBar seperator blue flex snap-both snap-mandatory gap-2 overflow-scroll scroll-smooth pr-3 sm:max-h-full sm:flex-col"
@@ -24,7 +24,7 @@ const SlideNav = ({
             <Link key={i.id} href={`/playground/blog/${i.id}`}>
               <div
                 key={i.id}
-                className="grid aspect-[3/2] w-[140px] flex-shrink-0 snap-start place-content-center truncate text-wrap text-center text-blue-950 sm:w-[150px]"
+                className="grid aspect-[3/2] w-[140px] flex-shrink-0 snap-start place-content-center truncate text-center text-wrap text-blue-950 sm:w-[150px]"
               >
                 {i.title}
               </div>
