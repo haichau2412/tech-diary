@@ -52,9 +52,19 @@ const Menu = () => {
 
   return (
     <div className="relative my-1 flex items-center justify-center gap-2 bg-green-100 py-[2px] sm:text-lg">
-      <nav className="navPlaygroud z-50 flex w-min flex-col gap-2">
-        <button ref={btnRef} onClick={toggleMenu}>
-          <div className="flex items-center justify-between text-nowrap">
+      <nav
+        id="main-navigation"
+        aria-label="main"
+        className="navPlaygroud z-50 flex w-min flex-col gap-2"
+        aria-expanded={!!shown}
+      >
+        <button
+          ref={btnRef}
+          onClick={toggleMenu}
+          aria-controls="main-navigation"
+          aria-expanded={!!shown}
+        >
+          <div className="flex cursor-pointer items-center justify-between text-nowrap">
             <span className="font-bold">Choose experiment</span>
             <svg
               ref={svgRef}
@@ -76,47 +86,47 @@ const Menu = () => {
               </p>
             )}
           </div>
-
-          <div
-            ref={currentRef}
-            className="navDropDown absolute top-full left-1/2 -translate-x-1/2"
-          >
-            <ul className="list-none text-center text-sm text-nowrap text-white">
-              <li>
-                <Link
-                  className="block bg-red-800 px-2 py-1 hover:bg-red-600 active:bg-red-700"
-                  href="/playground/utubeNote"
-                >
-                  Utube Note
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className={`block ${font.className} bg-gray-800 px-2 py-1 text-slate-200 hover:bg-gray-600 active:bg-gray-700`}
-                  href="/playground/feelthebeat"
-                >
-                  Feel the beat
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="block bg-blue-800 px-2 py-1 hover:bg-blue-600 active:bg-blue-700"
-                  href="/playground/roadmap"
-                >
-                  Chau&apos;s tech diary
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="block bg-blue-800 px-2 py-1 hover:bg-blue-600 active:bg-blue-700"
-                  href="/playground/blog"
-                >
-                  Blog post
-                </Link>
-              </li>
-            </ul>
-          </div>
         </button>
+        <div
+          onClick={toggleMenu}
+          ref={currentRef}
+          className="navDropDown absolute top-full left-1/2 -translate-x-1/2"
+        >
+          <ul className="list-none text-center text-sm text-nowrap text-white">
+            <li>
+              <Link
+                className="block bg-red-800 px-2 py-1 hover:bg-red-600 active:bg-red-700"
+                href="/playground/utubeNote"
+              >
+                Utube Note
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={`block ${font.className} bg-gray-800 px-2 py-1 text-slate-200 hover:bg-gray-600 active:bg-gray-700`}
+                href="/playground/feelthebeat"
+              >
+                Feel the beat
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="block bg-blue-800 px-2 py-1 hover:bg-blue-600 active:bg-blue-700"
+                href="/playground/roadmap"
+              >
+                Chau&apos;s tech diary
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="block bg-blue-800 px-2 py-1 hover:bg-blue-600 active:bg-blue-700"
+                href="/playground/blog"
+              >
+                Blog post
+              </Link>
+            </li>
+          </ul>
+        </div>
       </nav>
     </div>
   );

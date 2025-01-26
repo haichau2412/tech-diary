@@ -12,20 +12,14 @@
 }
 
 @theme {
-  --animate-shaking: note-shaking 0.5s ease-in-out;
+  --animate-shaking: note-shaking 0.5s ease-in-out infinite;
 
   @keyframes note-shaking {
     0% {
       transform: rotate(-20deg);
     }
-    25% {
-      transform: rotate(0deg);
-    }
     50% {
       transform: rotate(20deg);
-    }
-    75% {
-      transform: rotate(0deg);
     }
     100% {
       transform: rotate(-20deg);
