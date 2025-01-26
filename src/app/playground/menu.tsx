@@ -21,7 +21,7 @@ const PATH_TO_NAME = {
 
 const Menu = () => {
   const pathName = usePathname();
-  const currentRef = useRef<HTMLUListElement>(null);
+  const currentRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const [shown, setShown] = useState(false);
@@ -76,11 +76,12 @@ const Menu = () => {
               </p>
             )}
           </div>
-          <ul
+
+          <div
             ref={currentRef}
-            className="absolute top-full left-1/2 -translate-x-1/2 list-none text-center text-sm text-nowrap"
+            className="navDropDown absolute top-full left-1/2 -translate-x-1/2"
           >
-            <div className="text-white">
+            <ul className="list-none text-center text-sm text-nowrap text-white">
               <li>
                 <Link
                   className="block bg-red-800 px-2 py-1 hover:bg-red-600 active:bg-red-700"
@@ -113,8 +114,8 @@ const Menu = () => {
                   Blog post
                 </Link>
               </li>
-            </div>
-          </ul>
+            </ul>
+          </div>
         </button>
       </nav>
     </div>

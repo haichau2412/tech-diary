@@ -18,7 +18,7 @@ const UtubeSearchBar = () => {
       <input
         onChange={onTyping}
         type="text"
-        role="search"
+        aria-label="Search"
         className="input"
         placeholder="Video name..."
         value={searchText}

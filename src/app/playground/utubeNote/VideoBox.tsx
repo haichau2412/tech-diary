@@ -39,7 +39,7 @@ const VideoBox = ({
         />
       </div>
 
-      <div className="absolute right-[2px] top-[2px]">
+      <div className="absolute top-[2px] right-[2px]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="16px"
@@ -51,6 +51,7 @@ const VideoBox = ({
       </div>
 
       <input
+        aria-label={`videoNameChangeInput`}
         onChange={(e) => {
           setCustomName({
             id,
@@ -60,7 +61,7 @@ const VideoBox = ({
         }}
         onBlur={openRenamePopover}
         type="text"
-        className="max-w-full truncate text-ellipsis rounded-t-md border-none bg-red-900 py-[2px] text-center leading-tight text-slate-200 outline-none hover:bg-red-800"
+        className="max-w-full truncate rounded-t-md border-none bg-red-900 py-[2px] text-center leading-tight text-ellipsis text-slate-200 outline-none hover:bg-red-800"
         value={videoName}
       />
     </div>

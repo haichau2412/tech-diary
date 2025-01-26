@@ -233,17 +233,17 @@ body {
       }
     }
 
-    ul {
+    .navDropDown {
       @apply grid;
       grid-template-rows: 0fr;
       transition: 300ms ease-in-out;
 
-      & > div {
-        @apply overflow-hidden;
-      }
-
       &.show {
         grid-template-rows: 1fr;
+      }
+
+      ul {
+        @apply overflow-hidden;
       }
     }
   }
