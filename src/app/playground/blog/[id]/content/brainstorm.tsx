@@ -7,6 +7,7 @@ const Home = () => {
     <div className="blog customScrollBar blue">
       <H1>Chau Tech Brainstorming</H1>
       <h2>Ideas for the portfolio:</h2>
+      <div className="custokmm"></div>
       <p>
         I need to build a portfolio page to showcase my tech skills. It will
         serve as a playground where I can invent new things and experiment with

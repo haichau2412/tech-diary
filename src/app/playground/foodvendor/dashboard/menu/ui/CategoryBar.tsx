@@ -1,34 +1,35 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
+import React from "react";
 
-const SlideNav = ({
-  items,
-}: {
+interface CategoryBarProps {
   items: {
     id: string;
-    title: string;
+    content: {
+      en: string;
+      vn: string;
+    };
   }[];
-}) => {
+  onItemClick: (id: string) => void;
+}
+
+const CategoryBar = ({ onItemClick, items }: CategoryBarProps) => {
   const currentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="stickyNav order-1 h-full flex-shrink-0 basis-[100px] overflow-hidden border-black bg-blue-50 pr-1 sm:order-none sm:basis-auto sm:border-r-2">
-      <div
-        ref={currentRef}
-        className="customScrollBar seperator blue flex snap-both snap-mandatory gap-2 overflow-scroll scroll-smooth pr-3 sm:max-h-full sm:flex-col"
-      >
-        {items.map((i) => {
+    <div className="categoryBar">
+      <div ref={currentRef}>
+        {items.map(({ id, content }) => {
           return (
-            <Link key={i.id} href={`/playground/blog/${i.id}`}>
-              <div
-                key={i.id}
-                className="grid aspect-[3/2] w-[140px] flex-shrink-0 snap-start place-content-center truncate text-center text-wrap text-blue-950 sm:w-[150px]"
-              >
-                {i.title}
-              </div>
-            </Link>
+            <button
+              onClick={() => {
+                onItemClick(id);
+              }}
+              key={id}
+            >
+              {content.en}
+            </button>
           );
         })}
       </div>
@@ -83,4 +84,4 @@ const SlideNav = ({
   );
 };
 
-export default SlideNav;
+export default CategoryBar;

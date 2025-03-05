@@ -17,6 +17,7 @@ const PATH_TO_NAME = {
   blog: "Blog",
   feelthebeat: "Feel the beat",
   roadmap: "Chau's tech diary",
+  foodvendor: "Food vendor",
 };
 
 const Menu = () => {
@@ -56,7 +57,6 @@ const Menu = () => {
         id="main-navigation"
         aria-label="main"
         className="navPlaygroud z-50 flex w-min flex-col gap-2"
-        aria-expanded={!!shown}
       >
         <button
           ref={btnRef}
@@ -123,6 +123,14 @@ const Menu = () => {
                 href="/playground/blog"
               >
                 Blog post
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="block bg-blue-800 px-2 py-1 hover:bg-blue-600 active:bg-blue-700"
+                href="/playground/foodvendor"
+              >
+                Food vendor
               </Link>
             </li>
           </ul>

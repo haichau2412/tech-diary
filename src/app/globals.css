@@ -54,6 +54,19 @@ body {
 }
 
 @layer components {
+  .custokmm {
+    @apply h-[200px] w-[200px] bg-blue-400;
+    clip-path: path(
+      "M 10,50 L 90,50 A 10,10 0,0,0 100,40 L 100,10 A 10,10 0,0,1 110,0 L 190,0 L 200,10 L 200,190 L 190,200 L 10,200 L 0,190 L 0,60 Z"
+    );
+
+    &:hover {
+      @apply bg-amber-400;
+      clip-path: path(
+        "M 10,50 L 90,50 A 10,10 0,0,1 100,40 L 100,10 A 10,10 0,0,1 110,0 L 190,0 L 200,10 L 200,190 L 190,200 L 10,200 L 0,190 L 0,60 Z"
+      );
+    }
+  }
   .activeLink {
     @apply underline decoration-2 underline-offset-4;
   }

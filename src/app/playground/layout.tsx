@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <div className="flex h-screen max-h-screen w-screen cursor-default flex-col sm:px-5">
       <Menu />
-      <div className="flex-shrink flex-grow overflow-hidden">{children}</div>
+      <div className="flex-shrink overflow-hidden">{children}</div>
     </div>
   );
 }

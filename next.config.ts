@@ -13,7 +13,16 @@ const nextConfig: NextConfig = {
           pathname: "**"
         }
       ]
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/playground/foodvendor',
+        destination: '/playground/foodvendor/dashboard',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 const withMDX = createMDX({
