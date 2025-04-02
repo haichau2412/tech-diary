@@ -1,5 +1,5 @@
 import SlideNav from "@/app/playground/blog/slideNav";
-import { posts } from "./[id]/page";
+import { posts } from "./[id]/component";
 import "./blog.css";
 
 export default function Blog({

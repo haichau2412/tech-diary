@@ -1,17 +1,16 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useContext } from "react";
-import { AuthContext } from "./authContext";
+import { useAuth } from "@/libs/auth/authContext";
 
 import Link from "next/link";
 
 export default function Nav() {
-  const data = useContext(AuthContext);
+  const data = useAuth();
   const pathname = usePathname();
 
   return (
-    <div className="mx-2 my-1 flex items-center justify-center gap-2 border-b border-t border-solid border-black py-[2px] sm:text-lg">
+    <div className="mx-2 my-1 flex items-center justify-center gap-2 border-t border-b border-solid border-black py-[2px] sm:text-lg">
       {/* <Link
         className={`px-4 decoration-yellow-600 ${pathname === "/playground/aboutme" ? "activeLink" : ""}`}
         href="/playground/aboutme"
