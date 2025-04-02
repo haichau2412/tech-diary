@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
+import NewHeader from "@/components/newHeader";
 import { PT_Sans_Narrow } from "next/font/google";
-import Header from "./ui/header/Header";
 
 const font = PT_Sans_Narrow({
   display: "swap",
@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${font.className}`}>
         <div className="flex h-screen max-h-screen w-screen cursor-default flex-col">
-          <Header />
+          <NewHeader />
           <main className="flex-shrink flex-grow overflow-hidden">
             {children}
           </main>

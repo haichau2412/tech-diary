@@ -1,69 +1,117 @@
-import Image from "next/image";
-import criminalPic from "@/assets/human.png";
+import { Rye } from "next/font/google";
+// import { useScroll, motion } from "motion/react";
+// import { useRef } from "react";
+import Info from "./ui/intro/Info";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  mainEntity: {
-    "@type": "Person",
-    name: "Chau Hai Luu",
-    jobTitle: "Frontend Developer",
-    address: "Ho Chi Minh City, Vietnam",
-    description: "Chau's portfolio",
-  },
-};
+const rye = Rye({
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+});
 
-const Home2 = () => {
+// const updateStatus = async (userId: string, online: boolean) => {
+
+const Home = () => {
+  // const carouselRef = useRef(null);
+
+  // const { scrollYProgress } = useScroll({
+  //   container: carouselRef,
+  // });
+
   return (
-    <div className="relative flex h-full flex-col bg-gradient-to-tr from-violet-950 to-green-900 px-5 sm:mx-5 sm:mb-5 sm:pl-[50px] sm:text-lg">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <div className="flex flex-col items-baseline justify-between gap-10 pt-[50px] sm:flex-row">
-        <div className="text-stone-300 sm:w-1/3">
-          <p>
-            I am a frontend developer, who loves to create useful and creative
-            websites, on my journey to become a fullstack developer. In my
-            perspective, a website should be esthetical to the eyes while
-            serving its greatest purpose: cater to the users&apos; needs.
-          </p>
-          <p>A team player, a friend in disguise.</p>
-        </div>
+    <div className={`flex h-full flex-col items-center justify-center`}>
+      <div
+        // ref={carouselRef}
+        className="customScrollBarGreen h-full w-full overflow-x-hidden overflow-y-scroll bg-neutral-950 text-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 120 20"
+          className={`${rye.className} animate-fade-out mt-20 h-[200px] w-full translate-y-[20px] [animation-range:0px_300px] [animation-timeline:scroll()]`}
+        >
+          <path
+            id="curve"
+            d="M 0 20 Q 60 -10 120 20"
+            fill="none"
+            stroke="none"
+            strokeMiterlimit="10"
+          />
+          <text textAnchor="middle">
+            <textPath
+              href="#curve"
+              startOffset="50%"
+              letterSpacing=".05em"
+              className="fill-gray-300 text-[7px] sm:text-[6px]"
+            >
+              Welcome to my portfolio
+            </textPath>
+          </text>
+        </svg>
+        {/* <div className="sticky top-0 z-50 flex justify-center">
+          <svg id="progress" width="50" height="50" viewBox="0 0 50 50">
+            <circle
+              className="stroke-gray-300"
+              strokeDashoffset={0}
+              cx="25"
+              cy="25"
+              r="20"
+              strokeWidth={5}
+              fill="none"
+            />
+            <motion.circle
+              cx="25"
+              cy="25"
+              r="20"
+              className="stroke-green-700"
+              strokeWidth={5}
+              strokeDasharray="0 1px"
+              fill={"none"}
+              strokeDashoffset={0}
+              pathLength={1}
+              style={{ pathLength: scrollYProgress }}
+            />
+          </svg>
+          <svg
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform fill-gray-100"
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+          >
+            <path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z" />
+          </svg>
+        </div> */}
+        <Info />
+        <p className="playgroundText top-[50px] mt-[50px] [animation-range:0px_400px]">
+          Here at ChauTechDiary, I am building a playground for myself to test
+          out new features and ideas. These projects are not meant to be
+          perfect, but they are meant to be a learning experience. I hope you
+          enjoy your stay here.
+        </p>
 
-        <div className="text-stone-100 sm:mr-[100px]">
-          <h2 className="sm:text-2xl">My tech stacks</h2>
-          <ul>
-            <li>
-              Frontend: React (to v.18), Redux, Next.js, Tailwind CSS, SASS
-            </li>
-            <li>Backend: Express, Restful</li>
-            <li>Common: Vanilla JS, Jest</li>
-            <li>Others: Git, CI/CD</li>
-            <li>Upper-intermediate English level in Speaking/Writing</li>
-            <li>Upcomming techs: GraphQL, AWS, React v19</li>
-          </ul>
-        </div>
-      </div>
+        <div className="h-[500px]"></div>
+        <p className="playgroundText top-[200px] [animation-range:200px_500px]">
+          If you are interested in the code, and want me to become a coding
+          partner, you can contact me{" "}
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://www.linkedin.com/in/chau-luu-0a3378179/"
+            className="lack text-white hover:underline"
+          >
+            Linkedin
+          </a>
+          .
+        </p>
+        <div className="h-[500px]"></div>
+        <p className="playgroundText top-[300px] [animation-range:800px_1000px]">
+          Now, let&apos;s see what &quot;Games&quot; we have here.
+        </p>
 
-      <div>
-        <h2 className="relative mt-[60px] text-9xl leading-none font-bold text-white uppercase sm:mt-[50px] sm:leading-tight sm:tracking-wide">
-          Chau Hai Luu
-          <div className="absolute -top-[40px] left-[150px] sm:-top-[50px]">
-            <div className="relative aspect-[370/470] w-[80px] shadow-lg shadow-blue-500">
-              <Image
-                priority={false}
-                className="bg-slate-400"
-                src={criminalPic}
-                fill={true}
-                alt="Developer's potrait"
-              />
-            </div>
-          </div>
-        </h2>
+        <div className="h-[400px]"></div>
       </div>
     </div>
   );
 };
 
-export default Home2;
+export default Home;
