@@ -20,7 +20,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "libs/*": ["./src/libs/*"],
+      "utubeNote/*":  ["./src/app/playground/utubeNote/*"]
     }
   },
   "include": [

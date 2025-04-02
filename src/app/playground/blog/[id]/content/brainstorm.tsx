@@ -1,4 +1,4 @@
-import H1 from "../shared/h1";
+import H1 from "../ui/h1";
 import Image from "next/image";
 import utubePic from "@/assets/utube.avif";
 

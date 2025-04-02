@@ -1,4 +1,7 @@
-import { getLocalStorage, setLocalStorage } from "../../../../lib/localStorage";
+import {
+  getLocalStorage,
+  setLocalStorage,
+} from "../../../../libs/localStorage";
 import EventEmitter from "events";
 
 const LOCAL_KEY_VIDEOS = "videos";

@@ -7,8 +7,8 @@ import { getWithCredential } from "@/utils/fetcher";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
-import { verifyUtube, addUtube } from "../../lib/utubeApi";
-import guestDataManager from "../../lib/guestDataManager";
+import { verifyUtube, addUtube } from "./api/utubeApi";
+import guestDataManager from "../../libs/guestDataManager";
 
 type FormValues = {
   link: string;
@@ -126,7 +126,7 @@ const Carousel = () => {
                     />
                   </div>
 
-                  <p className="max-w-full truncate text-ellipsis text-center">
+                  <p className="max-w-full truncate text-center text-ellipsis">
                     {i.customName || "no name"}
                   </p>
                 </div>

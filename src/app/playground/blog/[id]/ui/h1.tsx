@@ -9,7 +9,7 @@ const rye = Rye({
 const H1 = ({ children }: { children: string }) => {
   return (
     <h1
-      className={`${rye.className} customBorder mb-4 text-center text-2xl font-bold uppercase text-blue-950 sm:text-4xl`}
+      className={`${rye.className} customBorder mb-4 text-center text-2xl font-bold text-blue-950 uppercase sm:text-4xl`}
     >
       {children}
     </h1>

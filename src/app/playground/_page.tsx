@@ -9,25 +9,6 @@ const rye = Rye({
   display: "swap",
 });
 
-// const updateStatus = async (userId: string, online: boolean) => {
-//   await fetch("http://localhost:8080/status", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({ userId, online }),
-//   });
-// };
-
-// const eventSource = new EventSource("http://localhost:8080/onlineStatus", {
-//   withCredentials: true,
-// });
-
-// eventSource.onmessage = (event) => {
-//   const data = JSON.parse(event.data);
-//   console.log("Online users:", data.onlineUsers);
-// };
-
-// updateStatus("user123212", true);
-
 const Home = () => {
   const carouselRef = useRef(null);
 
@@ -120,11 +101,12 @@ const Home = () => {
           .
         </p>
         <div className="h-[500px]"></div>
-        <p className="playgroundText top-[300px] [animation-range:800px_1000px]">
+        <p className="playgroundText top-[300px] [animation-range:500px_1500px]">
           Now, let&apos;s see what &quot;Games&quot; we have here.
         </p>
+        <div className="h-[500px]"></div>
 
-        <div className="h-[400px]"></div>
+        <div className="h-[500px]">sdkdlkasld</div>
       </div>
     </div>
   );

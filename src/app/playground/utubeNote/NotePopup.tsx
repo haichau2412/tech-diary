@@ -2,11 +2,11 @@
 
 import YouTube, { YouTubePlayer } from "react-youtube";
 import { YouTubeNote, Note as NoteType, VideoState } from "./youtubeData";
-import { useState, useRef, useEffect, useContext, forwardRef } from "react";
+import { useState, useRef, useEffect, forwardRef } from "react";
 import { postWithCredential, getWithCredential } from "@/utils/fetcher";
 import useSWR from "swr";
-import { AuthContext } from "@/components/authContext";
-import guestDataManager from "../../lib/guestDataManager";
+import { useAuth } from "@/libs/auth/authContext";
+import guestDataManager from "utubeNote/libs/guestDataManager";
 
 const formatTime = (time: number) => {
   const sec = time % 60;
@@ -161,7 +161,7 @@ const VideoBox = ({
 
   return (
     <div
-      className={`flex h-3/5 flex-col items-center gap-2 border-b-2 border-solid border-red-900 p-2 sm:h-full sm:w-3/5 sm:border-b-0 sm:border-r-2 ${videoState === "paused" ? "bg-red-200" : ""}`}
+      className={`flex h-3/5 flex-col items-center gap-2 border-b-2 border-solid border-red-900 p-2 sm:h-full sm:w-3/5 sm:border-r-2 sm:border-b-0 ${videoState === "paused" ? "bg-red-200" : ""}`}
     >
       {isValidId ? (
         <>
@@ -201,27 +201,27 @@ const NotePopup = forwardRef<HTMLDivElement, NotePopupProps>(function NotePopup(
   { videoId },
   popOverRef,
 ) {
-  const { isAuthorized } = useContext(AuthContext);
+  const { isAuthorized } = useAuth();
   const [videoState, setVideoState] = useState<VideoState>("paused");
   const [noteTime, setNoteTime] = useState<number | null>(null);
   const [timelapsed, setTimelapsed] = useState(0);
   const [notes, setNotes] = useState(guestDataManager.getNotes(videoId));
   const [guestVideo, setGuestVideo] = useState(guestDataManager.getVideos());
 
-  const { data: data_video } = useSWR(
-    isAuthorized ? `${process.env.NEXT_PUBLIC_BE_ORIGIN}/api/videos` : null,
-    getWithCredential<{ data: Video[] }>,
-  );
+  // const { data: data_video } = useSWR(
+  //   isAuthorized ? `${process.env.NEXT_PUBLIC_BE_ORIGIN}/api/videos` : null,
+  //   getWithCredential<{ data: Video[] }>,
+  // );
 
   useEffect(() => {
     setNotes(guestDataManager.getNotes(videoId));
   }, [videoId]);
 
-  let _data_videos = guestVideo;
+  const _data_videos = guestVideo;
 
-  if (isAuthorized && data_video) {
-    _data_videos = data_video.data;
-  }
+  // if (isAuthorized && data_video) {
+  //   _data_videos = data_video.data;
+  // }
 
   useEffect(() => {
     const listener = () => {
@@ -230,6 +230,7 @@ const NotePopup = forwardRef<HTMLDivElement, NotePopupProps>(function NotePopup(
     if (!isAuthorized) {
       guestDataManager.eventEmitter.on("videoAdded", listener);
     }
+    guestDataManager.eventEmitter.on("videoAdded", listener);
 
     return () => {
       if (!isAuthorized) {
@@ -341,7 +342,7 @@ const NotePopup = forwardRef<HTMLDivElement, NotePopupProps>(function NotePopup(
       ref={popOverRef}
       id="utubeNote-popover"
       popover=""
-      className="absolute left-0 top-0 h-full w-full bg-black bg-opacity-80"
+      className="bg-opacity-80 absolute top-0 left-0 h-full w-full bg-black"
     >
       <div className="grid h-full w-full place-items-center">
         <div

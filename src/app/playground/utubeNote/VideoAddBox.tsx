@@ -1,8 +1,8 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { verifyUtube } from "../../lib/utubeApi";
-import guestDataManager from "../../lib/guestDataManager";
+import { verifyUtube } from "./api/utubeApi";
+import guestDataManager from "./libs/guestDataManager";
 
 type FormValues = {
   link: string;

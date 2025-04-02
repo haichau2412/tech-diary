@@ -47,7 +47,7 @@ const Home2 = () => {
       </div>
 
       <div>
-        <h2 className="relative mt-[60px] text-9xl font-bold uppercase leading-none text-white sm:mt-[50px] sm:leading-tight sm:tracking-wide">
+        <h2 className="relative mt-[60px] text-9xl leading-none font-bold text-white uppercase sm:mt-[50px] sm:leading-tight sm:tracking-wide">
           Chau Hai Luu
           <div className="absolute -top-[40px] left-[150px] sm:-top-[50px]">
             <div className="relative aspect-[370/470] w-[80px] shadow-lg shadow-blue-500">
