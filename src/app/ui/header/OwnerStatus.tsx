@@ -121,7 +121,7 @@ const OwnerStatus = () => {
 
   return (
     <div
-      className="flex w-fit cursor-default items-center space-x-2 rounded-lg bg-gray-200 p-3"
+      className="flex w-fit shrink cursor-default items-center space-x-2 rounded-lg bg-gray-200 p-3"
       onClick={clickHandler}
     >
       {status && <span className={dotCss}></span>}

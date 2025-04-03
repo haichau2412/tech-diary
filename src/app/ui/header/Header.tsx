@@ -5,9 +5,9 @@ import OwnerStatus from "./OwnerStatus";
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-between bg-gray-50 px-[10px] py-2 font-bold">
+    <header className="flex items-center justify-between bg-gray-50 px-[10px] py-1 font-bold">
       <SocialLink />
-      <Link href="/">
+      <Link href="/" className="absolute left-1/2 -translate-x-1/2 transform">
         <h1 className="text-green-700 uppercase lg:text-3xl">
           Chau Tech Diary
         </h1>

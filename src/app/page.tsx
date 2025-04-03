@@ -41,7 +41,7 @@ const Home = () => {
               href="#curve"
               startOffset="50%"
               letterSpacing=".05em"
-              className="fill-gray-300 text-[7px] sm:text-[6px]"
+              className="fill-gray-100 text-[7px] sm:text-[6px]"
             >
               Welcome to my portfolio
             </textPath>

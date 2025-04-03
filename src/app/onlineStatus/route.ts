@@ -34,8 +34,6 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  console.log("POST request received");
-
   const body = await request.json();
   const { secretCode, status } = body;
 
