@@ -17,18 +17,63 @@ const TEXT = {
   busy: "Chau is busy",
 };
 
+let lastClickTime = 0;
+
 const OwnerStatus = () => {
   const [lastSeen, setLastSeen] = useState<number | null>(null);
   const [status, setStatus] = useState<Status | null>(null);
+  const [clickCount, setClickCount] = useState<number>(0);
+  const [triggering, setTriggering] = useState<boolean>(false);
+  const [secretCode] = useState(localStorage.getItem("secretCode"));
+
+  const clickHandler = async () => {
+    if (clickCount === 3 || !status) {
+      return;
+    }
+
+    if (secretCode) {
+      const currentTime = new Date().getTime();
+      if (currentTime - lastClickTime < 500) {
+        setClickCount(clickCount + 1);
+      } else {
+        setClickCount(1);
+      }
+      lastClickTime = currentTime;
+    }
+  };
 
   useEffect(() => {
-    const secretCode = localStorage.getItem("secretCode");
+    if (!status || triggering) {
+      return;
+    }
 
+    const updateStatus = async () => {
+      try {
+        setTriggering(true);
+        await fetch(`${process.env.NEXT_PUBLIC_BE_ORIGIN}/status`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            secretCode,
+            status: status === "online" ? "offline" : "online",
+          }),
+        });
+      } catch (err: unknown) {
+        console.log("err", err);
+      } finally {
+        setTriggering(false);
+        setClickCount(0);
+      }
+    };
+
+    if (clickCount === 3) {
+      updateStatus();
+    }
+  }, [secretCode, clickCount, status, triggering]);
+
+  useEffect(() => {
     const eventSource = new EventSource(
       `${process.env.NEXT_PUBLIC_BE_ORIGIN}/onlineStatus`,
-      {
-        withCredentials: true,
-      },
     );
 
     eventSource.onmessage = (event) => {
@@ -40,25 +85,7 @@ const OwnerStatus = () => {
       setLastSeen(data.lastSeen || null);
     };
 
-    const handleBeforeUnload = () => {
-      fetch(`${process.env.NEXT_PUBLIC_BE_ORIGIN}/status`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ secretCode, status: "offline" }),
-      });
-    };
-
-    if (secretCode) {
-      fetch(`${process.env.NEXT_PUBLIC_BE_ORIGIN}/status`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ secretCode }),
-      });
-      window.addEventListener("beforeunload", handleBeforeUnload);
-    }
-
     return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
       eventSource.close();
     };
   }, []);
@@ -77,7 +104,10 @@ const OwnerStatus = () => {
     lastSeen && status !== "online" ? format(new Date(lastSeen), "PPpp") : null;
 
   return (
-    <div className="flex w-fit items-center space-x-2 rounded-lg bg-gray-200 p-3">
+    <div
+      className="flex w-fit cursor-default items-center space-x-2 rounded-lg bg-gray-200 p-3"
+      onClick={clickHandler}
+    >
       {status && <span className={dotCss}></span>}
       <p className="text-sm font-medium text-gray-700">
         {text}
