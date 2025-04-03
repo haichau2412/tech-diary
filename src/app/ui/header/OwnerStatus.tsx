@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { format } from "date-fns";
 import { getLocalStorage } from "@/app/libs/localStorage";
+import axios from "axios";
 
 type Status = "online" | "offline" | "busy";
 
@@ -51,14 +52,17 @@ const OwnerStatus = () => {
     const updateStatus = async () => {
       try {
         setTriggering(true);
-        await fetch(`${process.env.NEXT_PUBLIC_BE_ORIGIN}/status`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
+        await axios.post(
+          `/onlineStatus`,
+          {
             secretCode,
             status: status === "online" ? "offline" : "online",
-          }),
-        });
+          },
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          },
+        );
       } catch (err: unknown) {
         console.log("err", err);
       } finally {
@@ -73,21 +77,32 @@ const OwnerStatus = () => {
   }, [secretCode, clickCount, status, triggering]);
 
   useEffect(() => {
-    const eventSource = new EventSource(
-      `${process.env.NEXT_PUBLIC_BE_ORIGIN}/onlineStatus`,
-    );
-
-    eventSource.onmessage = (event) => {
-      const data = JSON.parse(event.data) as ApiResponse;
-
-      console.log("event", event);
-
+    const getOnlineStatus = async () => {
+      const result = await axios.get(`/onlineStatus`);
+      const data = result.data as ApiResponse;
       setStatus(data.status);
       setLastSeen(data.lastSeen || null);
     };
 
+    getOnlineStatus();
+
+    const interVal = setInterval(getOnlineStatus, 5000);
+
+    // const eventSource = new EventSource(
+    //   `${process.env.NEXT_PUBLIC_BE_ORIGIN}/onlineStatus`,
+    // );
+
+    // eventSource.onmessage = (event) => {
+    //   const data = JSON.parse(event.data) as ApiResponse;
+
+    //   console.log("event", event);
+
+    //   setStatus(data.status);
+    //   setLastSeen(data.lastSeen || null);
+    // };
+
     return () => {
-      eventSource.close();
+      clearInterval(interVal);
     };
   }, []);
 
