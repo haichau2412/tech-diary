@@ -24,7 +24,7 @@ const OwnerStatus = () => {
   const [status, setStatus] = useState<Status | null>(null);
   const [clickCount, setClickCount] = useState<number>(0);
   const [triggering, setTriggering] = useState<boolean>(false);
-  const [secretCode] = useState(localStorage.getItem("secretCode"));
+  const [secretCode] = useState(window.localStorage.getItem("secretCode"));
 
   const clickHandler = async () => {
     if (clickCount === 3 || !status) {
