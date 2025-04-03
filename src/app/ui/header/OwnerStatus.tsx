@@ -3,6 +3,7 @@ import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { format } from "date-fns";
+import { getLocalStorage } from "@/app/libs/localStorage";
 
 type Status = "online" | "offline" | "busy";
 
@@ -24,7 +25,7 @@ const OwnerStatus = () => {
   const [status, setStatus] = useState<Status | null>(null);
   const [clickCount, setClickCount] = useState<number>(0);
   const [triggering, setTriggering] = useState<boolean>(false);
-  const [secretCode] = useState(window.localStorage.getItem("secretCode"));
+  const [secretCode] = useState(getLocalStorage("secretCode"));
 
   const clickHandler = async () => {
     if (clickCount === 3 || !status) {
