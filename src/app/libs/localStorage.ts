@@ -5,7 +5,13 @@ export const getLocalStorage = (key: string, defaultData?: unknown) => {
     const localData = localStorage.getItem(key);
 
     if (localData) {
-      return JSON.parse(localData);
+      try {
+        const data = JSON.parse(localData);
+        return data;
+      } catch (err: unknown) {
+        void err;
+        return localData;
+      }
     }
   }
 
