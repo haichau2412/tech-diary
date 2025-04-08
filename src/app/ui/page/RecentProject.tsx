@@ -1,4 +1,3 @@
-import Link from "next/link";
 import SectionContainer from "./SectionContainer";
 
 const List = ({ data }: { data: string[] }) => {
@@ -36,12 +35,13 @@ const Anne = () => {
             ANNE - Razer Synapse 4
           </p>
           <p>A web application for controlling gaming peripherals</p>
-          <Link
+          <a
+            target="_blank"
             href={"https://www.razer.com/synapse-4"}
             className="hover:underline"
           >
             To Razer Synapse 4
-          </Link>
+          </a>
         </div>
       </summary>
       <ul className="w-full rounded-b-md bg-stone-100 p-2 text-start text-neutral-900">
@@ -75,12 +75,13 @@ const Alisha = () => {
             Alisha - Streamer companion app
           </p>
           <p>A web application for controlling gaming peripherals</p>
-          <Link
+          <a
+            target="_blank"
             href={"https://www.razer.com/streamer-companion-app"}
             className="hover:underline"
           >
             Streamer Companion App
-          </Link>
+          </a>
         </div>
       </summary>
       <ul className="w-full rounded-b-md bg-stone-100 p-2 text-start text-neutral-900">

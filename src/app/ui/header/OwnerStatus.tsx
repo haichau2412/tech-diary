@@ -129,7 +129,7 @@ const OwnerStatus = () => {
         {text}
       </p>
       {lastSeenAsMinute && (
-        <span className="invisible absolute top-[50px] right-0 rounded-sm bg-gray-200 px-1 text-right text-xs text-nowrap group-hover:visible">
+        <span className="visible absolute top-[50px] right-0 rounded-sm bg-gray-200 px-1 text-right text-xs text-nowrap group-hover:visible sm:invisible">
           Last seen: {lastSeenAsMinute}
         </span>
       )}
