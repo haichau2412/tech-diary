@@ -1,5 +1,32 @@
 import Link from "next/link";
 import SectionContainer from "./SectionContainer";
+
+const List = ({ data }: { data: string[] }) => {
+  return (
+    <ul className="list-disc pl-4">
+      {data.map((text, i) => {
+        return <li key={i}>{text}</li>;
+      })}
+    </ul>
+  );
+};
+
+const ANNE_TASK = [
+  "Worked closely with teams to implement new features.",
+  "Component Development: Contributed to the project&apos;s internal UI library, such as canvas chart, drag-and-drop, custom widget and reducer store.",
+  "Reviewed teammate&apos;s code to prevent potential side effects and maintain code quality.",
+  "Assisted colleagues with their issues before they escalated them to the client.",
+  "Managed codebase with Git and Jira.",
+];
+
+const ANNE_ACHIVEMENT = [
+  "Implement UI & business logic for controlling: Monitors, Headset.",
+  "Migrated UI codebase to fit new API of new architecture.",
+  "Developed and maintained background pages (written in pure TypeScript) for the device detection flow and installation process.",
+  "Collaborated with the backend team to implement the app rating feature.",
+  "Built data migration feature (UI & logic) to transfer data from old app schema to new system, including developing/integrating converter libraries.",
+];
+
 const Anne = () => {
   return (
     <details open className="group [--text-color:#44d62c]">
@@ -17,60 +44,27 @@ const Anne = () => {
           </Link>
         </div>
       </summary>
-      <ol className="w-full rounded-b-md bg-stone-100 p-2 text-start text-neutral-900">
-        <li>
-          Responsibilities:
-          <ul>
-            <li>Worked closely with teams to implement new features.</li>
-            <li>
-              Component Development: Contributed to the project&apos;s internal
-              UI library, such as canvas chart, drag-and-drop, custom widget and
-              reducer store.
-            </li>
-            <li>
-              Reviewed teammate&apos;s code to prevent potential side effects
-              and maintain code quality.
-            </li>
-            <li>
-              Assisted colleagues with their issues before they escalated them
-              to the client.
-            </li>
-            <li>Managed codebase with Git and Jira.</li>
-          </ul>
+      <ul className="w-full rounded-b-md bg-stone-100 p-2 text-start text-neutral-900">
+        <li className="ml-2">
+          <span className="font-bold">Responsibilities:</span>
+          <List data={ANNE_TASK} />
         </li>
 
-        <li>
-          Achievements:{" "}
-          <ul>
-            <li>
-              Play a important role for some featues of the released product:{" "}
-            </li>
-            <ul>
-              <li>
-                Implement UI & business logic for controlling: Monitors, Headset
-              </li>
-              <li>Migrated UI codebase to fit new API of new architecture.</li>
-              <li>
-                Developed and maintained background pages (written in pure
-                TypeScript) for the device detection flow and installation
-                process.
-              </li>
-              <li>
-                Collaborated with the backend team to implement the app rating
-                feature.
-              </li>
-              <li>
-                Built data migration feature (UI & logic) to transfer data from
-                old app schema to new system, including developing/integrating
-                converter libraries.
-              </li>
-            </ul>
-          </ul>
+        <li className="ml-2">
+          <span className="font-bold">Achievements: </span>
+          Play a important role for some featues of the released product:{" "}
+          <List data={ANNE_ACHIVEMENT} />
         </li>
-      </ol>
+      </ul>
     </details>
   );
 };
+
+const ALISHA_TASK = [
+  "Fixed issues based on user feedback.",
+  "Updated codebase to accommodate API changes from streaming platforms (Twitch, Streamlabs).",
+  "Implemented UI and business code for 4 new devices, including update UI for lighting effect previews on Canvas and ensuring UI data compatibility with the backend API.",
+];
 
 const Alisha = () => {
   return (
@@ -89,52 +83,13 @@ const Alisha = () => {
           </Link>
         </div>
       </summary>
-      <ol className="w-full rounded-b-md bg-stone-100 p-2 text-start text-neutral-900">
-        <li>
-          Responsibilities:
-          <ul>
-            <li>Fixed issues based on user feedback. </li>
-            <li>
-              Updated codebase to accommodate API changes from streaming
-              platforms (Twitch, Streamlabs).
-            </li>
-            <li>
-              Implemented UI and business code for 4 new devices, including
-              update UI for lighting effect previews on Canvas and ensuring UI
-              data compatibility with the backend API
-            </li>
-          </ul>
-        </li>
+      <ul className="w-full rounded-b-md bg-stone-100 p-2 text-start text-neutral-900">
+        <li className="ml-2">
+          <span className="font-bold">Responsibilities:</span>
 
-        <li>
-          Achievements:{" "}
-          <ul>
-            <li>
-              Play a important role for some featues of the released product:{" "}
-            </li>
-            <ul>
-              <li>
-                Implement UI & business logic for controlling: Monitors, Headset
-              </li>
-              <li>Migrated UI codebase to fit new API of new architecture.</li>
-              <li>
-                Developed and maintained background pages (written in pure
-                TypeScript) for the device detection flow and installation
-                process.
-              </li>
-              <li>
-                Collaborated with the backend team to implement the app rating
-                feature.
-              </li>
-              <li>
-                Built data migration feature (UI & logic) to transfer data from
-                old app schema to new system, including developing/integrating
-                converter libraries.
-              </li>
-            </ul>
-          </ul>
+          <List data={ALISHA_TASK} />
         </li>
-      </ol>
+      </ul>
     </details>
   );
 };

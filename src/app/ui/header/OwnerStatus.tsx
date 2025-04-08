@@ -117,18 +117,22 @@ const OwnerStatus = () => {
   );
 
   const lastSeenAsMinute =
-    lastSeen && status !== "online" ? format(new Date(lastSeen), "PPpp") : null;
+    lastSeen && status !== "online" ? format(new Date(lastSeen), "Pp") : null;
 
   return (
     <div
-      className="flex w-fit shrink cursor-default items-center space-x-2 rounded-lg bg-gray-200 p-3"
+      className="group relative flex w-fit shrink cursor-default items-center space-x-2 rounded-lg bg-gray-200 p-3"
       onClick={clickHandler}
     >
       {status && <span className={dotCss}></span>}
-      <p className="text-sm font-medium text-gray-700">
+      <p className="text-xs font-medium text-wrap text-gray-700 sm:text-sm">
         {text}
-        {lastSeenAsMinute && <span>, last seen: {lastSeenAsMinute}</span>}
       </p>
+      {lastSeenAsMinute && (
+        <span className="invisible absolute top-[50px] right-0 rounded-sm bg-gray-200 px-1 text-right text-xs text-nowrap group-hover:visible">
+          Last seen: {lastSeenAsMinute}
+        </span>
+      )}
     </div>
   );
 };
