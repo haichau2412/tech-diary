@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import { PT_Sans_Narrow } from "next/font/google";
+import { PT_Sans_Narrow, Rye } from "next/font/google";
 import Header from "./ui/header/Header";
+import HomeFooter from "./ui/footer";
 
 const font = PT_Sans_Narrow({
   display: "swap",
   subsets: ["latin"],
   weight: ["400", "700"],
+});
+
+const rye = Rye({
+  subsets: ["latin"],
+  variable: "--font-primary",
+  weight: ["400"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -27,13 +35,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${font.className}`}>
-        <div className="flex h-screen max-h-screen w-screen cursor-default flex-col">
-          <Header />
-          <main className="flex-shrink flex-grow overflow-hidden">
-            {children}
-          </main>
-        </div>
+      <body
+        className={`${font.className} ${rye.variable} flex min-h-screen flex-col`}
+      >
+        <Header />
+        {children}
+        <HomeFooter />
       </body>
     </html>
   );

@@ -404,7 +404,7 @@
 
   .customScrollBarGreen {
     &::-webkit-scrollbar {
-      width: 10px;
+      width: 5px;
     }
     &::-webkit-scrollbar-thumb {
       @apply bg-gray-300;
