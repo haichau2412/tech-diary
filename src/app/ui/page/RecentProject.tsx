@@ -12,8 +12,8 @@ const List = ({ data }: { data: string[] }) => {
 
 const ANNE_TASK = [
   "Worked closely with teams to implement new features.",
-  "Component Development: Contributed to the project&apos;s internal UI library, such as canvas chart, drag-and-drop, custom widget and reducer store.",
-  "Reviewed teammate&apos;s code to prevent potential side effects and maintain code quality.",
+  "Component Development: Contributed to the project's internal UI library, such as canvas chart, drag-and-drop, custom widget and reducer store.",
+  "Reviewed teammate's code to prevent potential side effects and maintain code quality.",
   "Assisted colleagues with their issues before they escalated them to the client.",
   "Managed codebase with Git and Jira.",
 ];
@@ -74,7 +74,14 @@ const Alisha = () => {
           <p className="text-[var(--text-color)] uppercase">
             Alisha - Streamer companion app
           </p>
-          <p>A web application for controlling gaming peripherals</p>
+          <p>
+            Chromium Web Application for controlling lighting effect of
+            streaming devices for streaming platforms.
+          </p>
+          <p>
+            Application listens to streaming flatform events and changes
+            device&apos;s lighting effects accordingly.
+          </p>
           <a
             target="_blank"
             href={"https://www.razer.com/streamer-companion-app"}
