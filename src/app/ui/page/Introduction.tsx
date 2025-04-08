@@ -48,6 +48,7 @@ const Introduction = () => {
     <SectionContainer
       title="About me"
       subTitle="Employment identification card"
+      additionalStyle="lg:w-[450px]"
     >
       <div>
         <Info />

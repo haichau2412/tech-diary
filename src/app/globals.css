@@ -412,7 +412,7 @@
   }
 
   .playgroundText {
-    @apply animate-fade-in-zoom sticky mx-auto leading-normal text-gray-300 [animation-timeline:scroll()] lg:text-lg;
+    @apply animate-fade-in-zoom sticky mx-auto leading-normal text-gray-300 [animation-timeline:scroll()];
   }
 
   #app {
