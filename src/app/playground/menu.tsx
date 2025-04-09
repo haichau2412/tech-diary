@@ -176,25 +176,9 @@ const Menu = () => {
               <li>
                 <Link
                   className="block bg-blue-800 px-2 py-1 hover:bg-blue-600 active:bg-blue-700"
-                  href="/playground/roadmap"
-                >
-                  Chau&apos;s tech diary
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="block bg-blue-800 px-2 py-1 hover:bg-blue-600 active:bg-blue-700"
                   href="/playground/blog"
                 >
                   Blog post
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="block bg-blue-800 px-2 py-1 hover:bg-blue-600 active:bg-blue-700"
-                  href="/playground/foodvendor"
-                >
-                  Food vendor
                 </Link>
               </li>
             </ul>
