@@ -8,10 +8,10 @@ export default function RootLayout({
 }>) {
   return (
     <AuthProvider>
-      <div className="flex h-screen max-h-screen w-screen cursor-default flex-col sm:px-5">
+      <main className="flex grow cursor-default flex-col">
         <Menu />
         <div className="flex-shrink overflow-hidden">{children}</div>
-      </div>
+      </main>
     </AuthProvider>
   );
 }

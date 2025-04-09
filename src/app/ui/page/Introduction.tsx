@@ -1,5 +1,8 @@
-import Info from "./Info";
 import SectionContainer from "./SectionContainer";
+import Image from "next/image";
+import criminalPic from "@/assets/human.png";
+import React from "react";
+
 const TechTag = ({ text }: { text: string }) => {
   return (
     <span className="mx-1 inline-block cursor-default rounded-sm bg-amber-50 px-0.5 text-center text-xs text-gray-900 md:px-1 md:py-0.5 lg:text-sm">
@@ -45,63 +48,60 @@ const TECH = [
 
 const Introduction = () => {
   return (
-    <SectionContainer
-      title="About me"
-      subTitle="Employment identification card"
-      additionalStyle="lg:w-[450px]"
-    >
-      <div>
-        <Info />
-        <div
-          className={`customScrollBarGreen h-[400px] overflow-y-scroll bg-neutral-900`}
-        >
-          <div className="p-3 px-5 text-center">
-            <div className="text-stone-100">
-              <h2 className="text-6xl font-bold uppercase">My skills</h2>
-              <ul className="mt-3 flex flex-col items-start text-start">
-                {TECH.map(({ title, tag }) => (
-                  <li className="mt-2 first:mt-0" key={title}>
-                    <p>
-                      {title}:{" "}
-                      {tag.map((t, i) => (
-                        <TechTag key={i} text={t} />
-                      ))}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+    <div>
+      <SectionContainer
+        title="About me"
+        subTitle="Employment identification card"
+        additionalStyle="lg:w-[400px] mx-auto "
+      >
+        <div>
+          <div className="flex flex-col gap-2.5 rounded-t-md bg-gradient-to-tl from-violet-950 to-green-700 p-2.5 px-5">
+            <div className="relative flex flex-col justify-between text-right text-stone-300">
+              <div className="pl-[150px]">
+                <p className="inline-block">
+                  I write things in JS and TS, and love what I do.
+                </p>
+              </div>
+              <h2 className="relative rounded-md text-xl leading-none font-bold tracking-wide uppercase">
+                Chau Hai Luu
+              </h2>
+              <div className="absolute -top-[0px] left-[10px]">
+                <div className="relative aspect-[370/470] w-[70px] shadow-lg shadow-blue-500">
+                  <Image
+                    priority={false}
+                    className="bg-slate-400"
+                    src={criminalPic}
+                    fill={true}
+                    alt="Developer's potrait"
+                  />
+                </div>
+              </div>
             </div>
-            <p className="playgroundText top-[50px] mt-[50px] [animation-range:0px_400px]">
-              Here at ChauTechDiary, I am building a playground for myself to
-              test out new features and ideas. These projects are not meant to
-              be perfect, but they are meant to be a learning experience. I hope
-              you enjoy your stay here.
-            </p>
-
-            <div className="h-[500px]"></div>
-            <p className="playgroundText top-[200px] [animation-range:200px_500px]">
-              If you are interested in the code, and want me to become a coding
-              partner, you can contact me{" "}
-              <a
-                target="_blank"
-                rel="noopener"
-                href="https://www.linkedin.com/in/chau-luu-0a3378179/"
-                className="lack cursor-pointer text-white underline"
-              >
-                Linkedin
-              </a>
-              .
-            </p>
-            <div className="h-[500px]"></div>
-            <p className="playgroundText top-[300px] [animation-range:800px_1000px]">
-              Now, let&apos;s see what &quot;Games&quot; we have here.
-            </p>
-
-            <div className="h-[400px]"></div>
+          </div>
+          <div
+            className={`customScrollBarGreen overflow-y-scroll bg-neutral-900`}
+          >
+            <div className="p-3 px-5 text-center">
+              <div className="text-stone-100">
+                <p className="text-6xl font-bold uppercase">My skills</p>
+                <ul className="mt-3 flex flex-col items-start text-start">
+                  {TECH.map(({ title, tag }) => (
+                    <li className="mt-2 first:mt-0" key={title}>
+                      <p>
+                        {title}:{" "}
+                        {tag.map((t, i) => (
+                          <TechTag key={i} text={t} />
+                        ))}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </SectionContainer>
+      </SectionContainer>
+    </div>
   );
 };
 

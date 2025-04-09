@@ -1,4 +1,6 @@
 import SectionContainer from "./SectionContainer";
+import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const List = ({ data }: { data: string[] }) => {
   return (
@@ -30,7 +32,7 @@ const Anne = () => {
   return (
     <details open className="group [--text-color:#44d62c]">
       <summary className="cursor-pointer list-none">
-        <div className="w-full rounded-md bg-neutral-900 p-3 group-open:rounded-b-none hover:bg-neutral-800">
+        <div className="w-full rounded-md bg-neutral-950 p-3 group-open:rounded-b-none hover:bg-neutral-700 lg:bg-neutral-900 lg:hover:bg-neutral-800">
           <p className="text-[var(--text-color)] uppercase">
             ANNE - Razer Synapse 4
           </p>
@@ -70,7 +72,7 @@ const Alisha = () => {
   return (
     <details open className="group [--text-color:#44d62c]">
       <summary className="cursor-pointer list-none">
-        <div className="w-full rounded-md bg-neutral-900 p-3 group-open:rounded-b-none hover:bg-neutral-800">
+        <div className="w-full rounded-md bg-neutral-950 p-3 group-open:rounded-b-none hover:bg-neutral-700 lg:bg-neutral-900 lg:hover:bg-neutral-800">
           <p className="text-[var(--text-color)] uppercase">
             Alisha - Streamer companion app
           </p>
@@ -101,16 +103,36 @@ const Alisha = () => {
     </details>
   );
 };
+
 const RecentProject = () => {
   return (
-    <SectionContainer
-      title="My recent work"
-      subTitle="These are projects that I worked for S3 corp"
-      additionalStyle="grow"
-    >
-      <Anne />
-      <Alisha />
-    </SectionContainer>
+    <div className="grow">
+      <SectionContainer
+        title="My recent work"
+        subTitle="These are projects that I worked for S3 corp"
+        additionalStyle="bg-neutral-800 pb-10 px-5 lg:bg-neutral-950"
+      >
+        <Anne />
+        <Alisha />
+      </SectionContainer>
+      <SectionContainer
+        title="Personal Project"
+        subTitle="Code, Play, Repeat: A Developer’s Sandbox"
+        additionalStyle="mt-10"
+      >
+        <div className="relative mx-auto mt-4 w-fit">
+          <Link href={"/playground"}>
+            <p className="bgGradient animate-gradient-text bg-gradient-to-tl from-green-700 to-violet-950 bg-clip-text text-6xl font-bold text-transparent uppercase hover:from-red-500 hover:to-yellow-500">
+              Playground
+            </p>
+          </Link>
+          {/* <ArrowDown className="animate-bounce-down absolute -top-12 left-1/2 h-10 w-10 -translate-x-1/2 text-green-700" /> */}
+          {/* <ArrowUp className="animate-bounce-up absolute -bottom-12 left-1/2 h-10 w-10 -translate-x-1/2 text-red-700" /> */}
+          <ArrowLeft className="animate-bounce-left absolute top-1/2 -right-12 h-10 w-10 -translate-y-1/2 text-green-700" />
+          <ArrowRight className="animate-bounce-right absolute top-1/2 -left-12 h-10 w-10 -translate-y-1/2 text-red-700" />
+        </div>
+      </SectionContainer>
+    </div>
   );
 };
 

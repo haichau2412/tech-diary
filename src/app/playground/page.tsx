@@ -1,7 +1,5 @@
 "use client";
 import { Rye } from "next/font/google";
-import { useScroll, motion } from "motion/react";
-import { useRef } from "react";
 
 const rye = Rye({
   subsets: ["latin"],
@@ -9,38 +7,10 @@ const rye = Rye({
   display: "swap",
 });
 
-// const updateStatus = async (userId: string, online: boolean) => {
-//   await fetch("http://localhost:8080/status", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({ userId, online }),
-//   });
-// };
-
-// const eventSource = new EventSource("http://localhost:8080/onlineStatus", {
-//   withCredentials: true,
-// });
-
-// eventSource.onmessage = (event) => {
-//   const data = JSON.parse(event.data);
-//   console.log("Online users:", data.onlineUsers);
-// };
-
-// updateStatus("user123212", true);
-
 const Home = () => {
-  const carouselRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    container: carouselRef,
-  });
-
   return (
     <div className={`flex h-full flex-col items-center justify-center`}>
-      <div
-        ref={carouselRef}
-        className="customScrollBarGreen h-full w-full overflow-x-hidden overflow-y-scroll bg-green-50 text-center"
-      >
+      <div className="customScrollBarGreen h-full w-full overflow-x-hidden overflow-y-scroll bg-green-50 text-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 120 20"
@@ -64,67 +34,6 @@ const Home = () => {
             </textPath>
           </text>
         </svg>
-        <div className="sticky top-0 flex justify-center">
-          <svg id="progress" width="50" height="50" viewBox="0 0 50 50">
-            <circle
-              className="stroke-green-200"
-              strokeDashoffset={0}
-              cx="25"
-              cy="25"
-              r="20"
-              strokeWidth={5}
-              fill="none"
-            />
-            <motion.circle
-              cx="25"
-              cy="25"
-              r="20"
-              className="stroke-green-700"
-              strokeWidth={5}
-              strokeDasharray="0 1px"
-              fill={"none"}
-              strokeDashoffset={0}
-              pathLength={1}
-              style={{ pathLength: scrollYProgress }}
-            />
-          </svg>
-          <svg
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform"
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
-          >
-            <path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z" />
-          </svg>
-        </div>
-        <p className="playgroundText top-[50px] [animation-range:0px_200px]">
-          Here at ChauTechDiary, I am building a playground for myself to test
-          out new features and ideas. These projects are not meant to be
-          perfect, but they are meant to be a learning experience. I hope you
-          enjoy your stay here.
-        </p>
-
-        <div className="h-[500px]"></div>
-        <p className="playgroundText top-[200px] [animation-range:200px_500px]">
-          If you are interested in the code, and want me to become a coding
-          partner, you can contact me{" "}
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://www.linkedin.com/in/chau-luu-0a3378179/"
-            className="text-black hover:underline"
-          >
-            Linkedin
-          </a>
-          .
-        </p>
-        <div className="h-[500px]"></div>
-        <p className="playgroundText top-[300px] [animation-range:800px_1000px]">
-          Now, let&apos;s see what &quot;Games&quot; we have here.
-        </p>
-
-        <div className="h-[400px]"></div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 interface SectionContainerProps extends React.ComponentPropsWithRef<"section"> {
   title: string;
@@ -16,11 +17,13 @@ const SectionContainer: React.FC<SectionContainerProps> = ({
 }) => {
   return (
     <section
-      className={`flex flex-col gap-2 text-center text-stone-100 ${additionalStyle || ""}`}
+      className={twMerge(
+        `flex flex-col gap-2 text-center text-stone-50 ${additionalStyle || ""}`,
+      )}
       {...props}
     >
-      <h1 className="text-2xl font-bold uppercase">{title}</h1>
-      <h2 className="text-xl">{subTitle}</h2>
+      <h2 className="text-3xl font-bold uppercase">{title}</h2>
+      <p className="text-xl">{subTitle}</p>
       {children}
     </section>
   );

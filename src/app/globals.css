@@ -4,6 +4,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --animate-bounce-up: jump-up 1s infinite ease-in-out;
+  --animate-bounce-down: jump-down 1s infinite ease-in-out;
+  --animate-bounce-left: jump-left 1s infinite ease-in-out;
+  --animate-bounce-right: jump-right 1s infinite ease-in-out;
+
+  --animate-gradient-text: gradientShift 2s 6s ease infinite;
   --animate-fade-in-zoom: fade-in 0.5s ease-in-out;
   --animate-fade-out: fade-out 0.5s ease-in-out forwards;
   --grid-cols-utubeDashboard: repeat(auto-fill, 250px);
@@ -12,7 +18,7 @@
   @keyframes fade-in {
     0% {
       opacity: 0;
-      transform: scale(0);
+      transform: scale(0.2);
     }
     100% {
       opacity: 1;
@@ -28,6 +34,51 @@
     100% {
       opacity: 0;
       transform: scale(1.4);
+    }
+  }
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+
+  @keyframes jump-up {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  @keyframes jump-right {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+  }
+  @keyframes jump-down {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+  }
+  @keyframes jump-left {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-10px);
     }
   }
 }
@@ -224,6 +275,10 @@
     &.blue {
       @apply bg-blue-200 p-1 hover:bg-blue-900 active:bg-blue-700;
     }
+  }
+
+  .bgGradient {
+    background-size: 300% 300%;
   }
 
   .blog {
