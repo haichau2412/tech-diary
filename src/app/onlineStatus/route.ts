@@ -1,19 +1,10 @@
-import Redis from "ioredis";
 import { ApiResponse, Status } from "./type";
+import redis from "./redis";
 const _secret = `${process.env.NEXT_PUBLIC_ONLINE_SECRET}`;
 
-const client = new Redis({
-  username: "default",
-  password: `${process.env.NEXT_PUBLIC_REDIS_PASSWORD}`,
-  host: "redis-18938.c244.us-east-1-2.ec2.redns.redis-cloud.com",
-  port: 18938,
-});
-
-client.on("error", (err) => console.log("Redis Client Error", err));
-
 let _status: Status =
-  ((await client.get("onlineStatus")) as Status) || "offline";
-const lastSeenAsStr = (await client.get("lastSeen")) ?? "0";
+  ((await redis.get("onlineStatus")) as Status) || "offline";
+const lastSeenAsStr = (await redis.get("lastSeen")) ?? "0";
 
 let _lastSeen: number = parseInt(lastSeenAsStr);
 
@@ -41,10 +32,10 @@ export async function POST(request: Request) {
     _status = status ?? "online";
     if (_status === "offline") {
       _lastSeen = Date.now();
-      await client.set("lastSeen", _lastSeen);
+      await redis.set("lastSeen", _lastSeen);
     }
   }
-  await client.set("onlineStatus", _status);
+  await redis.set("onlineStatus", _status);
   return new Response(createStr(), {
     headers: { "Content-Type": "application/json" },
   });
