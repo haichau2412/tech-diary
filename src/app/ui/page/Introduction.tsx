@@ -5,7 +5,7 @@ import React from "react";
 
 const TechTag = ({ text }: { text: string }) => {
   return (
-    <span className="mx-1 inline-block cursor-default rounded-sm bg-amber-50 px-0.5 text-center text-xs text-gray-900 md:px-1 md:py-0.5 lg:text-sm">
+    <span className="mx-1 inline-block cursor-default rounded-sm bg-stone-100 px-0.5 text-center text-xs text-gray-900 md:px-1 md:py-0.5 lg:text-sm">
       {text}
     </span>
   );
@@ -55,7 +55,7 @@ const Introduction = () => {
         additionalStyle="lg:w-[400px] mx-auto "
       >
         <div>
-          <div className="flex flex-col gap-2.5 rounded-t-md bg-gradient-to-tl from-violet-950 to-green-700 p-2.5 px-5">
+          <div className="flex flex-col gap-2.5 rounded-t-md bg-gradient-to-r from-violet-950 to-green-700 p-2.5 px-5">
             <div className="relative flex flex-col justify-between text-right text-stone-300">
               <div className="pl-[150px]">
                 <p className="inline-block">
