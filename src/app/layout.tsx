@@ -3,6 +3,8 @@ import "@/app/globals.css";
 import { PT_Sans_Narrow, Rye } from "next/font/google";
 import Header from "./ui/header/Header";
 import HomeFooter from "./ui/footer";
+import { TransitionProvider } from "./shared/transition/transitionContext";
+import OverlayLoader from "./shared/transition/TransitionOverplay";
 
 const font = PT_Sans_Narrow({
   display: "swap",
@@ -38,9 +40,12 @@ export default function RootLayout({
       <body
         className={`${font.className} ${rye.variable} flex min-h-screen flex-col`}
       >
-        <Header />
-        {children}
-        <HomeFooter />
+        <TransitionProvider>
+          <Header />
+          <OverlayLoader />
+          {children}
+          <HomeFooter />
+        </TransitionProvider>
       </body>
     </html>
   );

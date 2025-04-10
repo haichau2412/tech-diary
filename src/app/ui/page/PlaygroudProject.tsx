@@ -1,8 +1,11 @@
 import SectionContainer from "./SectionContainer";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { usePageTransition } from "@/app/shared/transition/transitionContext";
 
 const ProjectShowcase = () => {
+  const { setShow } = usePageTransition();
+
   return (
     <SectionContainer
       title="Personal Project"
@@ -10,7 +13,14 @@ const ProjectShowcase = () => {
       additionalStyle="lg:w-[450px]"
     >
       <div className="relative mx-auto mt-4 w-fit">
-        <Link href={"/playground"}>
+        <Link
+          onClick={(event) => {
+            event.preventDefault();
+            console.log("dffdf");
+            setShow(true);
+          }}
+          href={"/playground"}
+        >
           <h2 className="bgGradient animate-gradient-text bg-gradient-to-tl from-green-700 to-violet-950 bg-clip-text text-6xl font-bold text-transparent uppercase hover:from-red-500 hover:to-yellow-500">
             Playground
           </h2>
