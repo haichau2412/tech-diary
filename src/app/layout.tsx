@@ -5,6 +5,7 @@ import Header from "./ui/header/Header";
 import HomeFooter from "./ui/footer";
 import { TransitionProvider } from "./shared/transition/transitionContext";
 import OverlayLoader from "./shared/transition/TransitionOverplay";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const font = PT_Sans_Narrow({
   display: "swap",
@@ -44,6 +45,7 @@ export default function RootLayout({
           <Header />
           <OverlayLoader />
           {children}
+          <SpeedInsights />
           <HomeFooter />
         </TransitionProvider>
       </body>
