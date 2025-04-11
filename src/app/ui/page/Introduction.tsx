@@ -5,7 +5,7 @@ import React from "react";
 
 const TechTag = ({ text }: { text: string }) => {
   return (
-    <span className="mx-1 inline-block cursor-default rounded-sm bg-stone-100 px-0.5 text-center text-xs text-gray-900 md:px-1 md:py-0.5 lg:text-sm">
+    <span className="m-1 inline-block cursor-default rounded-sm bg-stone-100 px-0.5 text-center text-xs text-gray-900 md:px-1 md:py-0.5 lg:text-sm">
       {text}
     </span>
   );

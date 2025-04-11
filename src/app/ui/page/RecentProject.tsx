@@ -133,6 +133,7 @@ const RecentProject = () => {
           <ArrowLeft className="animate-bounce-left absolute top-1/2 -right-12 h-10 w-10 -translate-y-1/2 text-green-700" />
           <ArrowRight className="animate-bounce-right absolute top-1/2 -left-12 h-10 w-10 -translate-y-1/2 text-red-700" />
         </div>
+        <p>Click to explore</p>
       </SectionContainer>
     </div>
   );
