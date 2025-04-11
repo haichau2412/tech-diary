@@ -86,7 +86,7 @@ const OwnerStatus = () => {
 
     getOnlineStatus();
 
-    const interVal = setInterval(getOnlineStatus, 5000);
+    // const interVal = setInterval(getOnlineStatus, 5000);
 
     // const eventSource = new EventSource(
     //   `${process.env.NEXT_PUBLIC_BE_ORIGIN}/onlineStatus`,
@@ -102,7 +102,7 @@ const OwnerStatus = () => {
     // };
 
     return () => {
-      clearInterval(interVal);
+      // clearInterval(interVal);
     };
   }, []);
 
