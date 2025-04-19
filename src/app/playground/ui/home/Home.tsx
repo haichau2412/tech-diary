@@ -13,7 +13,7 @@ const Home = ({ onLoad }: { onLoad: () => void }) => {
   }, [onLoad]);
 
   return (
-    <div className="customScrollBar green relative flex grow flex-col overflow-x-hidden overflow-y-auto">
+    <div className="playgroundContainer customScrollBar green relative flex grow flex-col overflow-x-hidden overflow-y-auto">
       <main className="grow">
         <div className="mx-auto mt-10 max-w-[1600px]">
           <Intro />
