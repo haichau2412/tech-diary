@@ -2,8 +2,6 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
 import { useWheel } from "./wheelContext";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 
 const size = 410;
 
@@ -65,8 +63,6 @@ const WheelCanvas = () => {
     const dpr = window.devicePixelRatio || 1;
     canvasRef.current.width = size * dpr;
     canvasRef.current.height = size * dpr;
-    canvasRef.current.style.width = `${size}px`;
-    canvasRef.current.style.height = `${size}px`;
     canvasRef.current.style.width = `${size}px`;
     canvasRef.current.style.height = `${size}px`;
     const ctx = node.getContext("2d");
