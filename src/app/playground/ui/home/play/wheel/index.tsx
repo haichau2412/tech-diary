@@ -10,7 +10,7 @@ const Wheel = () => {
           <h2 className="mx-auto w-fit bg-white px-3 py-2 text-center text-4xl font-extrabold text-red-800 uppercase">
             Wheel of fortune
           </h2>
-          <div className="flex items-center">
+          <div className="flex items-center px-10">
             <WheelCanvas />
             <WheelSetup />
           </div>

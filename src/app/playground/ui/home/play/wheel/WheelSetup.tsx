@@ -77,19 +77,24 @@ const WheelSetup = () => {
   }
 
   return (
-    <div className="flex h-[400px] grow flex-col items-center justify-between">
+    <div className="wheelArticle flex h-[400px] grow flex-col items-center justify-between">
       <div className="mt-0 h-[50px]">
         <WinnerToaster message={selected || ""} visible={!!selected} />
-        <WarningText message={warning || ""} />
       </div>
-      <div className="flex items-center space-x-2">
-        <input
-          type="text"
-          value={inputValue}
-          onChange={onChange}
-          placeholder="Enter item"
-          className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-gray-800 placeholder-gray-400 shadow-sm transition duration-150 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none"
-        />
+      <div className="flex items-start space-x-2">
+        <div className="flex flex-col">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={onChange}
+            placeholder="Enter item"
+            className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-gray-800 placeholder-gray-400 shadow-sm transition duration-150 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          />
+          <div className="mt-0 h-[30px]">
+            <WarningText message={warning || ""} />
+          </div>
+        </div>
+
         <button
           disabled={!!warning || wheelState === "spinning"}
           onClick={handleAdd}

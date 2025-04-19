@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { useWheel } from "./wheelContext";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const size = 410;
 
@@ -61,6 +63,8 @@ const WheelCanvas = () => {
     const dpr = window.devicePixelRatio || 1;
     canvasRef.current.width = size * dpr;
     canvasRef.current.height = size * dpr;
+    canvasRef.current.style.width = `${size}px`;
+    canvasRef.current.style.height = `${size}px`;
     const ctx = node.getContext("2d");
     if (ctx) {
       ctx.scale(dpr, dpr);
@@ -240,14 +244,35 @@ const WheelCanvas = () => {
     }
   }, [wheelState, setSelectedIndex, wheelData, setWheelState]);
 
-  return (
-    <canvas
-      ref={setRef}
-      width={size}
-      height={size}
-      className="rounded-full bg-neutral-950 p-2"
-    />
+  useGSAP(
+    () => {
+      if (canvasRef.current) {
+        gsap.fromTo(
+          canvasRef.current,
+          {
+            scale: 0,
+          },
+          {
+            scale: 1,
+            duration: 1.2,
+            ease: "power2.out",
+            scrollTrigger: {
+              scroller: ".playgroundContainer",
+              trigger: canvasRef.current,
+              start: "top 90%",
+              end: "top 50%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      }
+    },
+    {
+      dependencies: [],
+    },
   );
+
+  return <canvas ref={setRef} className="rounded-full bg-neutral-950 p-2" />;
 };
 
 export default WheelCanvas;
