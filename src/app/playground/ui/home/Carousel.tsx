@@ -26,7 +26,7 @@ const AutoCarousel = () => {
 
   useGSAP(
     () => {
-      const getOrCreateTimeline = (target) => {
+      const getOrCreateTimeline = (target: Element) => {
         if (!timelines.has(target)) {
           const tl = gsap.timeline({ paused: true });
           tl.to(target, {
@@ -40,8 +40,9 @@ const AutoCarousel = () => {
         return timelines.get(target);
       };
 
-      const handleMouseDown = (e) => {
-        const target = e.target;
+      const handleMouseDown = (e: PointerEvent) => {
+        const target = e.target as HTMLElement;
+
         if (target.classList.contains("popup")) {
           const tl = getOrCreateTimeline(target);
           tl.play();
@@ -49,16 +50,16 @@ const AutoCarousel = () => {
         }
       };
 
-      const handleMouseUp = (e) => {
-        const target = e.target;
+      const handleMouseUp = (e: PointerEvent) => {
+        const target = e.target as HTMLElement;
         if (target.classList.contains("popup")) {
           const tl = getOrCreateTimeline(target);
           tl.reverse();
         }
       };
 
-      const handleMouseLeave = (e) => {
-        const target = e.target;
+      const handleMouseLeave = (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
         if (target.classList.contains("popup")) {
           const tl = getOrCreateTimeline(target);
           tl.reverse();
