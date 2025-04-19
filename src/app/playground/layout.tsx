@@ -1,5 +1,5 @@
-import Menu from "./menu";
-import AuthProvider from "libs/auth/authContext";
+import "./playground.css";
+import SwapperNav from "./ui/home/SwapperNav";
 
 export default function RootLayout({
   children,
@@ -7,11 +7,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthProvider>
-      <main className="flex grow cursor-default flex-col">
-        <Menu />
-        <div className="flex-shrink overflow-hidden">{children}</div>
-      </main>
-    </AuthProvider>
+    <>
+      <SwapperNav />
+      {children}
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import SlideNav from "@/app/playground/blog/slideNav";
+import SlideNav from "./slideNav";
 import { posts } from "./[id]/component";
 import "./blog.css";
 

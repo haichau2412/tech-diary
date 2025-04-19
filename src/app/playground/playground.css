@@ -1,0 +1,72 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  --btn-red: #bf2a2a;
+  --red-sd: #521212;
+  --btn-green: #025959;
+  --green-sh: #012525;
+  --btn-orange: #f29727;
+  --orange-sd: #89571a;
+  --btn-blue: #3365a6;
+  --blue-sd: #112237;
+}
+
+@layer components {
+  .noise {
+    &:after {
+      background-image: url("../../assets/noise.png");
+      bottom: 0;
+      content: "";
+      display: block;
+      left: 0;
+      opacity: 0.3;
+      right: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 99;
+      pointer-events: none;
+    }
+  }
+
+  .spark {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: yellow;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  button.gameButton {
+    @apply h-fit cursor-pointer rounded-md px-2 py-1 select-none;
+
+    &.blue {
+      @apply py-2;
+      background-color: var(--btn-blue);
+      box-shadow: 0 5px 0 var(--blue-sd);
+    }
+    &.orange {
+      background-color: var(--btn-orange);
+      box-shadow: 0 5px 0 var(--orange-sd);
+    }
+    &.red {
+      background-color: var(--btn-red);
+      box-shadow: 0 5px 0 var(--red-sd);
+    }
+    &.green {
+      @apply py-2;
+      background-color: var(--btn-green);
+      box-shadow: 0 5px 0 var(--green-sh);
+    }
+
+    &:active,
+    &:disabled {
+      box-shadow: none;
+      transform: translateY(5px);
+    }
+  }
+}

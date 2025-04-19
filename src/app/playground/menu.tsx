@@ -1,11 +1,10 @@
 "use client";
 import { format } from "date-fns";
-import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Pixelify_Sans } from "next/font/google";
 import useOnClickOutside from "../shared/hooks/use";
-import { useAuth } from "@/libs/auth/authContext";
+import { TransitionLink } from "../shared/transition/transitionLink";
 
 const font = Pixelify_Sans({
   display: "swap",
@@ -22,14 +21,12 @@ const PATH_TO_NAME = {
 };
 
 const Menu = () => {
-  const [{ greeting, dateStr }, setData] = useState({
+  const [{ dateStr }, setData] = useState({
     greeting: "",
     dateStr: "",
   });
 
   void dateStr;
-
-  const authContext = useAuth();
   const pathName = usePathname();
   const currentRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -101,13 +98,7 @@ const Menu = () => {
 
   return (
     <div className="relative my-1 flex items-center justify-center gap-2 bg-green-100 px-2.5 py-[2px] sm:text-lg">
-      <div className="flex flex-grow basis-0 flex-col">
-        <div className="text-sm md:text-lg">
-          {greeting
-            ? `${greeting}${authContext.isAuthorized ? "" : ", stranger"}!`
-            : null}
-        </div>
-      </div>
+      <div className="flex flex-grow basis-0 flex-col"></div>
       <div className="flex items-center justify-between px-1 py-2 sm:px-3">
         <nav
           id="main-navigation"
@@ -122,14 +113,6 @@ const Menu = () => {
           >
             <div className="flex cursor-pointer items-center justify-between text-nowrap">
               <span className="font-bold">Choose experiment</span>
-              {!authContext.isAuthorized && (
-                <div className="group relative inline-block">
-                  {<span className="text-sm md:text-base">(Guest mode)</span>}
-                  {/* <div className="absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 rounded-lg bg-gray-800 px-3 py-1 text-sm whitespace-nowrap text-white group-hover:block">
-                    Tooltip text here
-                  </div> */}
-                </div>
-              )}
               <svg
                 ref={svgRef}
                 className={`fill-green-800 ${currentName ? "active" : ""} ml-1`}
@@ -158,54 +141,34 @@ const Menu = () => {
           >
             <ul className="list-none text-center text-sm text-nowrap text-white">
               <li>
-                <Link
+                <TransitionLink
                   className="block bg-red-800 px-2 py-1 hover:bg-red-600 active:bg-red-700"
                   href="/playground/utubeNote"
                 >
                   Utube Note
-                </Link>
+                </TransitionLink>
               </li>
               <li>
-                <Link
+                <TransitionLink
                   className={`block ${font.className} bg-gray-800 px-2 py-1 text-slate-200 hover:bg-gray-600 active:bg-gray-700`}
                   href="/playground/feelthebeat"
                 >
                   Feel the beat
-                </Link>
+                </TransitionLink>
               </li>
               <li>
-                <Link
+                <TransitionLink
                   className="block bg-blue-800 px-2 py-1 hover:bg-blue-600 active:bg-blue-700"
                   href="/playground/blog"
                 >
                   Blog post
-                </Link>
+                </TransitionLink>
               </li>
             </ul>
           </div>
         </nav>
       </div>
-      <div className="flex flex-grow basis-0 flex-col items-end text-sm md:text-lg">
-        {authContext.isAuthorized ? (
-          <>
-            <button
-              onClick={authContext.logout}
-              className="logout cursor-pointer"
-            >
-              Log out
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              onClick={authContext.login}
-              className="loggin cursor-pointer"
-            >
-              Gmail signin
-            </button>
-          </>
-        )}
-      </div>
+      <div className="flex flex-grow basis-0 flex-col items-end text-sm md:text-lg"></div>
     </div>
   );
 };

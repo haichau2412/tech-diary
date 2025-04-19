@@ -225,7 +225,8 @@
 
   .customScrollBar {
     &::-webkit-scrollbar {
-      width: 3px;
+      width: 5px;
+
       /* height: 4px; */
     }
 
@@ -236,6 +237,12 @@
     &.blue {
       &::-webkit-scrollbar-thumb {
         @apply bg-blue-900;
+      }
+    }
+
+    &.green {
+      &::-webkit-scrollbar-thumb {
+        @apply bg-green-700;
       }
     }
   }
@@ -468,6 +475,25 @@
 
   .playgroundText {
     @apply animate-fade-in-zoom sticky mx-auto leading-normal text-gray-300 [animation-timeline:scroll()];
+  }
+
+  @layer components {
+    .noise {
+      &:after {
+        background-image: url("../assets/noise.png");
+        bottom: 0;
+        content: "";
+        display: block;
+        left: 0;
+        opacity: 0.3;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 99;
+      }
+    }
   }
 
   #app {

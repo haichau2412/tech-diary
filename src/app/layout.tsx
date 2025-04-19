@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 import { PT_Sans_Narrow, Rye } from "next/font/google";
 import Header from "./ui/header/Header";
-import HomeFooter from "./ui/footer";
 import { TransitionProvider } from "./shared/transition/transitionContext";
 import OverlayLoader from "./shared/transition/TransitionOverplay";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -39,14 +38,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${font.className} ${rye.variable} flex min-h-screen flex-col`}
+        className={`${font.className} ${rye.variable} flex max-h-screen min-h-screen flex-col`}
       >
         <TransitionProvider>
           <Header />
           <OverlayLoader />
           {children}
           <SpeedInsights />
-          <HomeFooter />
         </TransitionProvider>
       </body>
     </html>

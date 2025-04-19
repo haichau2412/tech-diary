@@ -2,7 +2,7 @@ import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
 import { usePageTransition } from "./transitionContext";
 
-interface TransitionLinkProps extends LinkProps {
+interface TransitionLinkProps extends React.ComponentProps<"a">, LinkProps {
   children: React.ReactNode;
   href: string;
 }
