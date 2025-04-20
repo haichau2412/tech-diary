@@ -8,6 +8,7 @@ import GameStartCanvas from "./GameStart";
 import StartGameMenu from "./StartGameMenu";
 import StartAudioNode from "./StartAudioNode";
 import Store from "./Store";
+import RotateH2 from "../shared/RotateH2";
 
 const font = Pixelify_Sans({
   display: "swap",
@@ -42,10 +43,13 @@ const Game = () => {
   return (
     <article className={`${font.className} px-8 text-lg`}>
       <div className="border-4 border-t-0 border-green-950 py-5">
-        <h2 className="text-center text-4xl font-bold">Feel The Beat (WIP)</h2>
-
+        <RotateH2
+          scrollerClass=".playgroundContainer"
+          text="Feel The Beat (WIP)"
+          additionalStyle="bg-blue-950 mx-auto mb-2"
+        />
         <div className="beat relative mx-auto">
-          <div className="relative overflow-hidden rounded-lg border-2 border-white p-2">
+          <div className="relative overflow-hidden rounded-lg border-2 border-blue-900 p-2">
             <canvas className="rounded-md bg-white" ref={setRef}>
               {ctxRef.current && refReady && (
                 <>
