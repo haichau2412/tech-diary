@@ -165,7 +165,8 @@ const WheelCanvas = () => {
       ctx.textAlign = "right";
       ctx.fillStyle = "#fff";
       ctx.font = "bold 14px sans-serif";
-      ctx.fillText(s, radius - 20, 5);
+      const text = s.length > 10 ? `${s.slice(0, 10)}...` : s;
+      ctx.fillText(text, radius - 20, 5);
       ctx.restore(); //Revert
     });
     ctx.save();

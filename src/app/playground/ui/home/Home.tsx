@@ -5,6 +5,7 @@ import Intro from "./play/Intro";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Wheel from "./play/wheel";
 import HomeFooter from "@/app/ui/footer";
+import Game from "./feelthebeat";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,6 +20,7 @@ const Home = ({ onLoad }: { onLoad: () => void }) => {
         <div className="mx-auto mt-10 max-w-[1600px]">
           <Intro />
           <Wheel />
+          <Game />
         </div>
       </main>
       <HomeFooter />

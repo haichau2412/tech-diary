@@ -29,7 +29,7 @@ const StoreNav = ({ items, selectedId }: StoreNavProps) => {
               {title}
 
               {_selectedId === id ? (
-                <div className="absolute left-0 top-0 w-full max-w-full">
+                <div className="absolute top-0 left-0 w-full max-w-full">
                   <div className="selectedElement">
                     <div className="idicator">{title}</div>
                   </div>

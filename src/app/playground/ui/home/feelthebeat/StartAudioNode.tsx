@@ -11,11 +11,11 @@ const StartAudioNode = memo(function AudioNode() {
     }
     audioRef.current = node;
     node.volume = 0.4;
-    if (navigator.userActivation.isActive) {
-      node.play().then(() => {
-        setIsPlaying(true);
-      });
-    }
+    // if (navigator.userActivation.isActive) {
+    //   node.play().then(() => {
+    //     setIsPlaying(true);
+    //   });
+    // }
   };
 
   const togglePlay = () => {
@@ -31,7 +31,7 @@ const StartAudioNode = memo(function AudioNode() {
   };
 
   return (
-    <div className="absolute right-[50px] top-0">
+    <div className="absolute top-0 right-[50px]">
       <button onClick={togglePlay}>
         <div className="relative">
           <svg
