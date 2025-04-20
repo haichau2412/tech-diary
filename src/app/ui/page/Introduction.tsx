@@ -42,7 +42,7 @@ const TECH = [
   },
   {
     title: "Learning plan",
-    tag: ["Effect-TS", "AWS", "GraphQL", "Material-UI"],
+    tag: ["GraphQL", "Material-UI", "GSAP", "Playwright"],
   },
 ];
 
