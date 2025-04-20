@@ -77,7 +77,7 @@ const WheelSetup = () => {
   }
 
   return (
-    <div className="wheelArticle flex h-[400px] grow flex-col items-center justify-between">
+    <div className="wheelArticle flex h-[400px] grow flex-col-reverse items-center justify-between md:flex-col">
       <div className="mt-0 h-[50px]">
         <WinnerToaster message={selected || ""} visible={!!selected} />
       </div>
@@ -146,7 +146,6 @@ const WheelSetup = () => {
       >
         {startBtnText}
       </button>
-      <p className="text-white"></p>
     </div>
   );
 };

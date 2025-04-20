@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
 import { useWheel } from "./wheelContext";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-
 const size = 410;
 
 const COLORS = [
@@ -247,24 +246,48 @@ const WheelCanvas = () => {
   useGSAP(
     () => {
       if (canvasRef.current) {
-        gsap.fromTo(
-          canvasRef.current,
-          {
-            scale: 0,
-          },
-          {
-            scale: 1,
-            duration: 1.2,
-            ease: "power2.out",
-            scrollTrigger: {
-              scroller: ".playgroundContainer",
-              trigger: canvasRef.current,
-              start: "top 90%",
-              end: "top 50%",
-              toggleActions: "play none none none",
+        const mm = gsap.matchMedia();
+
+        mm.add("(max-width: 767px)", () => {
+          gsap.fromTo(
+            canvasRef.current,
+            {
+              scale: 0,
             },
-          },
-        );
+            {
+              scale: 0.75,
+              duration: 1.2,
+              ease: "power2.out",
+              scrollTrigger: {
+                scroller: ".playgroundContainer",
+                trigger: canvasRef.current,
+                start: "top 90%",
+                end: "top 50%",
+                toggleActions: "play none none none",
+              },
+            },
+          );
+        });
+        mm.add("(min-width: 768px)", () => {
+          gsap.fromTo(
+            canvasRef.current,
+            {
+              scale: 0,
+            },
+            {
+              scale: 1,
+              duration: 1.2,
+              ease: "power2.out",
+              scrollTrigger: {
+                scroller: ".playgroundContainer",
+                trigger: canvasRef.current,
+                start: "top 90%",
+                end: "top 50%",
+                toggleActions: "play none none none",
+              },
+            },
+          );
+        });
       }
     },
     {
@@ -272,7 +295,9 @@ const WheelCanvas = () => {
     },
   );
 
-  return <canvas ref={setRef} className="rounded-full bg-neutral-950 p-2" />;
+  return (
+    <canvas ref={setRef} className="scale-75 rounded-full bg-neutral-950 p-2" />
+  );
 };
 
 export default WheelCanvas;

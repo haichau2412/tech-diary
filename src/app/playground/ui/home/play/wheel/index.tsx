@@ -7,10 +7,10 @@ const Wheel = () => {
     <WheelProvider>
       <article className="px-8">
         <div className="border-4 border-t-0 border-green-950 py-5">
-          <h2 className="mx-auto w-fit bg-white px-3 py-2 text-center text-4xl font-extrabold text-red-800 uppercase">
+          <h2 className="mx-auto w-fit bg-white px-3 py-2 text-center text-xl font-extrabold text-red-800 uppercase md:text-4xl">
             Wheel of fortune
           </h2>
-          <div className="flex items-center px-10">
+          <div className="flex flex-col items-center px-10 md:flex-row">
             <WheelCanvas />
             <WheelSetup />
           </div>

@@ -25,7 +25,7 @@ const GsapSwapperNav = () => {
         {/* Capsule */}
         <div
           ref={capsuleRef}
-          className="absolute top-1 left-1 z-0 h-[calc(100%-0.5rem)] w-1/2 rounded-full bg-blue-500"
+          className="absolute top-1 left-1 z-0 h-[calc(100%-0.5rem)] w-1/2 rounded-full bg-green-950"
         />
 
         {/* Buttons */}
@@ -35,7 +35,7 @@ const GsapSwapperNav = () => {
           }`}
           onClick={() => setSelected("left")}
         >
-          Option 1
+          Playground
         </button>
         <button
           className={`relative z-10 flex-1 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
@@ -43,7 +43,7 @@ const GsapSwapperNav = () => {
           }`}
           onClick={() => setSelected("right")}
         >
-          Option 2
+          Workplace
         </button>
       </div>
     </div>
