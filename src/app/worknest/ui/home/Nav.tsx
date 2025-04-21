@@ -33,7 +33,7 @@ const NavItem = ({ href, label, description, passHref }: NavItemProps) => {
       <Link
         passHref={passHref}
         href={href}
-        className="text-lg font-semibold text-gray-900 dark:text-white"
+        className="text-lg font-semibold text-gray-900"
       >
         <div className="aspect-[3/2] h-[100px] bg-red-800"></div>
       </Link>

@@ -16,10 +16,10 @@ const Page = () => {
   return (
     <div className="customScrollBar green relative flex grow flex-col overflow-x-hidden overflow-y-auto bg-orange-100">
       <main className="grow">
-        <h2 className="mt-5 text-center text-4xl font-extrabold text-gray-900 uppercase md:text-6xl dark:bg-gray-900 dark:text-white">
+        <h2 className="mt-5 text-center text-4xl font-extrabold text-gray-900 uppercase md:text-6xl">
           Worknest
         </h2>
-        <p className="px-10 text-center text-lg font-semibold text-gray-900 italic dark:text-white">
+        <p className="px-10 text-center text-lg font-semibold text-gray-900 italic">
           Worknest is a personal project that I am working on. It is a
           collection of various tools and utilities that I have created to help
           me with my work and personal life.
