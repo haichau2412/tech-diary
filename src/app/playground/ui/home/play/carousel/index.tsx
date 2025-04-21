@@ -1,5 +1,5 @@
 import React from "react";
-import AutoCarousel from "./carousel/Carousel";
+import AutoCarousel from "./Carousel";
 
 const Intro = () => {
   return (
@@ -11,11 +11,11 @@ const Intro = () => {
         <AutoCarousel />
         <div className="max-w-[1080px] px-15 text-center text-lg text-green-950 md:text-3xl">
           <p>
-            This is my little corner of the web where I create mini interactive
-            widget and test out fun ideas. It&apos;s a space for creativity,
-            chill vibes, and post-work game sessions. You&apos;re invited to
-            join me—just wander around the site and try out whatever catches
-            your eye.
+            This is my little corner of the web where I create interactive mini
+            interactive widget and test out fun ideas. It&apos;s a space for
+            creativity, chill vibes, and post-work game sessions. You&apos;re
+            invited to join me—just wander around the site and try out whatever
+            catches your eye.
           </p>
           <p className="font-bold">Just scroll down and find out what I did!</p>
         </div>

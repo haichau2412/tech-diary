@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState, useCallback } from "react";
-import guestDataManager from "utubeNote/libs/guestDataManager";
+import guestDataManager from "./libs/guestDataManager";
 import VideoAdd from "./VideoAddBox";
 import VideoBox from "./VideoBox";
 import NotePopup from "./NotePopup";

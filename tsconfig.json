@@ -22,7 +22,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "libs/*": ["./src/libs/*"],
-      "utubeNote/*":  ["./src/app/playground/utubeNote/*"]
+      "utubeNote/*":  ["./src/app/worknest/utube-note/*"]
     }
   },
   "include": [

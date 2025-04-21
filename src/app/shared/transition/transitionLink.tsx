@@ -4,15 +4,17 @@ import { usePageTransition } from "./transitionContext";
 
 interface TransitionLinkProps extends React.ComponentProps<"a">, LinkProps {
   children: React.ReactNode;
+  pageName?: string;
   href: string;
 }
 
 export const TransitionLink = ({
   children,
   href,
+  pageName = "",
   ...props
 }: TransitionLinkProps) => {
-  const { setShow, setMouseLocation } = usePageTransition();
+  const { setShow, setMouseLocation, setPageName } = usePageTransition();
   const router = useRouter();
 
   const handleTransition = async (
@@ -20,6 +22,7 @@ export const TransitionLink = ({
   ) => {
     e.preventDefault();
     const { clientX, clientY } = e;
+    setPageName(pageName);
     setMouseLocation({ mouseX: clientX, mouseY: clientY });
     setShow(true);
 

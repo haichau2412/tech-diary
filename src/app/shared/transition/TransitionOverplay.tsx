@@ -7,6 +7,7 @@ export const OverlayLoader = () => {
   const {
     show,
     location: { mouseX, mouseY },
+    pageName,
   } = usePageTransition();
 
   return (
@@ -31,7 +32,7 @@ export const OverlayLoader = () => {
               transition: { duration: 1, ease: "easeInOut" },
             }}
           >
-            <p className="text-stone-100">Joining playground</p>
+            <p className="text-stone-100">{`Joining ${pageName}`}</p>
           </motion.div>
         </motion.div>
       )}

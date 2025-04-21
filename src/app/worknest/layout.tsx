@@ -1,5 +1,3 @@
-import "./playground.css";
-
 export default function RootLayout({
   children,
 }: Readonly<{

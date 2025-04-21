@@ -9,7 +9,9 @@ type MouseLocation = {
 type TransitionContextValues = {
   show: boolean;
   location: MouseLocation;
+  pageName: string;
   setShow: (show: boolean) => void;
+  setPageName: (name: string) => void;
   setMouseLocation: (mouseLocation: MouseLocation) => void;
 };
 
@@ -19,8 +21,10 @@ const ThemeContext = createContext<TransitionContextValues>({
     mouseX: 0,
     mouseY: 0,
   },
+  pageName: "",
   setShow: () => {},
   setMouseLocation: () => {},
+  setPageName: () => {},
 });
 
 export function TransitionProvider({
@@ -28,6 +32,7 @@ export function TransitionProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [pageName, setPageName] = useState("");
   const [show, setShow] = useState<boolean>(false);
   const [location, setMouseLocation] = useState<MouseLocation>({
     mouseX: 0,
@@ -36,7 +41,14 @@ export function TransitionProvider({
 
   return (
     <ThemeContext.Provider
-      value={{ show, setShow, location, setMouseLocation }}
+      value={{
+        show,
+        setShow,
+        location,
+        setMouseLocation,
+        pageName,
+        setPageName,
+      }}
     >
       {children}
     </ThemeContext.Provider>
@@ -47,7 +59,9 @@ export function usePageTransition() {
   const context = useContext(ThemeContext);
 
   if (context === undefined) {
-    throw new Error("useTransition must be used inside of a ThemeProvider");
+    throw new Error(
+      "useTransition must be used inside of a TransitionProvider",
+    );
   }
 
   return context;

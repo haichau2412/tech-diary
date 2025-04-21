@@ -138,7 +138,7 @@ const GameStartCanvas = memo(function GameStartCanvas({
       const frameDuration = 1000 / fps;
       let lastTime = 0;
 
-      const animate = (timestamp: number) => {
+      const animate = (timestamp = 0) => {
         const deltaTime = timestamp - lastTime;
 
         if (deltaTime >= frameDuration) {
@@ -157,7 +157,7 @@ const GameStartCanvas = memo(function GameStartCanvas({
         animatioHandler = window.requestAnimationFrame(animate);
       };
 
-      animate(0);
+      animate();
     };
 
     drawGameStart();

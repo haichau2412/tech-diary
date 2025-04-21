@@ -6,8 +6,9 @@ import { useState, useRef, useEffect, forwardRef } from "react";
 import { postWithCredential, getWithCredential } from "@/utils/fetcher";
 import useSWR from "swr";
 import { useAuth } from "@/libs/auth/authContext";
-import guestDataManager from "utubeNote/libs/guestDataManager";
+import guestDataManager from "./libs/guestDataManager";
 import { Note } from "./type";
+
 const formatTime = (time: number) => {
   const sec = time % 60;
   const min = Math.floor(time / 60);

@@ -240,6 +240,12 @@
       }
     }
 
+    &.blue {
+      &::-webkit-scrollbar-thumb {
+        @apply bg-amber-900;
+      }
+    }
+
     &.green {
       &::-webkit-scrollbar-thumb {
         @apply bg-green-700;

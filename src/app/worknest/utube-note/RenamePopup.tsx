@@ -14,7 +14,7 @@ const RenamePopup = forwardRef<HTMLDivElement, Props>(function RenamePopup(
       ref={ref as React.Ref<HTMLDivElement>}
       popover="auto"
       id="rename-popover"
-      className="absolute left-0 top-0 h-full w-full bg-black bg-opacity-30"
+      className="bg-opacity-30 absolute top-0 left-0 h-full w-full bg-black"
     >
       <div className="grid h-full w-full place-items-center">
         <div className="flex flex-col items-center gap-3 rounded-md bg-white px-5 py-2">
