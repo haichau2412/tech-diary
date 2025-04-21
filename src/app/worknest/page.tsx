@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { usePageTransition } from "../shared/transition/transitionContext";
-import WorknestNav from "./home/Nav";
+import WorknestNav from "./ui/home/Nav";
 import HomeFooter from "../ui/footer";
 
 const Page = () => {
