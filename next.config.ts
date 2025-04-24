@@ -36,34 +36,14 @@ const nextConfig: NextConfig = {
 const withMDX = createMDX({
   options: {
     remarkPlugins: [remarkFrontmatter, [remarkMdxFrontmatter, { name: 'meta' }]],
-    rehypePlugins: [
+    rehypePlugins:
       [
         rehypePrettyCode,
-        {
-          theme: "one-dark-pro",
-          keepBackground: false,
-          onVisitLine(node) {
-            if (node.children.length === 0) {
-              node.children = [{ type: "text", value: " " }];
-            }
-          },
-          onVisitHighlightedLine(node) {
-            if (node.children.length === 0) {
-              node.properties.className.push("highlighted");
-            }
-          },
-          onVisitHighlightedWord(node) {
-            if (node.children.length === 0) {
-              node.properties.className = ["word"];
-            }
-          },
-        },
+        withToc,
+        withTocExport,
+        remarkReadingTime,
+        readingMdxTime,
       ],
-      withToc,
-      withTocExport,
-      remarkReadingTime,
-      readingMdxTime,
-    ],
   },
 });
 
