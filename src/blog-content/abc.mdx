@@ -1,0 +1,152 @@
+---
+title: "Understanding Catch-All Segments in Next.js"
+slug: "understanding-catch-all-segments"
+date: "2025-04-24"
+author: "Jane Developer"
+excerpt: "Catch-all segments allow for flexible routing in Next.js. Learn how to use them effectively in your apps."
+coverImage: "/images/blog/catch-all-example.png"
+tags: ["nextjs", "routing", "dynamic routes"]
+readingTime: "7 min"
+---
+
+# Understanding Catch-All Segments in Next.js
+
+Next.js is well-known for its intuitive file-based routing system. One of the most powerful features of that system is the **catch-all segment**.
+
+In this article, we’ll break down what catch-all segments are, how to use them, and what common mistakes to avoid.
+
+---
+
+## 🧠 What Is a Catch-All Segment?
+
+A catch-all segment is a dynamic route in Next.js that matches **any number of path segments**.
+
+For example:
+
+```txt
+/pages/docs/[...slug].tsx
+```
+
+This single file will match:
+
+- `/docs`
+- `/docs/getting-started`
+- `/docs/guides/setup/windows`
+
+The key is the `[...]` syntax. It tells Next.js to capture **everything after the base path** and store it as an array.
+
+---
+
+## 🔍 Accessing the Segments
+
+When you define a catch-all route, the matched segments are passed into the page’s `params`.
+
+```tsx
+export default function Page({ params }) {
+  return <div>{JSON.stringify(params.slug)}</div>;
+}
+```
+
+If the URL is `/docs/guides/setup`, `params.slug` will be:
+
+```js
+["guides", "setup"]
+```
+
+---
+
+## 🎯 Optional Catch-All Segments
+
+You can also make the segment optional:
+
+```txt
+/pages/docs/[[...slug]].tsx
+```
+
+This matches:
+
+- `/docs`
+- `/docs/anything/here`
+- `/docs/even/deeper/paths`
+
+The extra `[]` around the spread tells Next.js this route should also match the base path.
+
+---
+
+## 🛠️ Use Cases for Catch-All Segments
+
+Catch-all segments are perfect for:
+
+- Documentation pages
+- Blog categories and nested slugs
+- CMS-powered routes
+- User-generated URLs (e.g. forums, multi-tenant apps)
+
+---
+
+## 🧪 Example: CMS-Powered Blog
+
+Let’s say your CMS provides blog paths like:
+
+- `/blog/tech/javascript`
+- `/blog/tech/react/hooks`
+- `/blog/lifestyle/productivity`
+
+Create a catch-all route:
+
+```txt
+/pages/blog/[...slug].tsx
+```
+
+You can now use the `slug` array to load the appropriate content.
+
+```tsx
+const path = params.slug.join('/');
+const post = await fetchPostByPath(path);
+```
+
+---
+
+## 🧱 Table: [slug] vs [...slug] vs [[...slug]]
+
+| Route Segment     | Matches                | Slug Result             |
+|-------------------|------------------------|--------------------------|
+| `[slug]`          | `/blog/react`          | `"react"`               |
+| `[...slug]`       | `/blog/react/hooks`    | `["react", "hooks"]`    |
+| `[[...slug]]`     | `/blog` and deeper     | `undefined` or array    |
+
+---
+
+## ❗ Common Mistakes to Avoid
+
+> “Catch-all segments are powerful, but easy to misuse.”
+
+### ⚠️ Mistake 1: Using `[slug]` instead of `[...slug]`
+
+`[slug]` only matches a single segment. If you need to match nested paths, you need the spread syntax.
+
+### ⚠️ Mistake 2: Not checking for `undefined`
+
+If you're using `[[...slug]]`, remember that `params.slug` can be `undefined`.
+
+---
+
+## 📚 Related Reading
+
+- [Next.js Dynamic Routes](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)
+- [Next.js App Router Routing Docs](https://nextjs.org/docs/app/building-your-application/routing)
+
+---
+
+## 🧾 Summary
+
+- Catch-all segments let you match multiple path segments using `[...slug]`.
+- Optional segments use `[[...slug]]` and match the base path too.
+- You can build powerful CMS, docs, and multi-level apps with this feature.
+- Be mindful of how you handle undefined and path depth.
+
+---
+
+![Catch-all routing diagram](/images/blog/catch-all-diagram.png)
+
+Thanks for reading!

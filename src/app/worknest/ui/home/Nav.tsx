@@ -14,10 +14,10 @@ const NAV_ITEMS: NavItemProps[] = [
     description: "A note-taking app for YouTube videos.",
   },
   {
-    href: "",
+    href: "/blog",
     passHref: true,
-    label: "Dummy 1",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    label: "Blog & Note",
+    description: "A blog and note",
   },
   {
     href: "",

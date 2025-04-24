@@ -251,6 +251,12 @@
         @apply bg-green-700;
       }
     }
+
+    &.blogScrollBar {
+      &::-webkit-scrollbar-thumb {
+        @apply bg-amber-200;
+      }
+    }
   }
 
   .addUtubeForm {
