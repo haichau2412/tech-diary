@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { verifyUtube } from "./api/utubeApi";
+import { verifyVideoLink } from "./actions/utils";
 import guestDataManager from "./libs/guestDataManager";
 
 type FormValues = {
@@ -10,12 +10,24 @@ type FormValues = {
 };
 
 const VideoAddBox = () => {
-  const { register, handleSubmit } = useForm<FormValues>({});
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+  } = useForm<FormValues>({
+    defaultValues: {
+      link: "",
+      customName: "",
+    },
+  });
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    const youtubeId = await verifyUtube(data.link);
+    const youtubeId = await verifyVideoLink(data.link);
+
     if (youtubeId) {
       guestDataManager.addVideo(youtubeId, data.customName);
+      reset();
     }
   };
 
@@ -38,7 +50,11 @@ const VideoAddBox = () => {
         placeholder="Custom name..."
         autoComplete="off"
       />
-      <input type="submit" value="Add new video" />
+      <input
+        disabled={isSubmitting}
+        type="submit"
+        value={`${isSubmitting ? "Verifying..." : "Add new video"}`}
+      />
     </form>
   );
 };
