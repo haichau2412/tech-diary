@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { format } from "date-fns";
 import { useState, useEffect } from "react";
-import { useAuth } from "@/libs/auth/authContext";
+import { useAuth } from "@/libs/context/authContext";
 
 const Header = () => {
   const [{ greeting, dateStr }, setData] = useState({

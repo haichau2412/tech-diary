@@ -1,14 +1,12 @@
-import React, { forwardRef } from "react";
+import React from "react";
 
-interface Props {
+interface RenamePopupProps {
   onConfirm: (value: boolean) => void;
   newName?: string;
+  ref: React.RefObject<HTMLDivElement | null>;
 }
 
-const RenamePopup = forwardRef<HTMLDivElement, Props>(function RenamePopup(
-  { onConfirm, newName },
-  ref,
-) {
+const RenamePopup = ({ onConfirm, newName, ref }: RenamePopupProps) => {
   return (
     <div
       ref={ref as React.Ref<HTMLDivElement>}
@@ -41,6 +39,6 @@ const RenamePopup = forwardRef<HTMLDivElement, Props>(function RenamePopup(
       </div>
     </div>
   );
-});
+};
 
 export default RenamePopup;

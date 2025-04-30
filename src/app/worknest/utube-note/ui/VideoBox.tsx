@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 interface Props {
-  srcSet: string;
   customName: string;
   setCustomName: (value: {
     id: string;
@@ -15,7 +14,6 @@ interface Props {
 }
 
 const VideoBox = ({
-  srcSet,
   customName,
   setCustomName,
   newCustomName,
@@ -34,7 +32,7 @@ const VideoBox = ({
           role="presentation"
           priority={false}
           fill={true}
-          src={srcSet}
+          src={`https://img.youtube.com/vi/${id}/0.jpg`}
           alt=""
         />
       </div>

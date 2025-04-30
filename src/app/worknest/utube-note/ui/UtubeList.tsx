@@ -1,24 +1,35 @@
 "use client";
 
 import { useRef, useEffect, useState, useCallback } from "react";
-import guestDataManager from "./libs/guestDataManager";
-import VideoAdd from "./VideoAddBox";
+import guestDataManager from "../libs/guestDataManager";
+import VideoAddBox from "./VideoAddBox";
 import VideoBox from "./VideoBox";
 import NotePopup from "./NotePopup";
 import RenamePopup from "./RenamePopup";
+import { useQuery } from "@tanstack/react-query";
+import dataService from "../libs/dataService";
 
 const UtubeList = () => {
-  const [guestData, setGuestData] = useState(guestDataManager.getVideos());
+  useEffect(() => {
+    dataService.updateMode("guest");
+  }, []);
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["getVideos"],
+    queryFn: () => dataService.getVideos(),
+  });
+
   const [rename, setRename] = useState<{
     id: string;
     newName: string;
     oldName: string;
   } | null>(null);
-
   const [videoId, setVideoId] = useState("");
-
   const renameRef = useRef<HTMLDivElement>(null);
   const noteRef = useRef<HTMLDivElement | null>(null);
+
+  if (isLoading) {
+  }
 
   const _setRename = useCallback(
     (value: { id: string; newName: string; oldName: string }) => {
@@ -27,19 +38,6 @@ const UtubeList = () => {
     [],
   );
 
-  const _data = guestData;
-
-  useEffect(() => {
-    const listener = () => {
-      setGuestData(guestDataManager.getVideos());
-    };
-    guestDataManager.eventEmitter.on("videoAdded", listener);
-
-    return () => {
-      guestDataManager.eventEmitter.off("videoAdded", listener);
-    };
-  }, []);
-
   const onConfirm = (value: boolean) => {
     if (renameRef.current) {
       if (value) {
@@ -47,7 +45,7 @@ const UtubeList = () => {
           rename?.id || "",
           rename?.newName || "",
         );
-        setGuestData(guestDataManager.getVideos());
+        // setGuestData(guestDataManager.getVideos());
       }
       setRename(null);
       renameRef.current.hidePopover();
@@ -72,18 +70,16 @@ const UtubeList = () => {
   };
 
   return (
-    <div className="customScrollBar relative mt-4 grid h-full w-fit grid-cols-(--grid-cols-utubeDashboard) grid-rows-(--grid-rows-utubeDashboard) gap-4 overflow-y-scroll p-4 sm:w-full sm:p-0">
-      <VideoAdd />
-      {_data.map((i) => {
+    <>
+      {data?.map((i) => {
         return (
           <VideoBox
             setCustomName={_setRename}
-            newCustomName={rename?.id === i.youtubeId ? rename.newName : ""}
+            newCustomName={rename?.id === i.youtubeId ? rename?.newName : ""}
             openNotePopover={openNotePopover}
             openRenamePopover={openRenamePopover}
             key={i.youtubeId}
             id={i.youtubeId}
-            srcSet={`https://img.youtube.com/vi/${i.youtubeId}/0.jpg`}
             customName={i.customName}
           />
         );
@@ -94,8 +90,17 @@ const UtubeList = () => {
         ref={renameRef}
       />
       <NotePopup videoId={videoId} ref={noteRef} />
+    </>
+  );
+};
+
+const UtubeContainer = () => {
+  return (
+    <div className="customScrollBar relative mt-4 grid h-full w-fit grid-cols-(--grid-cols-utubeDashboard) grid-rows-(--grid-rows-utubeDashboard) gap-4 overflow-y-scroll p-4 sm:w-full sm:p-0">
+      <VideoAddBox />
+      <UtubeList />
     </div>
   );
 };
 
-export default UtubeList;
+export default UtubeContainer;
