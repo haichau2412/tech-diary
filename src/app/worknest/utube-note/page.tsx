@@ -5,12 +5,12 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
+import HomeFooter from "@/app/ui/footer";
 const queryClient = new QueryClient();
 
 const YouTubeNote = () => {
   return (
-    <main className="customScrollBar grow overflow-x-hidden overflow-y-auto bg-red-50">
+    <main className="customScrollBar flex grow flex-col overflow-x-hidden overflow-y-auto bg-red-50">
       <Suspense fallback={<Loading />}>
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={true} />
@@ -20,6 +20,7 @@ const YouTubeNote = () => {
           </div>
         </QueryClientProvider>
       </Suspense>
+      <HomeFooter />
     </main>
   );
 };
