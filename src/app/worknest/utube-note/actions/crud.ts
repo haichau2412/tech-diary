@@ -1,12 +1,16 @@
 "use server";
-import dbConnect from "@/libs/db/dbConnect";
-import { Video, Note } from "@/libs/db/utubeModel";
 import { getUserInfo } from "@/app/actions/utube/actions";
 import { Video as VideoType, Note as NoteType } from "../type";
 import { ERROR_CODE } from "./type";
+import {
+  setNoteDB,
+  getNoteDB,
+  getVideoDB,
+  addVideoDB,
+  updateVideoNameDB,
+} from "../libs/remoteDBService";
 
 type ErrorCode = number | null;
-
 type ServerActionReturn<T> = [ErrorCode, T];
 
 export const setNote = async (
@@ -20,51 +24,17 @@ export const setNote = async (
       return [ERROR_CODE.NOT_FOUND_USER, false];
     }
 
-    await dbConnect();
-
-    const video = await Video.findOne({
-      youtubeId: youtubeId,
+    const result = await setNoteDB({
+      youtubeId,
       userId: data.user.id,
+      note,
     });
 
-    if (video === null) {
-      return [ERROR_CODE.NOT_FOUND_VIDEO, false];
+    if (result.success) {
+      return [null, true];
     }
 
-    const { from, text } = note;
-
-    const _note = await Note.findOne({
-      videoId: video._id,
-    });
-
-    const hasNote = !!_note;
-    let _allNotes: NoteType[] = [];
-
-    if (_note) {
-      _allNotes = _note.notes;
-    }
-    _allNotes = _allNotes.filter(({ from: _from }) => _from !== from);
-    _allNotes.push({ from, text });
-
-    if (hasNote) {
-      await Note.findOneAndUpdate(
-        {
-          videoId: video._id,
-        },
-        {
-          videoId: video._id,
-          notes: _allNotes,
-        },
-        { new: true, upsert: true },
-      );
-    } else {
-      const newNote = new Note({
-        videoId: video._id,
-        notes: _allNotes,
-      });
-      await newNote.save();
-    }
-    return [null, true];
+    return [result.message, false];
   } catch (err) {
     console.log("RUNTIME_ERROR", err);
     return [ERROR_CODE.RUNTIME_ERROR, false];
@@ -81,26 +51,16 @@ export const getNotes = async (
       return [ERROR_CODE.NOT_FOUND_USER, null];
     }
 
-    await dbConnect();
-
-    const video = await Video.findOne({
-      youtubeId: youtubeId,
-      userId: data.user?.id,
+    const result = await getNoteDB({
+      youtubeId,
+      userId: data.user.id,
     });
 
-    if (video === null) {
-      return [null, null];
+    if (result.success) {
+      return [null, result.returnValue];
     }
 
-    const _note = await Note.findOne({
-      videoId: video._id,
-    });
-
-    if (_note) {
-      return [null, _note?.notes];
-    }
-
-    return [null, []];
+    return [result.message, null];
   } catch (err) {
     console.log("RUNTIME_ERROR", err);
     return [ERROR_CODE.RUNTIME_ERROR, null];
@@ -117,23 +77,13 @@ export const getVideos = async (): Promise<
       return [ERROR_CODE.NOT_FOUND_USER, null];
     }
 
-    await dbConnect();
+    const result = await getVideoDB({ userId: data.user.id });
 
-    const videos = await Video.find({
-      userId: data.user.id,
-    });
-
-    if (videos.length === 0) {
-      return [null, null];
+    if (result.success) {
+      return [null, result.returnValue];
     }
 
-    return [
-      null,
-      videos.map(({ youtubeId, customName }) => ({
-        youtubeId,
-        customName,
-      })),
-    ];
+    return [result.message, null];
   } catch (err) {
     console.log("RUNTIME_ERROR", err);
     return [ERROR_CODE.RUNTIME_ERROR, null];
@@ -154,24 +104,17 @@ export const addVideo = async ({
       return [ERROR_CODE.NOT_FOUND_USER, false];
     }
 
-    await dbConnect();
-
-    const video = await Video.findOne({
-      youtubeId,
+    const result = await addVideoDB({
       userId: data.user.id,
+      youtubeId,
+      customName,
     });
 
-    if (!video) {
-      const newDoc = new Video({
-        youtubeId,
-        userId: data.user.id,
-        customName: customName,
-      });
-      await newDoc.save();
-
+    if (result.success) {
       return [null, true];
     }
-    return [ERROR_CODE.RESOURCE_EXISTED, null];
+
+    return [result.message, null];
   } catch (err) {
     console.log("RUNTIME_ERROR", err);
     return [ERROR_CODE.RUNTIME_ERROR, null];
@@ -192,18 +135,16 @@ export const updateVideoName = async ({
       return [ERROR_CODE.NOT_FOUND_USER, false];
     }
 
-    await dbConnect();
+    const result = await updateVideoNameDB({
+      youtubeId,
+      customName,
+      userId: data.user.id,
+    });
 
-    await Video.findOneAndUpdate(
-      {
-        videoId: youtubeId,
-        userId: data.user.id,
-      },
-      {
-        customName,
-      },
-    );
-    return [null, true];
+    if (result.success) {
+      return [null, true];
+    }
+    return [result.message, null];
   } catch (err) {
     console.log("RUNTIME_ERROR", err);
     return [ERROR_CODE.RUNTIME_ERROR, null];
