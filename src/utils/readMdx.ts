@@ -12,7 +12,6 @@ const getEntries = cache(async (type: MDXEntryType): Promise<MDXEntry[]> => {
     const getFiles = async (dir: string): Promise<string[]> => {
       const entries = await fs.readdir(dir, { withFileTypes: true });
 
-      console.log("entriesentries", entries);
       const files = await Promise.all(
         entries.map(async (entry) => {
           const fullPath = path.join(dir, entry.name);

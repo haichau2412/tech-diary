@@ -1,5 +1,4 @@
 "use client";
-import UtubeSearchBar from "./ui/UtubeSearchBar";
 import UtubeContainer from "./ui/UtubeList";
 import { Suspense } from "react";
 import Loading from "./loading";
@@ -15,7 +14,6 @@ const YouTubeNote = () => {
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={true} />
           <div className="flex grow flex-col items-center py-1 text-sm sm:p-1 sm:text-base">
-            <UtubeSearchBar />
             <UtubeContainer />
           </div>
         </QueryClientProvider>

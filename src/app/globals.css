@@ -363,7 +363,7 @@
   }
 
   .utubeSearchBar {
-    @apply relative flex h-fit w-fit items-center justify-center gap-1 self-start;
+    @apply relative flex h-fit w-fit items-center justify-center gap-1;
 
     &:has(input:placeholder-shown) .searchIcon,
     &:has(input:not(:placeholder-shown)) button {
@@ -406,6 +406,7 @@
     button {
       all: unset;
       cursor: pointer;
+      margin-left: 100%;
 
       &:focus-visible {
         @apply shadow shadow-red-400;

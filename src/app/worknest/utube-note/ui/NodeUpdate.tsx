@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { formatTime } from "../libs/util";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import dataService from "../libs/dataService";
+import { useUpdateVideoName } from "../hook/queryHook";
 
 const NodeUpdate = ({
   skipNote,
@@ -12,14 +11,7 @@ const NodeUpdate = ({
   noteTime: number;
   videoId: string;
 }) => {
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: dataService.setNote,
-    onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: ["videoNotes", videoId] });
-    },
-  });
+  const mutation = useUpdateVideoName();
 
   const [note, setNote] = useState("");
 
