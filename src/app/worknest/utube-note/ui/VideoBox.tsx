@@ -1,27 +1,45 @@
 import Image from "next/image";
+import { memo } from "react";
+import { useState } from "react";
 
 interface Props {
   customName: string;
+  openNotePopover: (id: string) => void;
+  openRenamePopover: (func: () => void) => void;
+  id: string;
   setCustomName: (value: {
     id: string;
     newName: string;
     oldName: string;
   }) => void;
   newCustomName?: string;
-  openNotePopover: (id: string) => void;
-  openRenamePopover: () => void;
-  id: string;
 }
 
 const VideoBox = ({
   customName,
-  setCustomName,
-  newCustomName,
   openNotePopover,
   openRenamePopover,
+  setCustomName,
   id,
 }: Props) => {
-  const videoName = newCustomName || customName || "Empty name";
+  const [newCustomName, setNewCustomName] = useState<string | null>(null);
+
+  const videoName = newCustomName ?? (customName || "Empty name");
+
+  const onBlur = () => {
+    if (newCustomName && customName !== newCustomName) {
+      setCustomName({
+        id,
+        newName: newCustomName,
+        oldName: customName,
+      });
+      openRenamePopover(() => {
+        setNewCustomName(null);
+      });
+    } else {
+      setNewCustomName(null);
+    }
+  };
   return (
     <div className="utubeElement videoBox relative flex flex-col items-center justify-between gap-1 border border-transparent bg-red-200 hover:border-orange-300">
       <div
@@ -51,13 +69,9 @@ const VideoBox = ({
       <input
         aria-label={`videoNameChangeInput`}
         onChange={(e) => {
-          setCustomName({
-            id,
-            newName: e.target.value,
-            oldName: customName,
-          });
+          setNewCustomName(e.target.value);
         }}
-        onBlur={openRenamePopover}
+        onBlur={onBlur}
         type="text"
         className="max-w-full truncate rounded-t-md border-none bg-red-900 py-[2px] text-center leading-tight text-ellipsis text-slate-200 outline-none hover:bg-red-800"
         value={videoName}
@@ -66,4 +80,6 @@ const VideoBox = ({
   );
 };
 
-export default VideoBox;
+const MemoVideoBox = memo(VideoBox);
+
+export default MemoVideoBox;

@@ -8,7 +8,7 @@ export const useGetVideos = () => {
   });
 };
 
-export const useUpdateVideoName = () => {
+export const useUpdateNote = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -16,6 +16,19 @@ export const useUpdateVideoName = () => {
     onSuccess: (_, variables) => {
       queryClient.refetchQueries({
         queryKey: ["videoNotes", variables.youtubeId],
+      });
+    },
+  });
+};
+
+export const useUpdateVideoName = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: dataService.updateVideoName,
+    onSuccess: () => {
+      queryClient.refetchQueries({
+        queryKey: ["getVideos"],
       });
     },
   });

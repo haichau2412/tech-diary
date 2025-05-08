@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { formatTime } from "../libs/util";
-import { useUpdateVideoName } from "../hook/queryHook";
+import { useUpdateNote } from "../hook/queryHook";
 
 const NodeUpdate = ({
   skipNote,
@@ -11,7 +11,7 @@ const NodeUpdate = ({
   noteTime: number;
   videoId: string;
 }) => {
-  const mutation = useUpdateVideoName();
+  const mutation = useUpdateNote();
 
   const [note, setNote] = useState("");
 

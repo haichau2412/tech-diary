@@ -1,6 +1,12 @@
 import { Video, Note, UtubeMode } from "../type";
 import guestDataManager from "./guestDataManager";
-import { getVideos, setNote, addVideo, getNotes } from "../actions/crud";
+import {
+  getVideos,
+  setNote,
+  addVideo,
+  getNotes,
+  updateVideoName,
+} from "../actions/crud";
 
 let mode: UtubeMode = null;
 
@@ -83,11 +89,38 @@ const _getNotes = async (youtubeId: string) => {
   return data;
 };
 
+const _updateVideoName = async ({
+  youtubeId,
+  customName,
+}: {
+  youtubeId: string;
+  customName: string;
+}) => {
+  console.log("getNotes", getNotes);
+
+  if (!mode) return null;
+
+  if (mode === "guest") {
+    return guestDataManager.updateVideoName(youtubeId, customName);
+  }
+
+  const [error, data] = await updateVideoName({ youtubeId, customName });
+
+  console.log("[error, data]", error, data);
+
+  if (error) {
+    return [];
+  }
+
+  return data;
+};
+
 const defaultExport = {
   getVideos: _getVideos,
   setNote: _setNote,
   addVideo: _addVideo,
   getNotes: _getNotes,
+  updateVideoName: _updateVideoName,
   updateMode,
 };
 
